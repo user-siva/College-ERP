@@ -6,6 +6,7 @@ function Main() {
         <Box flex={8} p={2} bgcolor="red">
             Main
         </Box>
+
     );
 }
 

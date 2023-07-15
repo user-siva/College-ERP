@@ -4,7 +4,7 @@ const STextField = styled(TextField)({
     margin:'14px'
 })
 
-function StudentForm() {
+function StaffForm() {
     return (
         <Box
         component="form"
@@ -23,7 +23,7 @@ function StudentForm() {
             sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'450px',overflow:'hidden',overflowY:'scroll'}}
             >
             <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>
-                Student Form
+                Staff Form
             </Typography>
             <STextField
             label="Name"
@@ -33,23 +33,40 @@ function StudentForm() {
             />
             <STextField
             size="small"
-            label="Admission Number"             
-            fullWidth
-            />
-            <DatePicker size='small' label={'Admission Date'} sx={{margin:'14px'}}/>
-            <STextField
-            size="small"
-            label="Batch"
+            label="Employee ID"             
             fullWidth
             />
             <STextField
             size="small"
-            label="Register No"            
+            select
+            label="Employee Category"
+            >
+                <MenuItem value='Assistent Professor' >Assistent Professor</MenuItem>
+                <MenuItem value='Professor' >Professor</MenuItem>
+                <MenuItem value='Lab Staff' >Lab Staff</MenuItem>
+                <MenuItem value='Supporting Staff' >Supporting Staff</MenuItem>
+                <MenuItem value='Driver' >Driver</MenuItem>
+                <MenuItem value='Maintanence Staff' >Maintanence Staff</MenuItem>
+            </STextField>
+            <DatePicker size='small' label={'Date of Birth'} sx={{margin:'14px'}}/>
+            <STextField
+            size="small"
+            label="Father Name"
             fullWidth
             />
             <STextField
             size="small"
-            label="Roll No"             
+            label="Mother Name"            
+            fullWidth
+            />
+            <STextField
+            size="small"
+            label="Phone"             
+            fullWidth
+            />
+            <STextField
+            size="small"
+            label="Email"
             fullWidth
             />
             <STextField
@@ -57,35 +74,14 @@ function StudentForm() {
             label="Age"
             fullWidth
             />
-            <DatePicker size='small' label={'Admission Date'} sx={{margin:'14px'}}/>
+            <DatePicker size='small' label={'Date of Joining'} sx={{margin:'14px'}}/>
             <STextField
             size="small"
             select
             label="Gender"
             >
-                <MenuItem value='Male' >Male</MenuItem>
+                <MenuItem value='Male'>Male</MenuItem>
                 <MenuItem value='Female'>Female</MenuItem>
-            </STextField>
-            <STextField
-            size="small"
-            select
-            label="Department"
-            >
-                <MenuItem  value='CSE'>CSE</MenuItem>
-                <MenuItem value='ECE'>ECE</MenuItem>
-                <MenuItem value='ECE'>ECE</MenuItem>
-                <MenuItem value='Mech'>Mech</MenuItem>
-                <MenuItem value='Civil'>Civil</MenuItem>
-            </STextField>
-            <STextField
-            size="small"
-            select
-            label="Year"
-            >
-                <MenuItem value='First'>First</MenuItem>
-                <MenuItem value='Second'>Second</MenuItem>
-                <MenuItem value='Third'>Third</MenuItem>
-                <MenuItem value='Fourth'>Fourth</MenuItem>
             </STextField>
             
             <STextField
@@ -94,12 +90,7 @@ function StudentForm() {
             size="small"
             />
             <STextField
-            label="Phone"
-            fullWidth
-            size="small"
-            />
-            <STextField
-            label="Email"
+            label="Home Contact No"
             fullWidth
             size="small"
             />
@@ -118,11 +109,7 @@ function StudentForm() {
             fullWidth
             size="small"
             />
-            <STextField
-            label="Father Occupation"
-            fullWidth
-            size="small"
-            />
+            
             <STextField
             label="Mother Name"
             fullWidth
@@ -130,16 +117,6 @@ function StudentForm() {
             />
             <STextField
             label="Mother Phone No"
-            fullWidth
-            size="small"
-            />
-            <STextField
-            label="Mother Occupation"
-            fullWidth
-            size="small"
-            />
-            <STextField
-            label="Annual Income"
             fullWidth
             size="small"
             />
@@ -153,17 +130,6 @@ function StudentForm() {
             fullWidth
             size="small"
             />
-            <STextField
-            size="small"
-            select
-            label="Student Category"
-            >
-                <MenuItem value='BC'>BC</MenuItem>
-                <MenuItem value='MBC'>MBC</MenuItem>
-                <MenuItem value='OC'>OC</MenuItem>
-                <MenuItem value='SC/ST'>SC/ST</MenuItem>
-                <MenuItem value='Other'>Other</MenuItem>
-            </STextField>
             <STextField
             label="Door No"
             fullWidth
@@ -219,34 +185,54 @@ function StudentForm() {
             size="small"
             />
             <STextField
-            label="Gaurdian Name"
+            size="small"
+            select
+            label="Marital Status"
+            >
+                <MenuItem value='Single'>Single</MenuItem>
+                <MenuItem value='Married'> Married</MenuItem>
+            </STextField>
+            <STextField
+            label="Spouse Name"
             fullWidth
             size="small"
             />
             <STextField
             size="small"
-            label="Gaurdian Is"
+            label="Children Count"
             />
             <STextField
             size="small"
-            label="Gaurdian Mobile"
+            label="Qualification"
             />
             <STextField
             size="small"
-            label="Gaurdian Address"
+            label="Experience"
             />
             <STextField
             size="small"
-            label="Gaurdian 2 Name"
+            label="Office Door no"
             />
             <STextField
             size="small"
-            label="Gaurdian 2 Mobile"
+            label="Office Area"
             />
             <STextField
             size="small"
-            label="Gaurdian 2 Address"
+            label="Office District"
             /> 
+            <STextField
+            size="small"
+            label="Office State"
+            />  
+            <STextField
+            size="small"
+            label="Office Country"
+            />  
+            <STextField
+            size="small"
+            label="Office Pincode"
+            />  
             <STextField
             size="small"
             label="Emergency Contact"
@@ -258,4 +244,4 @@ function StudentForm() {
     );
 }
 
-export default StudentForm;
+export default StaffForm;

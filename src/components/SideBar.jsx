@@ -17,16 +17,16 @@ function SideBar() {
         <List>
           
             <ListItem key={'Students'} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton>
+              <ListItemButton href='/'>
                 <ListItemIcon>
                   <PersonIcon />
-                </ListItemIcon>
+                </ListItemIcon>           
                 <ListItemText primary={'Students'} />
               </ListItemButton>
             </ListItem>
 
             <ListItem key={'Staffs'} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton>
+              <ListItemButton href='/staffDetails'>
                 <ListItemIcon>
                   <PersonOutlineTwoToneIcon />
                 </ListItemIcon>
@@ -35,31 +35,34 @@ function SideBar() {
             </ListItem>
 
             <ListItem key={'Subjects'} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton>
+              <ListItemButton href='/SubjectDet'>
                 <ListItemIcon>
                   <SubjectTwoToneIcon />
                 </ListItemIcon>
                 <ListItemText primary={'Subjects'} />
               </ListItemButton>
-            </ListItem>
-
-            
-    
+            </ListItem> 
         </List>
         <Divider />
         <List>
-          {['Time Table', 'Attendance'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton>
-                <ListItemIcon
-                  
+        <ListItem disablePadding sx={{ display: 'block' }}>
+              <ListItemButton href='/TimeTable'>
+                <ListItemIcon   
                 >
-                  {index % 2 === 0 ? <CalendarMonthIcon /> : <AccountCircleTwoToneIcon />}
+                  <CalendarMonthIcon />
                 </ListItemIcon>
-                <ListItemText primary={text}  />
+                <ListItemText primary={'Time Table'}  />
               </ListItemButton>
             </ListItem>
-          ))}
+            <ListItem disablePadding sx={{ display: 'block' }}>
+              <ListItemButton>
+                <ListItemIcon   
+                >
+                <AccountCircleTwoToneIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Attendance'}  />
+              </ListItemButton>
+            </ListItem>
         </List>      
         </Box>
     );

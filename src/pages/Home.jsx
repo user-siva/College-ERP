@@ -1,10 +1,13 @@
 import { Box, Stack,Divider } from '@mui/material';
+import {Routes,Route} from 'react-router-dom'
 import TopBar from '../components/TopBar';
 import SideBar from '../components/SideBar'
-//import StudentForm from '../components/StudentForm'
-//import StaffForm from '../components/StaffForm'
-//import StaffDet from '../components/StaffDet';
-//import TimeTable from '../components/TimeTable'
+import StudentDet from '../components/StudentDet'
+import StaffDet from '../components/StaffDet'
+import SubjectDet from '../components/SubjectDet'
+import StudentForm from '../components/StudentForm'
+import StaffForm from '../components/StaffForm'
+import TimeTable from '../components/TimeTable'
 import SubjectForm from '../components/SubjectForm';
 
 function Home() {
@@ -14,7 +17,16 @@ function Home() {
             <Stack direction='row' spacing={2} >
                 <SideBar />
                 <Divider orientation="vertical" flexItem />
-                <SubjectForm />
+                <Routes>
+                    <Route path='/' element={<StudentDet />} />
+                    <Route path='/studentForm' element={<StudentForm />} />
+                    <Route path='/staffDetails' element={<StaffDet />} />
+                    <Route path='/staffForm' element={<StaffForm />} />
+                    <Route path='/SubjectDet' element={<SubjectDet />} />
+                    <Route path='/SubjectForm' element={<SubjectForm />} />
+                    <Route path='/TimeTable' element={<TimeTable />} />       
+
+                </Routes>
             </Stack>
         </Box>
     );

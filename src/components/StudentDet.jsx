@@ -30,7 +30,7 @@ function StudentDet() {
     <Typography variant="h6" p={1}>
         Students
     </Typography>
-    <Button variant="contained" color="success">Add Student</Button>
+    <Button variant="contained" color="success" href='/studentForm'>Add Student</Button>
     </Box>
     <Paper elevation={3} >
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

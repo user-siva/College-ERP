@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 import { useState } from "react";
 
-function StaffDet() {
+function SubjectDet() {
     const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value) => () => {
@@ -28,9 +28,9 @@ function StaffDet() {
     <Box flex={10} p={2} >
     <Box sx={{display:'flex',justifyContent:'space-between'}}>
     <Typography variant="h6" p={1}>
-        Staffs
+        Subjects
     </Typography>
-    <Button variant="contained" color="success" href='/staffForm'>Add Staff</Button>
+    <Button variant="contained" color="success" href='/SubjectForm'>Add Subject</Button>
     </Box>
     <Paper elevation={3} >
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -66,4 +66,4 @@ function StaffDet() {
   );
 }
 
-export default StaffDet;
+export default SubjectDet;

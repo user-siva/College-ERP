@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 import { useState } from "react";
 
-function Main() {
+function StudentDet() {
     const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value) => () => {
@@ -66,4 +66,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default StudentDet;

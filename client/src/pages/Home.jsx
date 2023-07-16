@@ -14,7 +14,7 @@ function Home() {
     return (
         <Box sx={{height:'100vh'}}>
             <TopBar />
-            <Stack direction='row' >
+            <Stack direction='row' sx={{height:'100vh'}}>
                 <SideBar />
                 <Divider orientation="vertical" flexItem />
                 <Routes>

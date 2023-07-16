@@ -9,7 +9,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useState } from "react";
 
 function StudentDet() {
-    const [checked, setChecked] = useState([0]);
+    const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -34,13 +34,21 @@ function StudentDet() {
     </Box>
     <Paper elevation={3} >
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <ListItem
+      justifyContent="flex-between"
+      disablePadding
+      >
+    <ListItemText   primary={'Roll No'} sx={{marginLeft:'143px'}} />
+    <ListItemText   primary={'Name'} sx={{marginLeft:'21px'}} />
+
+    </ListItem>
+
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
           <ListItem
             key={value}
-            justifyContent="flex-start"
             disablePadding
           >
             <ListItemButton  disablePadding role={undefined} onClick={handleToggle(value)} >
@@ -54,9 +62,10 @@ function StudentDet() {
                 />
               </ListItemIcon>
             </ListItemButton>
-            <Link href="#" underline="none">
+            <Link href="#" underline="none" sx={{color:'black'}}>
             <ListItemText  id={labelId} primary={`Line item ${value + 1}`} />
             </Link>
+            <ListItemText  id={labelId} primary={'Register'} sx={{marginLeft:'30px'}} />
           </ListItem>
         );
       })}

@@ -9,7 +9,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useState } from "react";
 
 function StaffDet() {
-    const [checked, setChecked] = useState([0]);
+    const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -54,7 +54,7 @@ function StaffDet() {
                 />
               </ListItemIcon>
             </ListItemButton>
-            <Link href="#" underline="none">
+            <Link href="#" underline="none" sx={{color:'black'}}>
             <ListItemText  id={labelId} primary={`Line item ${value + 1}`} />
             </Link>
           </ListItem>

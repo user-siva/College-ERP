@@ -13,7 +13,7 @@ import SubjectTwoToneIcon from '@mui/icons-material/SubjectTwoTone';
 
 function SideBar() {
     return (
-        <Box flex={2} p={2} sx={{ overflow: 'auto',height:'100vh' }} >
+        <Box flex={2} p={2} sx={{ overflow: 'auto' }} bgcolor={'blue'} >
         <List>
           
             <ListItem key={'Students'} disablePadding sx={{ display: 'block' }}>

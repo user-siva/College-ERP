@@ -12,9 +12,9 @@ import SubjectForm from '../components/SubjectForm';
 
 function Home() {
     return (
-        <Box>
+        <Box sx={{height:'100vh'}}>
             <TopBar />
-            <Stack direction='row' spacing={2} >
+            <Stack direction='row' >
                 <SideBar />
                 <Divider orientation="vertical" flexItem />
                 <Routes>

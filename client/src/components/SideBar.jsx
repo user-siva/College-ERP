@@ -13,7 +13,7 @@ import SubjectTwoToneIcon from '@mui/icons-material/SubjectTwoTone';
 
 function SideBar() {
     return (
-        <Box flex={2} p={2} sx={{ overflow: 'auto' }} bgcolor={'blue'} >
+        <Box flex={2} p={2} sx={{ overflow: 'auto' }} >
         <List>
           
             <ListItem key={'Students'} disablePadding sx={{ display: 'block' }}>
@@ -55,7 +55,7 @@ function SideBar() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ display: 'block' }}>
-              <ListItemButton>
+              <ListItemButton href='/Attendance'>
                 <ListItemIcon   
                 >
                 <AccountCircleTwoToneIcon />

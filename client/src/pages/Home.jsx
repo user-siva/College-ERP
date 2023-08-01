@@ -9,7 +9,7 @@ import StudentForm from '../components/StudentForm'
 import StaffForm from '../components/StaffForm'
 import TimeTable from '../components/TimeTable'
 import SubjectForm from '../components/SubjectForm';
-
+import Attendance from '../components/Attendance';
 function Home() {
     return (
         <Box sx={{height:'100vh'}}>
@@ -25,7 +25,7 @@ function Home() {
                     <Route path='/SubjectDet' element={<SubjectDet />} />
                     <Route path='/SubjectForm' element={<SubjectForm />} />
                     <Route path='/TimeTable' element={<TimeTable />} />       
-
+                    <Route path='/Attendance' element={<Attendance />} />       
                 </Routes>
             </Stack>
         </Box>

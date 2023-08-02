@@ -48,22 +48,31 @@ function a11yProps(index) {
 
 function Attendance() {
   const [value, setValue] = useState(0);
-  const [flag,setFlag]  = useState("absent")
-  const [flagLabel,setFlagLabel] = useState("Ab")
+  const [choice,setChoice] = useState(["absent","absent","absent","absent","absent","absent","absent","absent","absent"])
+  const [choiceLabel,setChoiceLabel] = useState(["Ab","Ab","Ab","Ab","Ab","Ab","Ab","Ab"])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleFlag = () => {
-    if (flag==='absent') {
-      setFlag("od")
-      setFlagLabel("OD")
-    }
-    else{
-      setFlag("absent")
-      setFlagLabel("Ab")
-    }
+  const handleChoice = (val) => {
+   if(choice[val]==="absent")
+   {
+    const choices = [...choice]
+    choices[val] = "od"
+    setChoice(choices)
+    const choicesLab = [...choiceLabel]
+    choicesLab[val] = "OD"
+    setChoiceLabel(choicesLab)
+   }
+   else{
+    const choices = [...choice]
+    choices[val] = "absent"
+    setChoice(choices)
+    const choicesLab = [...choiceLabel]
+    choicesLab[val] = "Ab"
+    setChoiceLabel(choicesLab)
+   }
   }
 
   return (
@@ -109,7 +118,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[0]} control={<Radio  size='small'/>} label={choiceLabel[0]} onDoubleClick={()=>handleChoice(0)}/>
 
           </RadioGroup>
         </FormControl> 
@@ -122,7 +132,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
            <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[1]} control={<Radio  size='small'/>} label={choiceLabel[1]} onDoubleClick={()=>(handleChoice(1))}/>
 
           </RadioGroup>
         </FormControl> 
@@ -135,7 +146,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[2]} control={<Radio  size='small'/>} label={choiceLabel[2]} onDoubleClick={()=>(handleChoice(2))}/>
 
           </RadioGroup>
         </FormControl> 
@@ -148,7 +160,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[3]} control={<Radio  size='small'/>} label={choiceLabel[3]} onDoubleClick={()=>(handleChoice(3))}/>
 
           </RadioGroup>
         </FormControl> 
@@ -161,7 +174,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[4]} control={<Radio  size='small'/>} label={choiceLabel[4]} onDoubleClick={()=>(handleChoice(4))}/>
 
           </RadioGroup>
         </FormControl> 
@@ -174,7 +188,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[5]}control={<Radio  size='small'/>} label={choiceLabel[5]} onDoubleClick={()=>(handleChoice(5))}/>
 
           </RadioGroup>
         </FormControl> 
@@ -187,7 +202,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[6]} control={<Radio  size='small'/>} label={choiceLabel[6]} onDoubleClick={()=>(handleChoice(6))}/>
 
           </RadioGroup>
         </FormControl> 
@@ -200,7 +216,8 @@ function Attendance() {
             name="row-radio-buttons-group"
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
-            <FormControlLabel value={flag} control={<Radio  size='small'/>} label={flagLabel} onDoubleClick={handleFlag}/>
+            <FormControlLabel 
+            value={choice[7]} control={<Radio  size='small'/>} label={choiceLabel[7]} onDoubleClick={()=>(handleChoice(7))}/>
 
           </RadioGroup>
         </FormControl> 

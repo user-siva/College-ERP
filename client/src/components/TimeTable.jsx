@@ -1,67 +1,99 @@
-import { Box } from "@mui/material";
+import { Box,Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useState } from "react";
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'day', headerName: 'Day' },
     {
-      field: 'firstName',
-      headerName: 'First name',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'lastName',
-      headerName: 'Last name',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
+      field: '1',
+      headerName: '1',
       sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+      editable: true,
+    },
+    {
+      field: '2',
+      headerName: '2',
+      sortable: false,
+      editable: true,
+    },
+    {
+      field: '3',
+      headerName: '3',
+      sortable: false,
+      editable: true,
+    },
+    {
+      field: '4',
+      headerName: '4',
+      sortable: false,
+      editable: true,
+    },
+    {
+      field: '5',
+      headerName: '5',
+      sortable: false,
+      editable: true,
+    },
+    {
+      field: '6',
+      headerName: '6',
+      sortable: false,
+      editable: true,
+    },
+    {
+      field: '7',
+      headerName: '7',
+      sortable: false,
+      editable: true,
+    },
+    {
+      field: '8',
+      headerName: '8',
+      sortable: false,
+      editable: true,
+
     },
   ];
   
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+ 
 
 function TimeTable() {
+
+    const [rows,setRows] = useState(
+      [
+        {id:1,day:'monday',1:"TQM",2:"CD",3:"OOP",4:"CN",5:"DBMS",6:"DAA",7:"OOP",8:"DAA"},
+        {id:2,day:'Tuesday',1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:""},
+        {id:3,day:'Wednesday',1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:""},
+        {id:4,day:'Thursday',1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:""},
+        {id:5,day:'Friday',1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:""},
+        {id:6,day:'Saturday',1:"",2:"",3:"",4:"",5:"",6:"",7:"",8:""},
+      ]
+    );
+
+    const onSave = () => {
+      console.log("Rows:",rows)
+    }
+
+    const processRowUpdate = (updatedRow, originalRow) => {
+      const rowIndex = rows.findIndex((row) => row.id === updatedRow.id);
+
+      const updatedRows = [...rows];
+      updatedRows[rowIndex] = updatedRow;
+
+      setRows(updatedRows);
+      return updatedRow;
+          
+      };
+
     return (
-        <Box flex={10} p={2} sx={{ height: 400, width: '100%' }}>
+        <Box flex={10} p={2} sx={{ height: 500, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
-        pageSizeOptions={[5]}
-        checkboxSelection
+        processRowUpdate={processRowUpdate}
         disableRowSelectionOnClick
       />
+      <Button variant="contained" color="success" onClick={onSave} sx={{height:'45px',width:'80px'}}>Save</Button>
     </Box>
     );
 }

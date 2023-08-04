@@ -59,9 +59,7 @@ const [data,setData] = useState({
         })
     }
 
-    const onSave = () => {
-        console.log(data)
-    }
+   c
 
     return (
         <Box

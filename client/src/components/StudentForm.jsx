@@ -1,5 +1,6 @@
 import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import { useState } from "react";
 
 const STextField = styled(TextField)({
@@ -8,7 +9,51 @@ const STextField = styled(TextField)({
 
 function StudentForm() {
 
-    const [data,setData] = useState({})
+    const [data,setData] = useState({
+        name:"",
+        admission_no:"",
+        admission_date:dayjs(),
+        batch:"",
+        register_no:"",
+        roll_no:"",
+        age:"",
+        dob:"",
+        gender:"",
+        department:"",
+        year:"",
+        blood_group:"",
+        phone:"",
+        email:"",
+        aadhaar_no:"",
+        father_name:"",
+        father_phone_no:"",
+        father_occupation:"",
+        mother_name:"",
+        mother_phone_no:"",
+        mother_occupation:"",
+        annual_income:"",
+        nationality:"",
+        religion:"",
+        student_category:"",
+        door_no:"",
+        street:"",
+        district:"",
+        state:"",
+        country:"",
+        pincode:"",
+        transportation:"",
+        bus_route_no:"",
+        regular_boarding_point:"",
+        regular_dropping_point:"",
+        gaurdian_name:"",
+        gaurdian_is:"",
+        gaurdian_mobile:"",
+        gaurdian_address:"",
+        gaurdian_2_name:"",
+        gaurdian_2_mobile:"",
+        gaurdian_2_address:"",
+        emergency_contact:""
+})
 
     const handleChange = (e) => {
         setData({
@@ -16,6 +61,10 @@ function StudentForm() {
           [e.target.name]: e.target.value
         });
       };
+
+    const onSave = () => {
+        console.log(data)
+    }
 
     return (
         <Box
@@ -31,8 +80,8 @@ function StudentForm() {
         flex={10} 
         p={2}
         >   
-            <Paper variant="outlined" elevation={8} 
-            sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'450px',overflow:'hidden',overflowY:'scroll'}}
+            <Paper variant="outlined" 
+            sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'77vh',overflow:'hidden',overflowY:'scroll'}}
             >
             <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>
                 Student Form
@@ -41,6 +90,8 @@ function StudentForm() {
             label="Name"
             name="name"
             size="small"
+            value={data.name}
+            onChange={handleChange}
             fullWidth
             required
             />
@@ -48,38 +99,52 @@ function StudentForm() {
             size="small"
             label="Admission Number"
             name="admission_no"
+            onChange={handleChange}
+            value={data.admission_no}
             fullWidth
             />
-            <DatePicker size='small' label='Admission Date' name='admission_date' sx={{margin:'14px'}}/>
+            <DatePicker 
+            size='small' label='Admission Date' value={data.admission_date} name='admission_date' sx={{margin:'14px'}}/>
             <STextField
             size="small"
             label="Batch"
             name="batch"
+            onChange={handleChange}
+            value={data.batch}
             fullWidth
             />
             <STextField
             size="small"
             label="Register No"
-            name="register_no"            
+            name="register_no" 
+            onChange={handleChange}
+            value={data.register_no}          
             fullWidth
             />
             <STextField
             size="small"
             label="Roll No" 
-            name="roll_no"             
+            name="roll_no"  
+            onChange={handleChange}
+            value={data.roll_no}           
             fullWidth
             />
             <STextField
             size="small"
             label="Age"
             name="age"
+            onChange={handleChange}
+            value={data.age}
             fullWidth
             />
-            <DatePicker size='small' label='Admission Date' name='admission_date' sx={{margin:'14px'}}/>
+            <DatePicker 
+            size='small' label='Date of Birth' value={data.dob} name='dob' sx={{margin:'14px'}}/>
             <STextField
             size="small"
             select
             label="Gender"
+            onChange={handleChange}
+            value={data.gender}
             name="gender"
             >
                 <MenuItem value='Male' >Male</MenuItem>
@@ -90,6 +155,8 @@ function StudentForm() {
             select
             label="Department"
             name="department"
+            value={data.department}
+            onChange={handleChange}
             >
                 <MenuItem  value='CSE'>CSE</MenuItem>
                 <MenuItem value='ECE'>ECE</MenuItem>
@@ -102,6 +169,8 @@ function StudentForm() {
             select
             label="Year"
             name="year"
+            value={data.year}
+            onChange={handleChange}
             >
                 <MenuItem value='First'>First</MenuItem>
                 <MenuItem value='Second'>Second</MenuItem>
@@ -111,79 +180,105 @@ function StudentForm() {
             
             <STextField
             label="Blood Group"
-            name="blood_group"        
+            name="blood_group"  
+            value={data.blood_group}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Phone"
             name="phone"
+            value={data.phone}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Email"
             name="email"
+            value={data.email}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Aadhaar No"
             name="aadhaar_no"
+            value={data.aadhaar_no}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Father Name"
             name="father_name"
+            value={data.father_name}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Father Phone No"
             name="father_phone_no"
+            value={data.father_phone_no}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Father Occupation"
             name="father_occupation"
+            value={data.father_occupation}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Mother Name"
             name="mother_name"
+            value={data.mother_name}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Mother Phone No"
             name='mother_phone_no'
+            value={data.mother_phone_no}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Mother Occupation"
             name="mother_occupation"
+            value={data.mother_occupation}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Annual Income"
             name="annual_income"
+            value={data.annual_income}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Nationality"
             name="nationality"
+            value={data.nationality}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Religion"
             name="religion"
+            value={data.religion}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
@@ -192,6 +287,8 @@ function StudentForm() {
             select
             label="Student Category"
             name="student_category"
+            value={data.student_category}
+            onChange={handleChange}
             >
                 <MenuItem value='BC'>BC</MenuItem>
                 <MenuItem value='MBC'>MBC</MenuItem>
@@ -202,36 +299,48 @@ function StudentForm() {
             <STextField
             label="Door No"
             name="door_no"
+            value={data.door_no}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="Street"
             name="street"
+            value={data.street}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="District"
             name="district"
+            value={data.district}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="State"
             name="state"
+            value={data.state}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="Country"
             name="country"
+            value={data.country}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="Pincode"
             name="pincode"
+            value={data.pincode}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
@@ -240,6 +349,8 @@ function StudentForm() {
             select
             label="Mode Of Transportation"
             name="transportation"
+            value={data.transportation}
+            onChange={handleChange}
             >
                 <MenuItem value='College Bus'>College Bus</MenuItem>
                 <MenuItem value='Own Vehicle'>Own Vehicle</MenuItem>
@@ -248,24 +359,32 @@ function StudentForm() {
             <STextField
             label="Bus Route No"
             name="bus_route_no"
+            value={data.bus_route_no}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="Regular Boarding Point"
             name="regular_boarding_point"
+            value={data.regular_boarding_point}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
              <STextField
             label="Regular Dropping Point"
             name="regular_dropping_point"
+            value={data.regular_dropping_point}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
             <STextField
             label="Gaurdian Name"
             name="gaurdian_name"
+            value={data.gaurdian_name}
+            onChange={handleChange}
             fullWidth
             size="small"
             />
@@ -273,39 +392,53 @@ function StudentForm() {
             size="small"
             label="Gaurdian Is"
             name="gaurdian_is"
+            value={data.gaurdian_is}
+            onChange={handleChange}
             />
             <STextField
             size="small"
             label="Gaurdian Mobile"
             name="gaurdian_mobile"
+            value={data.gaurdian_mobile}
+            onChange={handleChange}
             />
             <STextField
             size="small"
             label="Gaurdian Address"
             name="gaurdian_address"
+            value={data.gaurdian_address}
+            onChange={handleChange}
             />
             <STextField
             size="small"
             label="Gaurdian 2 Name"
             name="gaurdian_2_name"
+            value={data.gaurdian_2_name}
+            onChange={handleChange}
             />
             <STextField
             size="small"
             label="Gaurdian 2 Mobile"
             name="gaurdian_2_mobile"
+            value={data.gaurdian_2_mobile}
+            onChange={handleChange}
             />
             <STextField
             size="small"
             label="Gaurdian 2 Address"
             name="gaurdian_2_address"
+            value={data.gaurdian_2_address}
+            onChange={handleChange}
             /> 
             <STextField
             size="small"
             label="Emergency Contact"
             name="emergency_contact"
+            value={data.emergency_contact}
+            onChange={handleChange}
             />  
             </Paper>
-            <Button variant="contained" color="success" sx={{height:'45px',width:'80px'}}>Save</Button>
+            <Button variant="contained" onClick={onSave} color="success" sx={{height:'45px',width:'80px'}}>Save</Button>
 
         </Box>
     );

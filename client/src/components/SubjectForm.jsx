@@ -1,9 +1,33 @@
 import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
+import { useState } from "react";
+
 const STextField = styled(TextField)({
     margin:'14px'
 })
 
 function SubjectForm() {
+
+    const [data,setData] = useState({
+        subject_code:"",
+        subject_name:"",
+        regulation:"",
+        department:"",
+        year:"",
+        semester:"",
+        staff:""
+    })
+
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.name]:e.target.value
+        })
+    }
+
+    const onSave = () => {
+        console.log(data)
+    }
+
     return (
         <Box
         component="form"
@@ -24,19 +48,29 @@ function SubjectForm() {
             <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>
                 Subject
             </Typography>
+
             <STextField
             label="Subject Code"
             size="small"
+            name="subject_code"
+            value={data.subject_code}
+            onChange={handleChange}
             fullWidth
             required
             />
             <STextField
             size="small"
-            label="Subject Name"             
+            label="Subject Name"    
+            name="subject_name"
+            value={data.subject_name}
+            onChange={handleChange}         
             fullWidth
             />
             <STextField
             size="small"
+            name="regulation"
+            value={data.regulation}
+            onChange={handleChange}
             select
             label="Regulation"
             >
@@ -45,6 +79,9 @@ function SubjectForm() {
             </STextField>
             <STextField
             size="small"
+            name="department"
+            value={data.department}
+            onChange={handleChange}
             select
             label="Department"
             >
@@ -56,6 +93,9 @@ function SubjectForm() {
             </STextField>
             <STextField
             size="small"
+            name="year"
+            value={data.year}
+            onChange={handleChange}
             select
             label="Year"
             >
@@ -67,6 +107,9 @@ function SubjectForm() {
 
             <STextField
             size="small"
+            name="semester"
+            value={data.semester}
+            onChange={handleChange}
             select
             label="Semester"
             >
@@ -75,6 +118,9 @@ function SubjectForm() {
             </STextField>
             <STextField
             size="small"
+            name="staff"
+            value={data.staff}
+            onChange={handleChange}
             select
             label="Staff"
             >
@@ -83,7 +129,7 @@ function SubjectForm() {
             </STextField>
              
             </Paper>
-            <Button variant="contained" color="success" sx={{height:'45px',width:'80px'}}>Save</Button>
+            <Button onClick={onSave} variant="contained" color="success" sx={{height:'45px',width:'80px'}}>Save</Button>
 
         </Box>
     );

@@ -1,5 +1,4 @@
 import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { useState } from "react";
 
@@ -86,7 +85,6 @@ const [data,setData] = useState({
             name="name"
             value={data.name}
             onChange={handleChange}
-            fullWidth
             required
             />
             <STextField
@@ -95,7 +93,6 @@ const [data,setData] = useState({
             value={data.emp_id}
             onChange={handleChange}
             label="Employee ID"             
-            fullWidth
             />
             <STextField
             size="small"
@@ -112,15 +109,20 @@ const [data,setData] = useState({
                 <MenuItem value='Driver' >Driver</MenuItem>
                 <MenuItem value='Maintanence Staff' >Maintanence Staff</MenuItem>
             </STextField>
-            <DatePicker 
-            name="dob" value={data.dob} onChange={handleChange} size='small' label={'Date of Birth'} sx={{margin:'14px'}}/>
+            <STextField 
+            name="dob"
+            type='date'
+            value={data.dob} 
+            onChange={handleChange} 
+            size='small' 
+            label={'Date of Birth'} 
+            sx={{margin:'14px'}}/>
             <STextField
             size="small"
             label="Father Name"
             name="father_name"
             value={data.father_name}
             onChange={handleChange}
-            fullWidth
             />
             <STextField
             size="small"
@@ -128,7 +130,6 @@ const [data,setData] = useState({
             name="mother_name"
             value={data.mother_name}
             onChange={handleChange}           
-            fullWidth
             />
             <STextField
             size="small"
@@ -136,7 +137,6 @@ const [data,setData] = useState({
             name="phone"
             value={data.phone}
             onChange={handleChange}            
-            fullWidth
             />
             <STextField
             size="small"
@@ -144,7 +144,6 @@ const [data,setData] = useState({
             name="email"
             value={data.email}
             onChange={handleChange}
-            fullWidth
             />
             <STextField
             size="small"
@@ -152,13 +151,15 @@ const [data,setData] = useState({
             name="age"
             value={data.age}
             onChange={handleChange}
-            fullWidth
             />
-            <DatePicker 
+            <STextField 
+            type='date'
             name="date_of_joining"
             value={data.date_of_joining}
             onChange={handleChange}
-            size='small' label={'Date of Joining'} sx={{margin:'14px'}}/>
+            size='small' 
+            label={'Date of Joining'} 
+            sx={{margin:'14px'}}/>
             <STextField
             size="small"
             select
@@ -176,7 +177,6 @@ const [data,setData] = useState({
             name="blood_group"
             value={data.blood_group}
             onChange={handleChange}     
-            fullWidth
             size="small"
             />
             <STextField
@@ -184,7 +184,6 @@ const [data,setData] = useState({
             name="home_contact_id"
             value={data.home_contact_id}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -192,7 +191,6 @@ const [data,setData] = useState({
             name="aadhaar_no"
             value={data.aadhaar_no}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -200,7 +198,6 @@ const [data,setData] = useState({
             name="father_phone_no"
             value={data.father_phone_no}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -208,7 +205,6 @@ const [data,setData] = useState({
             name="mother_phone_no"
             value={data.mother_phone_no}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -216,7 +212,6 @@ const [data,setData] = useState({
             name="nationality"
             value={data.nationality}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -224,7 +219,6 @@ const [data,setData] = useState({
             name="religion"
             value={data.religion}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -232,7 +226,6 @@ const [data,setData] = useState({
             name="door_no"
             value={data.door_no}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -240,7 +233,6 @@ const [data,setData] = useState({
             name="street"
             value={data.street}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -248,7 +240,6 @@ const [data,setData] = useState({
             name="district"
             value={data.district}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -256,7 +247,6 @@ const [data,setData] = useState({
             name="state"
             value={data.state}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -264,7 +254,6 @@ const [data,setData] = useState({
             name="country"
             value={data.country}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -272,7 +261,6 @@ const [data,setData] = useState({
             name="pin_code"
             value={data.pin_code}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -292,7 +280,6 @@ const [data,setData] = useState({
             name="bus_route_no"
             value={data.bus_route_no}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -300,7 +287,6 @@ const [data,setData] = useState({
             name="regular_boarding_point"
             value={data.regular_boarding_point}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
              <STextField
@@ -308,7 +294,6 @@ const [data,setData] = useState({
             name="regular_dropping_point"
             value={data.regular_dropping_point}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField
@@ -327,7 +312,6 @@ const [data,setData] = useState({
             name="spouse_name"
             value={data.spouse_name}
             onChange={handleChange}
-            fullWidth
             size="small"
             />
             <STextField

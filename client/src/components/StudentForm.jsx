@@ -1,5 +1,4 @@
 import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { useState } from "react";
 
@@ -17,7 +16,7 @@ function StudentForm() {
         register_no:"",
         roll_no:"",
         age:"",
-        dob:"",
+        dob:dayjs(),
         gender:"",
         department:"",
         year:"",
@@ -92,7 +91,6 @@ function StudentForm() {
             size="small"
             value={data.name}
             onChange={handleChange}
-            fullWidth
             required
             />
             <STextField
@@ -101,17 +99,22 @@ function StudentForm() {
             name="admission_no"
             onChange={handleChange}
             value={data.admission_no}
-            fullWidth
             />
-            <DatePicker 
-            size='small' label='Admission Date' value={data.admission_date} name='admission_date' sx={{margin:'14px'}}/>
+            <STextField
+        
+            size='small'
+            type='date' 
+            label='Admission Date' 
+            value={data.admission_date} 
+            name='admission_date' 
+            sx={{margin:'14px'}}/>
             <STextField
             size="small"
             label="Batch"
             name="batch"
             onChange={handleChange}
             value={data.batch}
-            fullWidth
+        
             />
             <STextField
             size="small"
@@ -119,7 +122,7 @@ function StudentForm() {
             name="register_no" 
             onChange={handleChange}
             value={data.register_no}          
-            fullWidth
+        
             />
             <STextField
             size="small"
@@ -127,7 +130,7 @@ function StudentForm() {
             name="roll_no"  
             onChange={handleChange}
             value={data.roll_no}           
-            fullWidth
+        
             />
             <STextField
             size="small"
@@ -135,10 +138,15 @@ function StudentForm() {
             name="age"
             onChange={handleChange}
             value={data.age}
-            fullWidth
+        
             />
-            <DatePicker 
-            size='small' label='Date of Birth' value={data.dob} name='dob' sx={{margin:'14px'}}/>
+            <STextField
+            size='small'
+            type='date'
+            label='Date of Birth' 
+            value={data.dob} 
+            name='dob' 
+            sx={{margin:'14px'}}/>
             <STextField
             size="small"
             select
@@ -183,7 +191,7 @@ function StudentForm() {
             name="blood_group"  
             value={data.blood_group}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -191,7 +199,7 @@ function StudentForm() {
             name="phone"
             value={data.phone}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -199,7 +207,7 @@ function StudentForm() {
             name="email"
             value={data.email}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -207,7 +215,7 @@ function StudentForm() {
             name="aadhaar_no"
             value={data.aadhaar_no}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -215,7 +223,7 @@ function StudentForm() {
             name="father_name"
             value={data.father_name}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -223,7 +231,7 @@ function StudentForm() {
             name="father_phone_no"
             value={data.father_phone_no}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -231,7 +239,7 @@ function StudentForm() {
             name="father_occupation"
             value={data.father_occupation}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -239,7 +247,7 @@ function StudentForm() {
             name="mother_name"
             value={data.mother_name}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -247,7 +255,7 @@ function StudentForm() {
             name='mother_phone_no'
             value={data.mother_phone_no}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -255,7 +263,7 @@ function StudentForm() {
             name="mother_occupation"
             value={data.mother_occupation}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -263,7 +271,7 @@ function StudentForm() {
             name="annual_income"
             value={data.annual_income}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -271,7 +279,7 @@ function StudentForm() {
             name="nationality"
             value={data.nationality}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -279,7 +287,7 @@ function StudentForm() {
             name="religion"
             value={data.religion}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -301,7 +309,7 @@ function StudentForm() {
             name="door_no"
             value={data.door_no}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -309,7 +317,7 @@ function StudentForm() {
             name="street"
             value={data.street}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -317,7 +325,7 @@ function StudentForm() {
             name="district"
             value={data.district}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -325,7 +333,7 @@ function StudentForm() {
             name="state"
             value={data.state}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -333,7 +341,7 @@ function StudentForm() {
             name="country"
             value={data.country}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -341,7 +349,7 @@ function StudentForm() {
             name="pincode"
             value={data.pincode}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -361,7 +369,7 @@ function StudentForm() {
             name="bus_route_no"
             value={data.bus_route_no}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -369,7 +377,7 @@ function StudentForm() {
             name="regular_boarding_point"
             value={data.regular_boarding_point}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
              <STextField
@@ -377,7 +385,7 @@ function StudentForm() {
             name="regular_dropping_point"
             value={data.regular_dropping_point}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField
@@ -385,7 +393,7 @@ function StudentForm() {
             name="gaurdian_name"
             value={data.gaurdian_name}
             onChange={handleChange}
-            fullWidth
+        
             size="small"
             />
             <STextField

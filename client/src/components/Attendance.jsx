@@ -47,7 +47,9 @@ function a11yProps(index) {
 
 
 function Attendance() {
+  
   const [value, setValue] = useState(0);
+  const [day,setDay] = useState({})
   const [choice,setChoice] = useState(["absent","absent","absent","absent","absent","absent","absent","absent","absent"])
   const [choiceLabel,setChoiceLabel] = useState(["Ab","Ab","Ab","Ab","Ab","Ab","Ab","Ab"])
 
@@ -91,8 +93,8 @@ function Attendance() {
 
       {/* First Tab */}
       <CustomTabPanel value={value} index={0}>
+      <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Siva</Typography><br/>
         <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
@@ -109,7 +111,7 @@ function Attendance() {
 
       {/* Second Tab */}
       <CustomTabPanel value={value} index={1}>
-        Gender<br/>
+        <Typography variant='p' component="span" id="stuName2" sx={{color:'gray'}}>Siva</Typography><br/>
         <FormControl>
           <RadioGroup
             row
@@ -119,8 +121,10 @@ function Attendance() {
           >
             <FormControlLabel value="present" control={<Radio size='small'/>} label="Pr" />
             <FormControlLabel 
-            value={choice[0]} control={<Radio  size='small'/>} label={choiceLabel[0]} onDoubleClick={()=>handleChoice(0)}/>
-
+            value={choice[0]} 
+            control={<Radio  size='small'/>}
+            label={choiceLabel[0]} 
+            onDoubleClick={()=>handleChoice(0)}/>
           </RadioGroup>
         </FormControl> 
         <FormControl>

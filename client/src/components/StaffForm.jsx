@@ -59,8 +59,6 @@ const [data,setData] = useState({
         })
     }
 
-   c
-
     return (
         <Box
         component="form"
@@ -403,7 +401,7 @@ const [data,setData] = useState({
             label="Emergency Contact"
             />  
             </Paper>
-            <Button variant="contained" color="success" onClick={onSave} sx={{height:'45px',width:'80px'}}>Save</Button>
+            <Button variant="contained" color="success"  sx={{height:'45px',width:'80px'}}>Save</Button>
 
         </Box>
     );

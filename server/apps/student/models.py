@@ -9,5 +9,25 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
-    
 
+class Subject(models.Model):
+    name = models.CharField(max_length=200)
+    details = JSONField()
+
+    def __str__(self):
+        return self.name
+
+
+class TimeTable(models.Model):
+    day = models.CharField(max_length=200)
+    details = JSONField()
+
+    def __str__(self):
+        return self.day
+
+class StudentAttendance(models.Model):
+    name = models.CharField(max_length=200)
+    details = JSONField()
+
+    def __str__(self):
+        return self.name

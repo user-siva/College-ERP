@@ -19,6 +19,7 @@ def get_profile(request):
 def add_profile(request):
     if request.method=='POST':
         data = JSONParser().parse(request)
+        print("Data:",data)
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

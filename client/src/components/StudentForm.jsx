@@ -1,6 +1,20 @@
 import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
 import dayjs from 'dayjs';
 import { useState } from "react";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Stack from '@mui/material/Stack';
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
 const STextField = styled(TextField)({
     margin:'14px'
@@ -446,8 +460,14 @@ function StudentForm() {
             onChange={handleChange}
             />  
             </Paper>
-            <Button variant="contained" onClick={onSave} color="success" sx={{height:'45px',width:'80px'}}>Save</Button>
-
+            <Stack spacing={2}>
+            <Button component="label" variant="contained" onClick={onSave} color="success" >Save</Button>
+            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+            Upload file
+            <VisuallyHiddenInput type="file" />
+            </Button>
+            </Stack>
+            
         </Box>
     );
 }

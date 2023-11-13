@@ -1,6 +1,19 @@
-import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
+import { Box,TextField,Paper,Typography,styled,MenuItem,Button,Stack } from "@mui/material";
 import dayjs from 'dayjs';
 import { useState } from "react";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
 const STextField = styled(TextField)({
     margin:'14px'
@@ -385,7 +398,13 @@ const [data,setData] = useState({
             label="Emergency Contact"
             />  
             </Paper>
-            <Button variant="contained" color="success"  sx={{height:'45px',width:'80px'}}>Save</Button>
+            <Stack spacing={2}>
+            <Button component="label" variant="contained" color="success" >Save</Button>
+            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+            Upload file
+            <VisuallyHiddenInput type="file" />
+            </Button>
+            </Stack>
 
         </Box>
     );

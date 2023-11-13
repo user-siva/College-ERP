@@ -1,5 +1,5 @@
 #from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 #from django.forms.models import model_to_dict
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
@@ -25,6 +25,15 @@ def add_profile(request):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+    
+@csrf_exempt   
+def delete_student(request,pk):
+    
+    st = Student.objects.get(pk=pk)
+    
+    
+    st.delete()
+    return HttpResponse(status=204)
 
 @api_view(['GET'])
 def get_subject(request):

@@ -4,6 +4,7 @@ from apps.student.views import *
 urlpatterns = [
 	path('',get_profile),
 	path('add_profile/',add_profile),
+	path('delete_student/<int:pk>/',delete_student),
 	path('get_subject/',get_subject),
 	path('add_subject/',add_subject),
 	path('get_time_table/',get_time_table),

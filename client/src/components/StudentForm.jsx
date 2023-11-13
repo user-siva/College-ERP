@@ -93,7 +93,7 @@ function StudentForm() {
         flex={10} 
         p={2}
         >   
-            <Paper variant="outlined" 
+            <Paper elevation={3} 
             sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'77vh',overflow:'hidden',overflowY:'scroll'}}
             >
             <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>

@@ -7,11 +7,29 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import {
+  useQuery,
+} from '@tanstack/react-query'
 
 import { useState } from "react";
 
 function StudentDet() {
-    const [checked, setChecked] = useState([]);
+  const [checked, setChecked] = useState([]);
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch('http://127.0.0.1:8000/student/').then(
+        (res) => res.json(),
+      ),
+  })
+
+  if (isLoading) return 'Loading...'
+
+  if (error) {
+    console.log(error.message)
+    return 'An error has occurred: ' + error.message
+  }
+  
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -118,7 +136,8 @@ function StudentDet() {
 
     </ListItem>
 
-      {[0, 1, 2, 3].map((value) => {
+      {data.map((value) => {
+        console.log("values:",value)
         const labelId = `checkbox-list-label-${value}`;
 
         return (
@@ -138,9 +157,9 @@ function StudentDet() {
               </ListItemIcon>
             </ListItemButton>
             <Link href="#" underline="none" sx={{color:'black'}}>
-            <ListItemText  id={labelId} primary={`Line item ${value + 1}`} />
+            <ListItemText  id={labelId} primary={value.details.register_no} />
             </Link>
-            <ListItemText  id={labelId} primary={'Register'} sx={{marginLeft:'30px'}} />
+            <ListItemText  id={labelId} primary={value.name} sx={{marginLeft:'30px'}} />
           </ListItem>
         );
       })}
@@ -148,6 +167,8 @@ function StudentDet() {
     </Paper>
     </Box>
   );
+
+    
 }
 
 export default StudentDet;

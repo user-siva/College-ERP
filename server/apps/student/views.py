@@ -26,12 +26,27 @@ def add_profile(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
     
+@api_view(['PUT'])
+def update_student(request,pk):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = StudentSerializer(student, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @csrf_exempt   
 def delete_student(request,pk):
-    
     st = Student.objects.get(pk=pk)
-    
-    
+    st.delete()
+    return HttpResponse(status=204)
+
+@csrf_exempt   
+def delete_student(request,pk):
+    st = Student.objects.get(pk=pk)
     st.delete()
     return HttpResponse(status=204)
 

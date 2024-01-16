@@ -86,7 +86,7 @@ WSGI_APPLICATION = "server.wsgi.application"
 #    }
 #}
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
@@ -95,7 +95,16 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
- }
+ }'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'ERP_DB',
+        'HOST': '127.0.0.1',
+        'PORT': 27017,
+    }
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Password validation

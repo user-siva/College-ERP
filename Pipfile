@@ -9,6 +9,8 @@ djangorestframework = "*"
 psycopg = "*"
 psycopg2 = "*"
 django-cors-headers = "*"
+djongo = "*"
+pymongo = "~=3.12.3"
 
 [dev-packages]
 

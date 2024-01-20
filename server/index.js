@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
+var cors = require('cors')
 const path = require("path");
 
 const studentRouter = require("./routes/students");
@@ -24,7 +25,7 @@ console.log("connected to mongodb");
 //middlewares
 
 //app.use("/images", express.static(path.join(__dirname, "public/images")));
-
+app.use(cors())
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("combined"));

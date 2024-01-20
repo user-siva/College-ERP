@@ -2,6 +2,8 @@ import { Box,TextField,Paper,Typography,styled,MenuItem,Button,Stack } from "@mu
 import dayjs from 'dayjs';
 import { useState } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -85,14 +87,15 @@ const [data,setData] = useState({
         flex={10} 
         p={2}
         >   
-            <Paper variant="outlined" 
+            <Card variant="outlined" 
             sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'450px',overflow:'hidden',overflowY:'scroll'}}
             >
             <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>
                 Staff Form
             </Typography>
 
-            <STextField
+           <CardContent>
+           <STextField
             label="Name"
             size="small"
             name="name"
@@ -397,7 +400,8 @@ const [data,setData] = useState({
             onChange={handleChange}
             label="Emergency Contact"
             />  
-            </Paper>
+           </CardContent>
+            </Card>
             <Stack spacing={2}>
             <Button component="label" variant="contained" color="success" >Save</Button>
             <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>

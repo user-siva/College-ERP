@@ -26,9 +26,21 @@ router.get("/:id", async (req, res) => {
     }
   });
 
+// get all
+
+router.get("/", async (req, res) => {
+  try {
+    //console.log(req.params.id)
+    const student = await Student.find();
+    res.status(200).json(student);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //post
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   const newStudent = new Student(req.body);
   try {
     const savedStudent = await newStudent.save();

@@ -18,7 +18,7 @@ function StudentDet() {
   const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      fetch('http://127.0.0.1:8000/student/').then(
+      fetch('http://localhost:5000/api/student/').then(
         (res) => res.json(),
       ),
   })
@@ -157,7 +157,7 @@ function StudentDet() {
               </ListItemIcon>
             </ListItemButton>
             <Link href="#" underline="none" sx={{color:'black'}}>
-            <ListItemText  id={labelId} primary={value.details.register_no} />
+            <ListItemText  id={labelId} primary={value?.register_no} />
             </Link>
             <ListItemText  id={labelId} primary={value.name} sx={{marginLeft:'30px'}} />
           </ListItem>

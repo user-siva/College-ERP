@@ -3,6 +3,18 @@ const router = require("express").Router();
 const TimeTable = require("../models/TimeTable");
 
 
+//filter
+
+router.get("/filter_timetable/", async (req, res) => {
+  try {
+    console.log(req.body)
+    const timetable = await TimeTable.find({ department:req.body.department,year:req.body.year });
+    res.status(200).json(timetable);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get user
 
 router.get("/:id", async (req, res) => {

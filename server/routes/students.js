@@ -3,6 +3,17 @@ const router = require("express").Router();
 const Student = require("../models/Student");
 
 
+//filter
+
+router.get("/filter_students/", async (req, res) => {
+  try {
+    const students = await Student.find({ department:req.body.department,year:req.body.year });
+    res.status(200).json(students);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get student
 
 router.get("/:id", async (req, res) => {
@@ -60,5 +71,7 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 module.exports = router;

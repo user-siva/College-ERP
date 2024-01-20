@@ -3,6 +3,17 @@ const router = require("express").Router();
 const StudentAttendance = require("../models/StudentAttendance");
 
 
+//filter
+
+router.get("/filter_students/", async (req, res) => {
+  try {
+    const student_attendance = await StudentAttendance.find({ department:req.body.department,year:req.body.year });
+    res.status(200).json(student_attendance);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get user
 
 router.get("/:id", async (req, res) => {

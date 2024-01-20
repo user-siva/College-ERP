@@ -3,6 +3,17 @@ const router = require("express").Router();
 const Staff = require("../models/Staff");
 
 
+//filter
+
+router.get("/filter_staffs/", async (req, res) => {
+  try {
+    const staffs = await Staff.find({ department:req.body.department,year:req.body.year });
+    res.status(200).json(staffs);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get user
 
 router.get("/:id", async (req, res) => {

@@ -3,6 +3,17 @@ const router = require("express").Router();
 const Subject = require("../models/Subject");
 
 
+//filter
+
+router.get("/filter_subjects/", async (req, res) => {
+  try {
+    const subjects = await Subject.find({ department:req.body.department,year:req.body.year });
+    res.status(200).json(subjects);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get user
 
 router.get("/:id", async (req, res) => {

@@ -1,0 +1,135 @@
+import { TextField,styled } from "@mui/material";
+import { useState } from "react";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+
+const STextField = styled(TextField)({
+    margin:'14px'
+})
+
+function FeesDetails() {
+
+    const [data,setData] = useState({
+        admission_fees:"",
+        tution_fees:"",
+        bus_fees:"",
+        hostel_fees:"",
+        previous_year_balance:"",
+        total_fees:"",
+        fgg:"",
+        pmss:"",
+        seven_point_five:"",
+        ket:"",
+        other_scholarship:""
+    })
+
+    const handleChange = (e) => {
+        setData({
+          ...data,
+          [e.target.name]: e.target.value
+        });
+      };
+
+
+
+    return (
+        <>
+            <Card 
+            sx={{display:'flex',flexDirection:'column',p:3,width:'95%',marginTop:'10px',height:'70vh',overflow:'hidden',overflowY:'scroll'}}
+            >
+            <CardContent>
+            <STextField
+            label="Admission Fees"
+            name="admission_fees"
+            size="small"
+            value={data.admission_fees}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="Tution Fees"
+            name="tution_fees"
+            size="small"
+            value={data.tution_fees}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="Bus Fees"
+            name="bus_fees"
+            size="small"
+            value={data.bus_fees}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="Hostel Fees"
+            name="hostel_fees"
+            size="small"
+            value={data.hostel_fees}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="Previos Year Fees"
+            name="previous_year_balance"
+            size="small"
+            value={data.previous_year_balance}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="Total Fees"
+            name="total_fees"
+            size="small"
+            value={data.total_fees}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="FGG Scholarhip"
+            name="fgg"
+            size="small"
+            value={data.fgg}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="PMSS Scholarhip"
+            name="pmss"
+            size="small"
+            value={data.pmss}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="7.5% Govt Quota"
+            name="seven_point_five"
+            size="small"
+            value={data.seven_point_five}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="KET Scholarship"
+            name="ket"
+            size="small"
+            value={data.ket}
+            onChange={handleChange}
+            required
+            />
+            <STextField
+            label="Other Scholarship"
+            name="other_scholarship"
+            size="small"
+            value={data.other_scholarship}
+            onChange={handleChange}
+            required
+            />
+            </CardContent>
+            </Card>
+        </>
+    );
+}
+
+export default FeesDetails;

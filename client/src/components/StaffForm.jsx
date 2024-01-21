@@ -1,4 +1,4 @@
-import { Box,TextField,Paper,Typography,styled,MenuItem,Button,Stack } from "@mui/material";
+import { Box,TextField,Typography,styled,MenuItem,Button,Stack } from "@mui/material";
 import dayjs from 'dayjs';
 import { useState } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -115,6 +115,7 @@ const [data,setData] = useState({
             name="emp_category"
             value={data.emp_category}
             onChange={handleChange}
+            sx={{width:'185px'}}
             select
             label="Employee Category"
             >
@@ -181,6 +182,7 @@ const [data,setData] = useState({
             select
             label="Gender"
             name="gender"
+            sx={{width:"95px"}}
             value={data.gender}
             onChange={handleChange}
             >
@@ -283,6 +285,7 @@ const [data,setData] = useState({
             size="small"
             name="mode_of_transportation"
             value={data.mode_of_transportation}
+            sx={{width:"210px"}}
             onChange={handleChange}
             select
             label="Mode Of Transportation"
@@ -315,6 +318,7 @@ const [data,setData] = useState({
             <STextField
             size="small"
             name="marital_status"
+            sx={{width:"150px"}}
             value={data.marital_status}
             onChange={handleChange}
             select

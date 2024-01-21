@@ -1,6 +1,8 @@
-import { Box,TextField,Paper,Typography,styled,MenuItem,Button,Stack } from "@mui/material";
+import { Box,TextField,Typography,styled,MenuItem,Button,Stack } from "@mui/material";
 import { useState } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -55,9 +57,10 @@ function SubjectForm() {
         flex={10} 
         p={2}
         >   
-            <Paper variant="outlined" elevation={8} 
+            <Card variant="outlined" elevation={8} 
             sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'430px',overflow:'hidden',overflowY:'scroll'}}
             >
+            <CardContent>
             <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>
                 Subject
             </Typography>
@@ -82,6 +85,7 @@ function SubjectForm() {
             <STextField
             size="small"
             name="regulation"
+            sx={{width:"125px"}}
             value={data.regulation}
             onChange={handleChange}
             select
@@ -93,6 +97,7 @@ function SubjectForm() {
             <STextField
             size="small"
             name="department"
+            sx={{width:"135px"}}
             value={data.department}
             onChange={handleChange}
             select
@@ -108,6 +113,7 @@ function SubjectForm() {
             size="small"
             name="year"
             value={data.year}
+            sx={{width:"75px"}}
             onChange={handleChange}
             select
             label="Year"
@@ -121,6 +127,7 @@ function SubjectForm() {
             <STextField
             size="small"
             name="semester"
+            sx={{width:"110px"}}
             value={data.semester}
             onChange={handleChange}
             select
@@ -133,6 +140,7 @@ function SubjectForm() {
             size="small"
             name="staff"
             value={data.staff}
+            sx={{width:"95px"}}
             onChange={handleChange}
             select
             label="Staff"
@@ -140,8 +148,8 @@ function SubjectForm() {
                 <MenuItem value='Staff1'>Staff1</MenuItem>
                 <MenuItem value='Staff2'>Staff2</MenuItem>
             </STextField>
-             
-            </Paper>
+            </CardContent>
+            </Card>
             <Stack spacing={2}>
             <Button component="label" variant="contained" color="success" >Save</Button>
             <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>

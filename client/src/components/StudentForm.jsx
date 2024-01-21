@@ -1,5 +1,4 @@
-import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
-import dayjs from 'dayjs';
+import { Box,styled,Button } from "@mui/material";
 import { useState } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Stack from '@mui/material/Stack';
@@ -7,6 +6,7 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import PersonalDetails from "./studentUtils/PersonalDetails";
+import FeesDetails from "./studentUtils/FeesDetails";
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -21,55 +21,9 @@ const VisuallyHiddenInput = styled('input')({
   });
 
 
-const steps = ['Personal Details', 'Fees Details', 'Exam Details'];
+const steps = ['Personal Details', 'Fees & Scholarship Details', 'Exam Details'];
 
 function StudentForm() {
-
-    const [data,setData] = useState({
-        name:"",
-        admission_no:"",
-        admission_date:dayjs(),
-        batch:"",
-        register_no:"",
-        roll_no:"",
-        age:"",
-        dob:dayjs(),
-        gender:"",
-        department:"",
-        year:"",
-        blood_group:"",
-        phone:"",
-        email:"",
-        aadhaar_no:"",
-        father_name:"",
-        father_phone_no:"",
-        father_occupation:"",
-        mother_name:"",
-        mother_phone_no:"",
-        mother_occupation:"",
-        annual_income:"",
-        nationality:"",
-        religion:"",
-        student_category:"",
-        door_no:"",
-        street:"",
-        district:"",
-        state:"",
-        country:"",
-        pincode:"",
-        transportation:"",
-        bus_route_no:"",
-        regular_boarding_point:"",
-        regular_dropping_point:"",
-        gaurdian_name:"",
-        gaurdian_is:"",
-        gaurdian_mobile:"",
-        gaurdian_address:"",
-        gaurdian_2_name:"",
-        gaurdian_2_mobile:"",
-        gaurdian_2_address:"",
-        emergency_contact:""
-})
 
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
@@ -112,25 +66,10 @@ function StudentForm() {
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
-    handleNext();
     };
-
-    const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
-    };
-
-    const handleChange = (e) => {
-        setData({
-          ...data,
-          [e.target.name]: e.target.value
-        });
-      };
 
     const onSave = () => {
-        console.log(data)
-    console.log("active step:",activeStep)
-
+        console.log("saved")
     }
 
     return (
@@ -147,7 +86,7 @@ function StudentForm() {
         flex={10} 
         p={2}
         >   
-        <Box sx={{ width: '80%' }}>
+        <Box sx={{ width: '85%' }}>
             <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
@@ -158,19 +97,8 @@ function StudentForm() {
         ))}
       </Stepper>
       <div>
-        {allStepsCompleted() ? (
-          <>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
-          </>
-        ) : (
-          <>
-            {activeStep===0 ? <PersonalDetails/> : activeStep===1 ? "Step 1" : activeStep===2 ? "Step 2" : null}
+        
+            {activeStep===0 ? <PersonalDetails/> : activeStep===1 ? <FeesDetails /> : activeStep===2 ? "Step 2" : null}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
@@ -181,24 +109,17 @@ function StudentForm() {
                 Back
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
+              {!isLastStep() ?
+               <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
-              </Button>
-              {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                    Step {activeStep + 1} already completed
-                  </Typography>
-                ) : (
+              </Button> : ''}
+              
                   <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? 'Finish'
-                      : 'Complete Step'}
+                    Save
                   </Button>
-                ))}
+                
             </Box>
-          </>
-        )}
+          
       </div>
       </Box>
             <Stack spacing={2}>

@@ -1,4 +1,4 @@
-import { Box,TextField,Paper,Typography,styled,MenuItem,Button } from "@mui/material";
+import { TextField,styled,MenuItem } from "@mui/material";
 import dayjs from 'dayjs';
 import { useState } from "react";
 import Card from '@mui/material/Card';
@@ -63,10 +63,6 @@ function PersonalDetails() {
         });
       };
 
-    const onSave = () => {
-        console.log(data)
-    }
-
 
     return (
         <>
@@ -81,6 +77,14 @@ function PersonalDetails() {
             value={data.name}
             onChange={handleChange}
             required
+            />
+            <STextField
+            size="small"
+            label="Register No"
+            name="register_no" 
+            onChange={handleChange}
+            value={data.register_no}          
+        
             />
             <STextField
             size="small"
@@ -105,14 +109,7 @@ function PersonalDetails() {
             value={data.batch}
         
             />
-            <STextField
-            size="small"
-            label="Register No"
-            name="register_no" 
-            onChange={handleChange}
-            value={data.register_no}          
-        
-            />
+            
             <STextField
             size="small"
             label="Roll No" 

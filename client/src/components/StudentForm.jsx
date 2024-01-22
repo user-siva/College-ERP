@@ -1,5 +1,5 @@
-import { Box,styled,Button } from "@mui/material";
-import { useState } from "react";
+import { Box,styled,Button,Typography } from "@mui/material";
+import { useState,useEffect } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
@@ -7,6 +7,8 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import PersonalDetails from "./studentUtils/PersonalDetails";
 import FeesDetails from "./studentUtils/FeesDetails";
+import ExamDetails from "./studentUtils/ExamDetails";
+import axios from 'axios';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -27,6 +29,9 @@ function StudentForm() {
 
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
+    const [personalData,setPersonalData] = useState({});
+    const [feesData,setFeesData] = useState({})
+    const [markData,setMarkData] = useState({})
 
     const totalSteps = () => {
     return steps.length;
@@ -66,11 +71,39 @@ function StudentForm() {
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
+    handleNext();
+    
     };
 
-    const onSave = () => {
-        console.log("saved")
+    const personalDetails = (data) => {
+      handleComplete()
+      //axios.post('http://localhost:5000/api/student/add',data)
+      setPersonalData(data)
     }
+
+    useEffect(() => {
+      console.log("personalData:", personalData);
+      console.log("Success!")
+    }, [personalData]);
+
+    const feesDetails = (data) => {
+      setFeesData(data)
+      handleComplete()
+    }
+
+    useEffect(() => {
+      console.log("feesData:", feesData);
+      console.log("Success!")
+    }, [feesData]);
+
+    const markDetails = (data) => {
+      setMarkData(data)
+    }
+
+    useEffect(() => {
+      console.log("markData:", markData);
+      console.log("Success!")
+    }, [markData]);
 
     return (
         <Box
@@ -98,7 +131,10 @@ function StudentForm() {
       </Stepper>
       <div>
         
-            {activeStep===0 ? <PersonalDetails/> : activeStep===1 ? <FeesDetails /> : activeStep===2 ? "Step 2" : null}
+            {activeStep===0 ? 
+            <PersonalDetails personalDetails={personalDetails}/> : 
+            activeStep===1 ? <FeesDetails feesDetails={feesDetails}/> : 
+            activeStep===2 ? <ExamDetails markDetails={markDetails}/> : null}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
@@ -113,17 +149,24 @@ function StudentForm() {
                <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
               </Button> : ''}
-              
-                  <Button onClick={handleComplete}>
-                    Save
-                  </Button>
-                
+              {activeStep !== steps.length &&
+                (completed[activeStep] ? (
+                  <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                    Step {activeStep + 1} already completed
+                  </Typography>
+                ) : (
+                  <>
+                    {completedSteps() === totalSteps() - 1
+                      ? <Button onClick={handleComplete}>Finish</Button>
+                      : <Button  disabled>Finish</Button>}
+                 </>
+                ))}
             </Box>
           
       </div>
       </Box>
             <Stack spacing={2}>
-            <Button component="label" variant="contained" onClick={onSave} color="success" >Save</Button>
+            <Button component="label" variant="contained" color="success" >Save</Button>
             <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
             Upload file
             <VisuallyHiddenInput type="file" />

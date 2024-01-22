@@ -3,12 +3,11 @@ import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import axios from "axios";
-
 const STextField = styled(TextField)({
     margin:'14px'
 })
 
-function FeesDetails({feesDetails}) {
+function ExamDetails({markDetails}) {
 
     const [data,setData] = useState({
         admission_fees:"",
@@ -29,12 +28,12 @@ function FeesDetails({feesDetails}) {
           ...data,
           [e.target.name]: e.target.value
         });
+       
       };
 
     const onSave = () => {
-        feesDetails(data)
+        markDetails(data)
     }
-
 
 
     return (
@@ -138,4 +137,4 @@ function FeesDetails({feesDetails}) {
     );
 }
 
-export default FeesDetails;
+export default ExamDetails;

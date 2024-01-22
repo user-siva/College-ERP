@@ -8,6 +8,8 @@ var cors = require('cors')
 const path = require("path");
 
 const studentRouter = require("./routes/students");
+const feesRouter = require("./routes/fees_details")
+const markRouter = require("./routes/mark_details")
 const staffRouter = require("./routes/staffs");
 const studentAttendanceRouter = require("./routes/studentAttendance");
 const subjectRouter = require("./routes/subject");
@@ -35,6 +37,9 @@ app.use("/api/staff", staffRouter);
 app.use("/api/studentAttendance", studentAttendanceRouter);
 app.use("/api/subject", subjectRouter);
 app.use("/api/timetable", timeTableRouter);
+app.use("/api/fees_details", feesRouter);
+app.use("/api/mark_details", markRouter);
+
 
 
 

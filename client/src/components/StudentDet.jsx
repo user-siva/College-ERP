@@ -131,8 +131,8 @@ function StudentDet() {
       justifyContent="flex-between"
       disablePadding
       >
-    <ListItemText   primary={'Roll No'} sx={{marginLeft:'143px'}} />
-    <ListItemText   primary={'Name'} sx={{marginLeft:'21px'}} />
+    <ListItemText   primary={'Register No'} sx={{marginLeft:'143px'}} />
+    <ListItemText   primary={'Name'} sx={{marginLeft:'60px'}} />
 
     </ListItem>
 
@@ -157,9 +157,9 @@ function StudentDet() {
               </ListItemIcon>
             </ListItemButton>
             <Link href="#" underline="none" sx={{color:'black'}}>
-            <ListItemText  id={labelId} primary={value?.register_no} />
+            <ListItemText  id={labelId} primary={value?.register_no} sx={{display:'flex',alignItems:'baseline'}}/>
             </Link>
-            <ListItemText  id={labelId} primary={value.name} sx={{marginLeft:'30px'}} />
+            <ListItemText  id={labelId} primary={value.name} sx={{paddingLeft:'60px'}} />
           </ListItem>
         );
       })}

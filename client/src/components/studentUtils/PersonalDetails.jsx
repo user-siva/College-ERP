@@ -1,4 +1,4 @@
-import { TextField,styled,MenuItem } from "@mui/material";
+import { TextField,styled,MenuItem,Button } from "@mui/material";
 import dayjs from 'dayjs';
 import { useState } from "react";
 import Card from '@mui/material/Card';
@@ -8,7 +8,7 @@ const STextField = styled(TextField)({
     margin:'14px'
 })
 
-function PersonalDetails() {
+function PersonalDetails({personalDetails}) {
 
     const [data,setData] = useState({
         name:"",
@@ -55,15 +55,20 @@ function PersonalDetails() {
         gaurdian_2_address:"",
         emergency_contact:""
 })
+    
 
     const handleChange = (e) => {
-        setData({
-          ...data,
-          [e.target.name]: e.target.value
-        });
+        const {name,value} = e.target;
+        setData((prev)=>{
+            return {...prev,[name]:value}
+        })
       };
 
+    const onSave = () => {
+        personalDetails(data)
+    }
 
+      
     return (
         <>
             <Card 
@@ -76,7 +81,6 @@ function PersonalDetails() {
             size="small"
             value={data.name}
             onChange={handleChange}
-            required
             />
             <STextField
             size="small"
@@ -438,6 +442,7 @@ function PersonalDetails() {
             onChange={handleChange}
             />  
             </CardContent>
+            <Button variant="contained" onClick={onSave}>Save</Button>
             </Card>
             
             

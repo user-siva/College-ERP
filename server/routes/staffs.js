@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
 
 //post
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   const newStaff = new Staff(req.body);
   try {
     await newStaff.save();

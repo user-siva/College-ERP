@@ -3,6 +3,7 @@ import { useState } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import axios from "axios";
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -40,123 +41,126 @@ function SubjectForm() {
     }
 
     const onSave = () => {
+        axios.post('http://localhost:5000/api/subject/add',data)
         console.log(data)
     }
 
     return (
         <Box
         component="form"
-        sx={{
-            bgcolor: 'background.default',
-            display:'flex',
-            justifyContent:'space-evenly'
-        }}
-        
         noValidate
         autoComplete="off"
         flex={10} 
         p={2}
         >   
-            <Card variant="outlined" elevation={8} 
-            sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'430px',overflow:'hidden',overflowY:'scroll'}}
-            >
-            <CardContent>
-            <Typography variant={'h6'} sx={{color:'blue',fontSize:30}}>
+            <Typography variant={'h6'} sx={{color:'blue',fontSize:30,margin:'10px'}}>
                 Subject
             </Typography>
+            <Box 
+            sx={{
+            bgcolor: 'background.default',
+            display:'flex',
+            justifyContent:'space-evenly'
+            }}>
+            <Card
+            sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'430px'}}
+            >
+                <CardContent>
 
-            <STextField
-            label="Subject Code"
-            size="small"
-            name="subject_code"
-            value={data.subject_code}
-            onChange={handleChange}
-            fullWidth
-            required
-            />
-            <STextField
-            size="small"
-            label="Subject Name"    
-            name="subject_name"
-            value={data.subject_name}
-            onChange={handleChange}         
-            fullWidth
-            />
-            <STextField
-            size="small"
-            name="regulation"
-            sx={{width:"125px"}}
-            value={data.regulation}
-            onChange={handleChange}
-            select
-            label="Regulation"
-            >
-                <MenuItem  value='2017'>2017</MenuItem>
-                <MenuItem value='2021'>2021</MenuItem>
-            </STextField>
-            <STextField
-            size="small"
-            name="department"
-            sx={{width:"135px"}}
-            value={data.department}
-            onChange={handleChange}
-            select
-            label="Department"
-            >
-                <MenuItem  value='CSE'>CSE</MenuItem>
-                <MenuItem value='ECE'>ECE</MenuItem>
-                <MenuItem value='ECE'>ECE</MenuItem>
-                <MenuItem value='Mech'>Mech</MenuItem>
-                <MenuItem value='Civil'>Civil</MenuItem>
-            </STextField>
-            <STextField
-            size="small"
-            name="year"
-            value={data.year}
-            sx={{width:"75px"}}
-            onChange={handleChange}
-            select
-            label="Year"
-            >
-                <MenuItem value='First'>First</MenuItem>
-                <MenuItem value='Second'>Second</MenuItem>
-                <MenuItem value='Third'>Third</MenuItem>
-                <MenuItem value='Fourth'>Fourth</MenuItem>
-            </STextField>
+                <STextField
+                label="Subject Code"
+                size="small"
+                name="subject_code"
+                value={data.subject_code}
+                onChange={handleChange}
+                fullWidth
+                required
+                />
+                <STextField
+                size="small"
+                label="Subject Name"    
+                name="subject_name"
+                value={data.subject_name}
+                onChange={handleChange}         
+                fullWidth
+                />
+                <STextField
+                size="small"
+                name="regulation"
+                sx={{width:"125px"}}
+                value={data.regulation}
+                onChange={handleChange}
+                select
+                label="Regulation"
+                >
+                    <MenuItem  value='2017'>2017</MenuItem>
+                    <MenuItem value='2021'>2021</MenuItem>
+                </STextField>
+                <STextField
+                size="small"
+                name="department"
+                sx={{width:"135px"}}
+                value={data.department}
+                onChange={handleChange}
+                select
+                label="Department"
+                >
+                    <MenuItem  value='CSE'>CSE</MenuItem>
+                    <MenuItem value='ECE'>ECE</MenuItem>
+                    <MenuItem value='ECE'>ECE</MenuItem>
+                    <MenuItem value='Mech'>Mech</MenuItem>
+                    <MenuItem value='Civil'>Civil</MenuItem>
+                </STextField>
+                <STextField
+                size="small"
+                name="year"
+                value={data.year}
+                sx={{width:"75px"}}
+                onChange={handleChange}
+                select
+                label="Year"
+                >
+                    <MenuItem value='First'>First</MenuItem>
+                    <MenuItem value='Second'>Second</MenuItem>
+                    <MenuItem value='Third'>Third</MenuItem>
+                    <MenuItem value='Fourth'>Fourth</MenuItem>
+                </STextField>
 
-            <STextField
-            size="small"
-            name="semester"
-            sx={{width:"110px"}}
-            value={data.semester}
-            onChange={handleChange}
-            select
-            label="Semester"
-            >
-                <MenuItem value='Odd'>Odd</MenuItem>
-                <MenuItem value='Even'>Even</MenuItem>
-            </STextField>
-            <STextField
-            size="small"
-            name="staff"
-            value={data.staff}
-            sx={{width:"95px"}}
-            onChange={handleChange}
-            select
-            label="Staff"
-            >
-                <MenuItem value='Staff1'>Staff1</MenuItem>
-                <MenuItem value='Staff2'>Staff2</MenuItem>
-            </STextField>
-            </CardContent>
-            </Card>
-            <Stack spacing={2}>
-            <Button component="label" variant="contained" color="success" >Save</Button>
-            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-            Upload file
-            <VisuallyHiddenInput type="file" />
-            </Button>
-            </Stack>
+                <STextField
+                size="small"
+                name="semester"
+                sx={{width:"110px"}}
+                value={data.semester}
+                onChange={handleChange}
+                select
+                label="Semester"
+                >
+                    <MenuItem value='Odd'>Odd</MenuItem>
+                    <MenuItem value='Even'>Even</MenuItem>
+                </STextField>
+                <STextField
+                size="small"
+                name="staff"
+                value={data.staff}
+                sx={{width:"95px"}}
+                onChange={handleChange}
+                select
+                label="Staff"
+                >
+                    <MenuItem value='Staff1'>Staff1</MenuItem>
+                    <MenuItem value='Staff2'>Staff2</MenuItem>
+                </STextField>
+                </CardContent>
+            <Button variant="contained" onClick={onSave}>Save</Button>
+                </Card>
+                <Stack spacing={2}>
+                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+                Upload file
+                <VisuallyHiddenInput type="file" />
+                </Button>
+                </Stack>
+            </Box>
+            
 
         </Box>
     );

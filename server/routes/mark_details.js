@@ -16,7 +16,7 @@ router.get("/:id", async (req, res) => {
 
 //post
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   const newmark = new Mark(req.body);
   try {
     await newmark.save();

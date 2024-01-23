@@ -103,6 +103,21 @@ const [data,setData] = useState({
                 <MenuItem value='Driver' >Driver</MenuItem>
                 <MenuItem value='Maintanence Staff' >Maintanence Staff</MenuItem>
             </STextField>
+            <STextField
+            size="small"
+            sx={{width:'130px'}}
+            select
+            label="Department"
+            name="department"
+            value={data.department}
+            onChange={handleChange}
+            >
+                <MenuItem  value='CSE'>CSE</MenuItem>
+                <MenuItem value='ECE'>ECE</MenuItem>
+                <MenuItem value='ECE'>ECE</MenuItem>
+                <MenuItem value='Mech'>Mech</MenuItem>
+                <MenuItem value='Civil'>Civil</MenuItem>
+            </STextField>
             <STextField 
             name="dob"
             type='date'

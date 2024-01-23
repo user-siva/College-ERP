@@ -14,6 +14,17 @@ router.get("/filter_subjects/", async (req, res) => {
   }
 });
 
+// get all
+
+router.get("/all", async (req, res) => {
+  try {
+    const subject = await Subject.find(req.body);
+    res.status(200).json(subject);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //get user
 
 router.get("/:id", async (req, res) => {

@@ -1,12 +1,12 @@
-import { Box ,Paper,Typography,Link,Button} from "@mui/material";
+import { Box ,Typography,Button} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
+import ListSubheader from '@mui/material/ListSubheader';
+import Filter from "./utils/Filter";
 import {
   useQuery,
 } from '@tanstack/react-query'
@@ -43,128 +43,87 @@ function StudentDet() {
 
     setChecked(newChecked);
   };
-
-  const departments = [
-    {
-      value: 'CSE',
-      label: 'CSE',
-    },
-    {
-      value: 'ECE',
-      label: 'ECE',
-    },
-    {
-      value: 'EEE',
-      label: 'EEE',
-    },
-    {
-      value: 'Mechanical',
-      label: 'MECH',
-    },
-    {
-      value: 'Civil',
-      label: 'Civil',
-    },
-  ];
-
-  const year = [
-    {
-      value: '1 year',
-      label: '1 year',
-    },
-    {
-      value: '2 year',
-      label: '2 year',
-    },
-    {
-      value: '3 year',
-      label: '3 year',
-    },
-    {
-      value: '4 year',
-      label: '4 year',
-    }
-  ];
   
+   const filter_data = (department,year,documents) => {
+    const filtered_data = documents.filter(doc => {
+      return (
+        ( doc.department === department) &&
+        (doc.year === year)
+      );
+    });
+    return filtered_data
+   }
+
+   //const dept_year = [['CSE',1],['CSE',2],['CSE',3],['CSE',4],["ECE",1],["ECE",2],["ECE",3],["ECE",4],
+   //                  ["EEE",1],["EEE",2],["EEE",3],["EEE",4],["MECH",1],["MECH",2],["MECH",3],["MECH",4],
+   //                  ["Civil",1],["Civil",2],["Civil",3],["Civil",4],]
+   const dept_year = [['CSE',4], ['CSE',3],['MECH',4]]
 
   return (
     <Box flex={10} p={2} >
+
     <Box sx={{display:'flex',justifyContent:'space-between'}}>
     <Typography variant="h6" p={1}>
         Students
     </Typography>
     <Button variant="contained" color="success" href='/studentForm'>Add Student</Button>
     </Box>
-    <Box component="form" sx={{display:'flex',justifyContent:'flex-start'}}>
-      <TextField
-          id="outlined-select-department"
-          select
-          label="Department"
-          defaultValue="CSE"
-          helperText="Please select the department"
-        >
-          {departments.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="outlined-select-year"
-          select
-          label="Year"
-          defaultValue="1 year"
-          helperText="Please select the year"
-          sx={{marginLeft:"10px"}}
-        >
-          {year.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <Button variant="contained" sx={{height:'45px',marginLeft:'10px'}}>Filter</Button>
-      </Box>
-    <Paper elevation={3} >    
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper',marginTop:'30px' }}>
-    <ListItem
-      justifyContent="flex-between"
-      disablePadding
-      >
-    <ListItemText   primary={'Register No'} sx={{marginLeft:'143px'}} />
-    <ListItemText   primary={'Name'} sx={{marginLeft:'60px'}} />
 
-    </ListItem>
+    <Filter />
 
-      {data.map((value) => {
-        console.log("values:",value)
-        const labelId = `checkbox-list-label-${value}`;
+    <List
+      sx={{
+        width: '100%',
 
-        return (
-          <ListItem
-            key={value}
-            disablePadding
-          >
-            <ListItemButton  disablePadding role={undefined} onClick={handleToggle(value)} >
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-            </ListItemButton>
-            <Link href="#" underline="none" sx={{color:'black'}}>
-            <ListItemText  id={labelId} primary={value?.register_no} sx={{display:'flex',alignItems:'baseline'}}/>
-            </Link>
-            <ListItemText  id={labelId} primary={value.name} sx={{paddingLeft:'60px'}} />
-          </ListItem>
-        );
-      })}
+        bgcolor: 'background.paper',
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 600,
+        '& ul': { padding: 0 },
+      }}
+      subheader={<li />}
+    >
+      {dept_year.map((details) => (
+        <li key={`section-${details[1]}`}>
+          <ul>
+            <ListSubheader>{` ${details} Year`}</ListSubheader>
+            {filter_data(details[0],details[1],data)?.map((value) => (
+              <ListItem
+              key={value.register_no+value.department+value.name}
+              secondaryAction={
+                <IconButton edge="end" aria-label="comments">
+                  <CommentIcon />
+                </IconButton>
+              }
+              disablePadding
+            >
+              <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                
+                <ListItemText
+                primary={value?.name}
+                secondary={
+                  <>
+                    <Typography
+                      sx={{ display: 'inline' }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Register No:&nbsp;
+                    </Typography>
+                    {value?.register_no}
+                  </>
+                }
+                sx={{margin:'10px'}}
+              />
+              </ListItemButton>
+            </ListItem>
+            ))}
+          </ul>
+        </li>
+      ))}
     </List>
-    </Paper>
+
     </Box>
   );
 

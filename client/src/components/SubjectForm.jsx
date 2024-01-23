@@ -120,10 +120,10 @@ function SubjectForm() {
                 select
                 label="Year"
                 >
-                    <MenuItem value='First'>First</MenuItem>
-                    <MenuItem value='Second'>Second</MenuItem>
-                    <MenuItem value='Third'>Third</MenuItem>
-                    <MenuItem value='Fourth'>Fourth</MenuItem>
+                    <MenuItem value='1'>First</MenuItem>
+                    <MenuItem value='2'>Second</MenuItem>
+                    <MenuItem value='3'>Third</MenuItem>
+                    <MenuItem value='4'>Fourth</MenuItem>
                 </STextField>
 
                 <STextField
@@ -151,7 +151,7 @@ function SubjectForm() {
                     <MenuItem value='Staff2'>Staff2</MenuItem>
                 </STextField>
                 </CardContent>
-            <Button variant="contained" onClick={onSave}>Save</Button>
+            <Button variant="contained" type="submit" onClick={onSave}>Save</Button>
                 </Card>
                 <Stack spacing={2}>
                 <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>

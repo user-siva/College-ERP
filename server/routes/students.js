@@ -5,7 +5,7 @@ const Student = require("../models/Student");
 
 //filter
 
-router.get("/filter_students/", async (req, res) => {
+router.get("/filter_students", async (req, res) => {
   try {
     const students = await Student.find({ department:req.body.department,year:req.body.year });
     res.status(200).json(students);

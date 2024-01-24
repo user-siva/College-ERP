@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import ListSubheader from '@mui/material/ListSubheader';
 import { Typography} from "@mui/material";
+import axios from "axios"
 import {
     useQuery,
   } from '@tanstack/react-query'
@@ -13,15 +14,16 @@ import {
 import { useState } from "react";
 import ShadowLoading from '../utils/ShadowLoading';
 
-function StudentList() {
+function StudentList({deptYear}) {
   const [checked, setChecked] = useState([]);
     
   const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('http://localhost:5000/api/student/all').then(
-        (res) => res.json(),
-      ),
+    queryFn: async () =>
+     {
+      const res = await axios.get('http://localhost:5000/api/student/all')
+      return res.data
+     },
   })
 
   if (isLoading) {
@@ -59,10 +61,7 @@ function StudentList() {
     return filtered_data
    }
 
-   //const dept_year = [['CSE',1],['CSE',2],['CSE',3],['CSE',4],["ECE",1],["ECE",2],["ECE",3],["ECE",4],
-   //                  ["EEE",1],["EEE",2],["EEE",3],["EEE",4],["MECH",1],["MECH",2],["MECH",3],["MECH",4],
-   //                  ["Civil",1],["Civil",2],["Civil",3],["Civil",4],]
-   const dept_year = [['CSE',4], ['CSE',3],['MECH',4]]
+   
 
     return (
         <List
@@ -72,12 +71,12 @@ function StudentList() {
             bgcolor: 'background.paper',
             position: 'relative',
             overflow: 'auto',
-            maxHeight: 600,
+            height: 500,
             '& ul': { padding: 0 },
         }}
         subheader={<li />}
         >
-        {dept_year.map((details) => (
+        {deptYear.map((details) => (
             <li key={`section-${details[1]}`}>
             <ul>
                 <ListSubheader>{` ${details} Year`}</ListSubheader>

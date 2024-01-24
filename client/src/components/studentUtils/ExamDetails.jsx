@@ -1,8 +1,9 @@
-import { TextField,styled,Button } from "@mui/material";
+import { TextField,styled,Button, Typography } from "@mui/material";
 import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import axios from "axios";
+import DynamicSemSection from "./DynamicSemSection";
+//import axios from "axios";
 const STextField = styled(TextField)({
     margin:'14px'
 })
@@ -10,30 +11,38 @@ const STextField = styled(TextField)({
 function ExamDetails({markDetails}) {
 
     const [data,setData] = useState({
-        admission_fees:"",
-        tution_fees:"",
-        bus_fees:"",
-        hostel_fees:"",
-        previous_year_balance:"",
-        total_fees:"",
-        fgg:"",
-        pmss:"",
-        seven_point_five:"",
-        ket:"",
-        other_scholarship:""
+        "sem_1_iat_1":"",
+        "sem_1_iat_2":"",
+        "sem_2_iat_3":"",
+        "sem_1_gpa":""
     })
+      const [sem,setSem] = useState(1)
+      const [semSection,setSemSection] = useState([])
 
-    const handleChange = (e) => {
-        setData({
-          ...data,
-          [e.target.name]: e.target.value
-        });
-       
+      const handleAddSemSection= () => {
+        
+        setSemSection((prevFields) => [...prevFields, sem+1]);
+        setSem(sem+1)
       };
 
-    const onSave = () => {
-        markDetails(data)
-    }
+      const handleCustomInputChange = (field, value) => {
+        setData((prevData) => ({
+          ...prevData,
+          [field]: value,
+        }));
+      };
+
+      const handleChange = (e) => {
+          const {name,value} = e.target;
+          setData((prev)=>{
+              return {...prev,[name]:value}
+          })
+        };
+
+        const onSave = () => {
+            markDetails(data)
+            console.log("markDetails:",data)
+        }
 
 
     return (
@@ -42,95 +51,48 @@ function ExamDetails({markDetails}) {
             sx={{display:'flex',flexDirection:'column',p:3,width:'95%',marginTop:'10px',height:'70vh',overflow:'hidden',overflowY:'scroll'}}
             >
             <CardContent>
+                <Typography>Semester 1</Typography>
+
             <STextField
-            label="Admission Fees"
-            name="admission_fees"
+            label="IAT 1 Mark"
+            name="sem_1_iat_1"
             size="small"
-            value={data.admission_fees}
+            value={data?.sem_1_iat_1}
             onChange={handleChange}
-            required
+            
             />
             <STextField
-            label="Tution Fees"
-            name="tution_fees"
+            label="IAT 2 Mark"
+            name="sem_1_iat_2"
             size="small"
-            value={data.tution_fees}
+            value={data?.sem_1_iat_2}
             onChange={handleChange}
-            required
+            
             />
             <STextField
-            label="Bus Fees"
-            name="bus_fees"
+            label="IAT 3 Mark"
+            name="sem_2_iat_3"
             size="small"
-            value={data.bus_fees}
+            value={data?.sem_2_iat_3}
             onChange={handleChange}
-            required
+            
             />
             <STextField
-            label="Hostel Fees"
-            name="hostel_fees"
+            label="GPA"
+            name="gpa"
             size="small"
-            value={data.hostel_fees}
+            value={data?.gpa}
             onChange={handleChange}
-            required
+            
             />
-            <STextField
-            label="Previos Year Fees"
-            name="previous_year_balance"
-            size="small"
-            value={data.previous_year_balance}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="Total Fees"
-            name="total_fees"
-            size="small"
-            value={data.total_fees}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="FGG Scholarhip"
-            name="fgg"
-            size="small"
-            value={data.fgg}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="PMSS Scholarhip"
-            name="pmss"
-            size="small"
-            value={data.pmss}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="7.5% Govt Quota"
-            name="seven_point_five"
-            size="small"
-            value={data.seven_point_five}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="KET Scholarship"
-            name="ket"
-            size="small"
-            value={data.ket}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="Other Scholarship"
-            name="other_scholarship"
-            size="small"
-            value={data.other_scholarship}
-            onChange={handleChange}
-            required
-            />
+            
             </CardContent>
+            <DynamicSemSection 
+            semSection={semSection}
+            onInputChange={handleCustomInputChange}
+            onAddSemSection={handleAddSemSection}
+            />
+            
             <Button variant="contained" onClick={onSave}>Save</Button>
             </Card>
         </>

@@ -70,7 +70,7 @@ function StaffList() {
             bgcolor: 'background.paper',
             position: 'relative',
             overflow: 'auto',
-            maxHeight: 600,
+            height: 500,
             '& ul': { padding: 0 },
         }}
         subheader={<li />}

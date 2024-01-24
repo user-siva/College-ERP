@@ -1,7 +1,8 @@
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Box ,Button} from "@mui/material";
-
+import axios from "axios";
+import { useState } from 'react';
 
 const departments = [
     {
@@ -17,7 +18,7 @@ const departments = [
       label: 'EEE',
     },
     {
-      value: 'Mechanical',
+      value: 'MECH',
       label: 'MECH',
     },
     {
@@ -28,31 +29,45 @@ const departments = [
 
   const year = [
     {
-      value: '1 year',
+      value: 1,
       label: '1 year',
     },
     {
-      value: '2 year',
+      value: 2,
       label: '2 year',
     },
     {
-      value: '3 year',
+      value: 3,
       label: '3 year',
     },
     {
-      value: '4 year',
+      value: 4,
       label: '4 year',
     }
   ];
 
-function Filter() {
+function Filter({onFilter}) {
+
+    const [data,setData] = useState([[]])
+
+    const handleChange = (e) => {
+    console.log('e.target.value:',e.target.value)
+    };
+
+    const doFilter = async () => {
+      console.log("hello")
+      onFilter(data)
+      console.log(data)
+    }
+
     return (
         <Box component="form" sx={{display:'flex',justifyContent:'flex-start'}}>
       <TextField
           id="outlined-select-department"
           select
           label="Department"
-          defaultValue="CSE"
+          name="department"
+          onClick={handleChange}
           helperText="Please select the department"
         >
           {departments.map((option) => (
@@ -65,7 +80,8 @@ function Filter() {
           id="outlined-select-year"
           select
           label="Year"
-          defaultValue="1 year"
+          name="year"
+          onClick={handleChange}
           helperText="Please select the year"
           sx={{marginLeft:"10px"}}
         >
@@ -75,7 +91,7 @@ function Filter() {
             </MenuItem>
           ))}
         </TextField>
-        <Button variant="contained" sx={{height:'45px',marginLeft:'10px'}}>Filter</Button>
+        <Button variant="contained" sx={{height:'45px',marginLeft:'10px'}} onClick={doFilter}>Filter</Button>
       </Box>
     );
 }

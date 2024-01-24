@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import DynamicForm from "../utils/DynamicForm";
 
 const STextField = styled(TextField)({
     margin:'14px'
@@ -54,8 +55,9 @@ function PersonalDetails({personalDetails}) {
         gaurdian_2_mobile:"",
         gaurdian_2_address:"",
         emergency_contact:""
-})
-    
+    })
+
+    const [customFields, setCustomFields] = useState([]);  
 
     const handleChange = (e) => {
         const {name,value} = e.target;
@@ -64,8 +66,23 @@ function PersonalDetails({personalDetails}) {
         })
       };
 
+      const handleAddCustomField = () => {
+        const newFieldName = prompt('Enter the name for the custom field:');
+        if (newFieldName && !customFields.includes(newFieldName)) {
+          setCustomFields((prevFields) => [...prevFields, newFieldName]);
+        }
+      };
+
+      const handleCustomInputChange = (field, value) => {
+        setData((prevData) => ({
+          ...prevData,
+          [field]: value,
+        }));
+      };
+
     const onSave = () => {
         personalDetails(data)
+        console.log(data)
     }
 
       
@@ -441,6 +458,11 @@ function PersonalDetails({personalDetails}) {
             value={data.emergency_contact}
             onChange={handleChange}
             />  
+            <DynamicForm
+            customFields={customFields}
+            onInputChange={handleCustomInputChange}
+            onAddCustomField={handleAddCustomField}
+            />
             </CardContent>
             <Button variant="contained" onClick={onSave}>Save</Button>
             </Card>

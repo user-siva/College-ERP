@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import ListSubheader from '@mui/material/ListSubheader';
+import ShadowLoading from '../utils/ShadowLoading';
 import { useState } from "react";
 import {
     useQuery,
@@ -22,7 +23,11 @@ function SubjectList() {
       ),
   })
 
-  if (isLoading) return 'Loading...'
+  if (isLoading) {
+    return (
+      <ShadowLoading />
+    )
+  }
 
   if (error) {
     console.log(error.message)

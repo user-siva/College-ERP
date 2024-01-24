@@ -11,6 +11,7 @@ import {
   } from '@tanstack/react-query'
   
 import { useState } from "react";
+import ShadowLoading from '../utils/ShadowLoading';
 
 function StudentList() {
   const [checked, setChecked] = useState([]);
@@ -23,7 +24,11 @@ function StudentList() {
       ),
   })
 
-  if (isLoading) return 'Loading...'
+  if (isLoading) {
+    return (
+      <ShadowLoading />
+    )
+  }
 
   if (error) {
     console.log(error.message)

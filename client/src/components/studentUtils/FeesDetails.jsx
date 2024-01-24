@@ -2,6 +2,7 @@ import { TextField,styled,Button } from "@mui/material";
 import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import DynamicForm from "../utils/DynamicForm";
 import axios from "axios";
 
 const STextField = styled(TextField)({
@@ -24,11 +25,27 @@ function FeesDetails({feesDetails}) {
         other_scholarship:""
     })
 
+    const [customFields, setCustomFields] = useState([]);  
+
     const handleChange = (e) => {
         setData({
           ...data,
           [e.target.name]: e.target.value
         });
+      };
+
+    const handleAddCustomField = () => {
+        const newFieldName = prompt('Enter the name for the custom field:');
+        if (newFieldName && !customFields.includes(newFieldName)) {
+          setCustomFields((prevFields) => [...prevFields, newFieldName]);
+        }
+      };
+
+    const handleCustomInputChange = (field, value) => {
+        setData((prevData) => ({
+          ...prevData,
+          [field]: value,
+        }));
       };
 
     const onSave = () => {
@@ -130,6 +147,11 @@ function FeesDetails({feesDetails}) {
             value={data.other_scholarship}
             onChange={handleChange}
             required
+            />
+            <DynamicForm
+            customFields={customFields}
+            onInputChange={handleCustomInputChange}
+            onAddCustomField={handleAddCustomField}
             />
             </CardContent>
             <Button variant="contained" onClick={onSave}>Save</Button>

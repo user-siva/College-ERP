@@ -3,6 +3,7 @@ import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import DynamicSemSection from "./DynamicSemSection";
+import DynamicForm from "../utils/DynamicForm";
 //import axios from "axios";
 const STextField = styled(TextField)({
     margin:'14px'
@@ -38,6 +39,16 @@ function ExamDetails({markDetails}) {
               return {...prev,[name]:value}
           })
         };
+
+        const [customFields, setCustomFields] = useState([]);  
+
+
+      const handleAddCustomField = () => {
+        const newFieldName = prompt('Enter the name for the custom field:');
+        if (newFieldName && !customFields.includes(newFieldName)) {
+          setCustomFields((prevFields) => [...prevFields, newFieldName]);
+        }
+      };
 
         const onSave = () => {
             markDetails(data)
@@ -84,6 +95,11 @@ function ExamDetails({markDetails}) {
             value={data?.gpa}
             onChange={handleChange}
             
+            />
+            <DynamicForm
+            customFields={customFields}
+            onInputChange={handleCustomInputChange}
+            onAddCustomField={handleAddCustomField}
             />
             
             </CardContent>

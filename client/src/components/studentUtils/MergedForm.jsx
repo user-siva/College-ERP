@@ -107,7 +107,7 @@ function MergedForm() {
     
 
     return (
-        <Box sx={{ width: '85%' }}>
+        <Box sx={{ width: '95%' }}>
             <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>

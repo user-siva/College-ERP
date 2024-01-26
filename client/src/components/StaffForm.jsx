@@ -1,18 +1,6 @@
-import { Box,styled,Button,Stack,Typography } from "@mui/material";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Box,Typography } from "@mui/material";
 import StaffDetails from "./staffUtils/StaffDetails";
 
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
 
 
 
@@ -36,12 +24,6 @@ function StaffForm() {
             justifyContent:'space-evenly'
         }}>
             <StaffDetails />
-            <Stack spacing={2}>
-            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-            Upload file
-            <VisuallyHiddenInput type="file" />
-            </Button>
-            </Stack>
         </Box>
 
         </Box>

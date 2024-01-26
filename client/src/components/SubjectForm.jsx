@@ -1,21 +1,8 @@
-import { Box,TextField,Typography,styled,MenuItem,Button,Stack } from "@mui/material";
+import { Box,TextField,Typography,styled,MenuItem,Button } from "@mui/material";
 import { useState } from "react";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import axios from "axios";
-
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
 
 const STextField = styled(TextField)({
     margin:'14px'
@@ -63,7 +50,7 @@ function SubjectForm() {
             justifyContent:'space-evenly'
             }}>
             <Card
-            sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'430px'}}
+            sx={{display:'flex',flexDirection:'column',p:3,width:'95%',height:'430px'}}
             >
                 <CardContent>
 
@@ -153,12 +140,7 @@ function SubjectForm() {
                 </CardContent>
             <Button variant="contained" type="submit" onClick={onSave}>Save</Button>
                 </Card>
-                <Stack spacing={2}>
-                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-                Upload file
-                <VisuallyHiddenInput type="file" />
-                </Button>
-                </Stack>
+                
             </Box>
             
 

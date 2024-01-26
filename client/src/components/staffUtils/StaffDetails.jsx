@@ -67,7 +67,7 @@ const [data,setData] = useState({
 
     return (
         <Card variant="outlined" 
-            sx={{display:'flex',flexDirection:'column',p:3,width:'75%',height:'550px',overflow:'hidden',overflowY:'scroll'}}
+            sx={{display:'flex',flexDirection:'column',p:3,width:'95%',height:'550px',overflow:'hidden',overflowY:'scroll'}}
             >
             
 

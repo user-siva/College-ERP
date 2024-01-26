@@ -10,7 +10,7 @@ import StaffForm from '../components/StaffForm'
 import TimeTable from '../components/TimeTable'
 import SubjectForm from '../components/SubjectForm';
 import Attendance from '../components/Attendance';
-import Profile from '../components/Profile';
+import StudentProfile from '../components/StudentProfile';
 function Home() {
     return (
         <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -36,7 +36,7 @@ function Home() {
               <Route path='/SubjectForm' element={<SubjectForm />} />
               <Route path='/TimeTable' element={<TimeTable />} />       
               <Route path='/Attendance' element={<Attendance />} />    
-              <Route path='/Profile/:Id' element={<Profile />} />    
+              <Route path='/StudentProfile/:Id' element={<StudentProfile />} />    
       </Routes>
     </Box>
   </Box>

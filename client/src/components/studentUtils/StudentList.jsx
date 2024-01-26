@@ -18,7 +18,7 @@ import ShadowLoading from '../utils/ShadowLoading';
 function StudentList({deptYear}) {
   const [checked, setChecked] = useState([]);
     
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data,isFetching  } = useQuery({
     queryKey: ['repoData'],
     queryFn: async () =>
      {
@@ -27,11 +27,12 @@ function StudentList({deptYear}) {
      },
   })
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <ShadowLoading />
     )
   }
+
 
   if (error) {
     console.log(error.message)
@@ -92,7 +93,7 @@ function StudentList({deptYear}) {
                 
                 disablePadding
                 >
-                <ListItemButton role={undefined} component={Link} to={`Profile/${value?._id}`}  onClick={handleToggle(value)} dense>
+                <ListItemButton role={undefined} component={Link} to={`StudentProfile/${value?._id}`}  onClick={handleToggle(value)} dense>
                     
                     <ListItemText
                     primary={value?.name}

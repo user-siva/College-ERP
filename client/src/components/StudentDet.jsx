@@ -15,9 +15,6 @@ function StudentDet() {
     console.log("dept_year:",dept_year)
    }
 
-   useEffect(() => {
-    console.log("dept_year:", dept_year);
-  }, [dept_year]);
   return (
     <Box flex={10} p={2} >
 

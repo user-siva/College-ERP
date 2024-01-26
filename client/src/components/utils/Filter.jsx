@@ -51,7 +51,7 @@ function Filter({onFilter}) {
     const [data,setData] = useState([[]])
 
     const handleChange = (e) => {
-    console.log('e.target.value:',e.target.value)
+    console.log('e.target.value:',e.target)
     };
 
     const doFilter = async () => {

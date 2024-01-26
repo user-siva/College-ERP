@@ -76,8 +76,8 @@ function StudentList({deptYear}) {
         }}
         subheader={<li />}
         >
-        {deptYear.map((details) => (
-            <li key={`section-${details[1]}`}>
+        {deptYear.map((details,index) => (
+            <li key={index}>
             <ul>
                 <ListSubheader>{` ${details} Year`}</ListSubheader>
                 {filter_data(details[0],details[1],data)?.map((value) => (

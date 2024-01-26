@@ -76,15 +76,35 @@ function MergedForm() {
     }
 
 
-    const onSubmit = (e)=>{
-      e.preventDefault()
-      setActiveStep(0)
-      setCompleted({})
-      axios.post("http://localhost:5000/api/student/add",personalData)
-      axios.post("http://localhost:5000/api/fees_details/add",feesData)
-      axios.post("http://localhost:5000/api/mark_details/add",markData)
-      console.log("FORM SUBMITTED")
-    }
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      setActiveStep(0);
+      setCompleted({});
+    
+      try {
+        const personalDetailsResponse = await axios.post("http://localhost:5000/api/student/add", personalData);
+        console.log("personalDetailsResponse:",personalDetailsResponse)
+        const personalDetailsId = personalDetailsResponse.data._id;
+        console.log("personalDetailsId:",personalDetailsId)
+  
+
+        const feesDetailsResponse = await axios.post("http://localhost:5000/api/fees_details/add", feesData);
+        const feesDetailsId = feesDetailsResponse.data._id;
+    
+        const markDetailsResponse = await axios.post("http://localhost:5000/api/mark_details/add", markData);
+        const markDetailsId = markDetailsResponse.data._id;
+    
+        await axios.put(`http://localhost:5000/api/student/update/${personalDetailsId}`, {
+          feesDetails: feesDetailsId,
+          markDetails: markDetailsId,
+        });
+    
+        console.log("FORMS SUBMITTED");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
 
     return (
         <Box sx={{ width: '85%' }}>

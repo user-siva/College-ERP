@@ -43,7 +43,7 @@ router.post("/add", async (req, res) => {
   const newStudent = new Student(req.body);
   try {
     const savedStudent = await newStudent.save();
-    res.status(200).json("Post saved successfully");
+    res.status(200).json(savedStudent);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -51,10 +51,12 @@ router.post("/add", async (req, res) => {
 
 //update
 
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
-    if (student._id.toString() === req.body._id) {
+    console.log("student._id:",student._id)
+    console.log("req.body._id",req.params.id)
+    if (student._id.toString() === req.params.id) {
       await student.updateOne({ $set: req.body });
       res.status(200).json("Post updated Successfully");
     } else {

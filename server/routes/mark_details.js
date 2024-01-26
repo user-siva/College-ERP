@@ -19,8 +19,8 @@ router.get("/:id", async (req, res) => {
 router.post("/add", async (req, res) => {
   const newmark = new Mark(req.body);
   try {
-    await newmark.save();
-    res.status(200).json("Post saved successfully");
+    const savedMark = await newmark.save();
+    res.status(200).json(savedMark);
   } catch (err) {
     res.status(500).json(err);
   }

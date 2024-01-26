@@ -19,8 +19,8 @@ router.get("/:id", async (req, res) => {
 router.post("/add", async (req, res) => {
   const newFees = new Fees(req.body);
   try {
-    await newFees.save();
-    res.status(200).json("Post saved successfully");
+    const savedFees = await newFees.save();
+    res.status(200).json(savedFees);
   } catch (err) {
     res.status(500).json(err);
   }

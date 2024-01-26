@@ -82,7 +82,6 @@ function PersonalDetails({personalDetails}) {
 
     const onSave = () => {
         personalDetails(data)
-        console.log(data)
     }
 
       

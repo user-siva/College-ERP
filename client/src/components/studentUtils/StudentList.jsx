@@ -5,6 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import ListSubheader from '@mui/material/ListSubheader';
+import { Link } from 'react-router-dom';
 import { Typography} from "@mui/material";
 import axios from "axios"
 import {
@@ -88,9 +89,10 @@ function StudentList({deptYear}) {
                     <CommentIcon />
                     </IconButton>
                 }
+                
                 disablePadding
                 >
-                <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                <ListItemButton role={undefined} component={Link} to={`Profile/${value?._id}`}  onClick={handleToggle(value)} dense>
                     
                     <ListItemText
                     primary={value?.name}

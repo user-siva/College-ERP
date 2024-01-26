@@ -1,7 +1,7 @@
 import { Box ,Typography,Button} from "@mui/material";
 import Filter from "./utils/Filter";
 import StudentList from "./studentUtils/StudentList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function StudentDet() {
 

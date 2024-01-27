@@ -22,7 +22,6 @@ function FeesDetails({feesDetails}) {
         pmss:"",
         seven_point_five:"",
         ket:"",
-        other_scholarship:""
     })
 
     const [customFields, setCustomFields] = useState([]);  
@@ -137,14 +136,6 @@ function FeesDetails({feesDetails}) {
             name="ket"
             size="small"
             value={data.ket}
-            onChange={handleChange}
-            required
-            />
-            <STextField
-            label="Other Scholarship"
-            name="other_scholarship"
-            size="small"
-            value={data.other_scholarship}
             onChange={handleChange}
             required
             />

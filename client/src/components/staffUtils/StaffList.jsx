@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import ListSubheader from '@mui/material/ListSubheader';
 import ShadowLoading from '../utils/ShadowLoading';
+import { Link } from 'react-router-dom';
 import { useState } from "react";
 import {
     useQuery,
@@ -75,21 +76,21 @@ function StaffList() {
         }}
         subheader={<li />}
         >
-        {dept_year.map((details) => (
-            <li key={`section-${details[1]}`}>
+        {dept_year.map((details,index_) => (
+            <li key={index_}>
             <ul>
                 <ListSubheader>{` ${details}`}</ListSubheader>
-                {filter_data(details,data)?.map((value) => (
+                {filter_data(details,data)?.map((value,index) => (
                 <ListItem
-                key={value.register_no+value.department+value.name}
                 secondaryAction={
                     <IconButton edge="end" aria-label="comments">
                     <CommentIcon />
                     </IconButton>
                 }
+                key={index}
                 disablePadding
                 >
-                <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                <ListItemButton role={undefined} component={Link} to={`StaffProfile/${value?._id}`} onClick={handleToggle(value)} dense>
                     
                     <ListItemText
                     primary={value?.name}

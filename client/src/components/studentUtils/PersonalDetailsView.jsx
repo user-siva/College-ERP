@@ -1,46 +1,8 @@
-import axios from "axios"
 import {Typography} from '@mui/material'
-import {
-    useQuery,
-  } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom';
-import ShadowLoading from '../utils/ShadowLoading';
 
-function PersonalDetailsView({onFees,onMark}) {
-    const { Id } = useParams();
 
-    const { isLoading, error, data,isFetched,isFetching } = useQuery({
-        queryKey: ['repoData'],
-        queryFn: async () =>
-         {
-          const res = await axios.get(`http://localhost:5000/api/student/${Id}`)
-          return res.data
-         },
-      })
+function PersonalDetailsView({data}) {
     
-      if (isLoading || isFetching) {
-        return (
-          <ShadowLoading />
-        )
-      }
-
-      const fetchOther = async () => {
-        const feesData = await axios.get(`http://localhost:5000/api/fees_details/${data?.feesDetails}`)
-        const markData = await axios.get(`http://localhost:5000/api/mark_details/${data?.markDetails}`)
-        
-        onFees(feesData.data)
-        onMark(markData.data)
-      }
-
-      if(isFetched)
-      {
-        //fetchOther()
-      }
-    
-      if (error) {
-        console.log(error.message)
-        return 'An error has occurred: ' + error.message
-      }
 
     return (
         <div>

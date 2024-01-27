@@ -16,6 +16,7 @@ const [data,setData] = useState({
     emp_id:"",
     emp_category:"",
     dob:dayjs(),
+    father_name:"",
     mother_name:"",
     phone:"",
     email:"",

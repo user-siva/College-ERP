@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import ListSubheader from '@mui/material/ListSubheader';
 import ShadowLoading from '../utils/ShadowLoading';
+import { Link } from 'react-router-dom';
 import { useState } from "react";
 import {
     useQuery,
@@ -90,7 +91,7 @@ function SubjectList() {
                 }
                 disablePadding
                 >
-                <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+                <ListItemButton role={undefined} component={Link} to={`SubjectProfile/${value?._id}`} onClick={handleToggle(value)} dense>
                     
                     <ListItemText
                     primary={value?.subject_name}

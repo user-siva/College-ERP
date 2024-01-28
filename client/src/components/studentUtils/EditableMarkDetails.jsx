@@ -9,7 +9,7 @@ const STextField = styled(TextField)({
     margin:'14px'
 })
 
-function ExamDetails({markDetails}) {
+function EditableMarkDetails({markDetails}) {
 
     const [data,setData] = useState({
         "sem_1_iat_1":"",
@@ -115,4 +115,4 @@ function ExamDetails({markDetails}) {
     );
 }
 
-export default ExamDetails;
+export default EditableMarkDetails;

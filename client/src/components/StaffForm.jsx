@@ -1,9 +1,6 @@
 import { Box,Typography } from "@mui/material";
 import StaffDetails from "./staffUtils/StaffDetails";
 
-
-
-
 function StaffForm() {
 
     return (

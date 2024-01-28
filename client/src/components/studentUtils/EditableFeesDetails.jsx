@@ -8,7 +8,7 @@ const STextField = styled(TextField)({
     margin:'14px'
 })
 
-function FeesDetails({feesDetails}) {
+function EditableFeesDetails({feesDetails}) {
 
     const [data,setData] = useState({
         admission_fees:"",
@@ -150,4 +150,4 @@ function FeesDetails({feesDetails}) {
     );
 }
 
-export default FeesDetails;
+export default EditableFeesDetails;

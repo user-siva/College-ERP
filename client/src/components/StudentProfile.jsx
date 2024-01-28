@@ -65,13 +65,6 @@ function StudentProfile() {
           }
         }, [isMarkFetched, markData_]);
 
-        useEffect(() => {
-          console.log("FeesData:",feesData)
-        },[feesData])
-
-        useEffect(() => {
-          console.log("MarkData:",markData)
-        },[markData])
       
         if (isLoadingPersonal || isLoadingFees || isLoadingMark) {
           return (

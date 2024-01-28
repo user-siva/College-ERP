@@ -50,7 +50,7 @@ function SubjectForm() {
             justifyContent:'space-evenly'
             }}>
             <Card
-            sx={{display:'flex',flexDirection:'column',p:3,width:'95%',height:'430px'}}
+            sx={{display:'flex',flexDirection:'column',p:3,width:'95%',height:'auto'}}
             >
                 <CardContent>
 

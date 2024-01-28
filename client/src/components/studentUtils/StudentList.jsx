@@ -3,7 +3,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ListSubheader from '@mui/material/ListSubheader';
 import { Link } from 'react-router-dom';
 import { Typography} from "@mui/material";
@@ -63,6 +64,11 @@ function StudentList({deptYear}) {
     return filtered_data
    }
 
+   const handleDelete = async (e,id) => {
+    await axios.delete(`http://localhost:5000/api/student/delete/${id}`)
+    console.log("Deleted")
+   }
+
    
 
     return (
@@ -86,9 +92,14 @@ function StudentList({deptYear}) {
                 <ListItem
                 key={value.register_no+value.department+value.name}
                 secondaryAction={
+                    <>
                     <IconButton edge="end" aria-label="comments">
-                    <CommentIcon />
+                    <EditIcon sx={{ color: 'blue' }}/>
                     </IconButton>
+                    <IconButton edge="end" aria-label="comments">
+                    <DeleteIcon onClick={(e) => (handleDelete(e,value._id))} sx={{color:'red'}}/>
+                    </IconButton>
+                    </>
                 }
                 
                 disablePadding

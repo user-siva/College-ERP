@@ -9,7 +9,7 @@ const STextField = styled(TextField)({
     margin:'14px'
 })
 
-function PersonalDetails({personalDetails}) {
+function EditablePersonalDetails({personalDetails}) {
 
     const [data,setData] = useState({
         name:"",
@@ -471,4 +471,4 @@ function PersonalDetails({personalDetails}) {
     );
 }
 
-export default PersonalDetails;
+export default EditablePersonalDetails;

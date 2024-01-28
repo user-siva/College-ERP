@@ -54,8 +54,6 @@ router.post("/add", async (req, res) => {
 router.put("/update/:id", async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
-    console.log("student._id:",student._id)
-    console.log("req.body._id",req.params.id)
     if (student._id.toString() === req.params.id) {
       await student.updateOne({ $set: req.body });
       res.status(200).json("Post updated Successfully");
@@ -69,12 +67,10 @@ router.put("/update/:id", async (req, res) => {
 
 //delete
 
-router.delete("/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
-    console.log("_id:",student._id.toString())
-    console.log("req",req.body._id)
-    if (student._id.toString() === req.body._id) {
+    if (student._id.toString() === req.params.id) {
       await student.deleteOne();
       res.status(200).json("Post deleted Successfully");
     } else {

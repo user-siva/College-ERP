@@ -63,7 +63,8 @@ function PersonalDetails({personalDetails}) {
         const { name, value } = e.target;
     
         // Convert to numbers for specific fields
-        const newValue = (name === 'age' || name === 'register_no' || name === 'admission_no') ? Number(value) : value;
+        const newValue = (name === 'age' || name === 'register_no' || name === 'admission_no' || name === 'year') 
+        ? Number(value) : value;
     
         setData((prev) => ({ ...prev, [name]: newValue }));
     };

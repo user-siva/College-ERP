@@ -60,11 +60,15 @@ function PersonalDetails({personalDetails}) {
     const [customFields, setCustomFields] = useState([]);  
 
     const handleChange = (e) => {
-        const {name,value} = e.target;
-        setData((prev)=>{
-            return {...prev,[name]:value}
-        })
-      };
+        const { name, value } = e.target;
+    
+        // Convert to numbers for specific fields
+        const newValue = (name === 'age' || name === 'register_no' || name === 'admission_no') ? Number(value) : value;
+    
+        setData((prev) => ({ ...prev, [name]: newValue }));
+    };
+    
+    
 
       const handleAddCustomField = () => {
         const newFieldName = prompt('Enter the name for the custom field:');
@@ -101,6 +105,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             label="Register No"
+            type="number"
             name="register_no" 
             onChange={handleChange}
             value={data.register_no}          
@@ -109,18 +114,22 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             label="Admission Number"
+            type="number"
             name="admission_no"
             onChange={handleChange}
             value={data.admission_no}
             />
             <STextField
-        
             size='small'
             type='date' 
             label='Admission Date' 
             value={data.admission_date} 
+            helperText=" "
+            InputLabelProps={{ shrink: true }}
+            onChange={handleChange}
             name='admission_date' 
             sx={{margin:'14px'}}/>
+
             <STextField
             size="small"
             label="Batch"
@@ -133,6 +142,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             label="Roll No" 
+            type="number"
             name="roll_no"  
             onChange={handleChange}
             value={data.roll_no}           
@@ -141,6 +151,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             label="Age"
+            type="number"
             name="age"
             onChange={handleChange}
             value={data.age}
@@ -150,6 +161,7 @@ function PersonalDetails({personalDetails}) {
             size='small'
             type='date'
             label='Date of Birth' 
+            onChange={handleChange}
             value={data.dob} 
             name='dob' 
             sx={{margin:'14px'}}/>
@@ -184,16 +196,13 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             sx={{width:'95px'}}
-            select
             label="Year"
+            type="number"
             name="year"
             value={data.year}
             onChange={handleChange}
             >
-                <MenuItem value='First'>First</MenuItem>
-                <MenuItem value='Second'>Second</MenuItem>
-                <MenuItem value='Third'>Third</MenuItem>
-                <MenuItem value='Fourth'>Fourth</MenuItem>
+                
             </STextField>
             
             <STextField
@@ -207,6 +216,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             label="Phone"
             name="phone"
+            type="number"
             value={data.phone}
             onChange={handleChange}
         
@@ -215,6 +225,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             label="Email"
             name="email"
+            type="email"
             value={data.email}
             onChange={handleChange}
         
@@ -223,6 +234,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             label="Aadhaar No"
             name="aadhaar_no"
+            type="number"
             value={data.aadhaar_no}
             onChange={handleChange}
         
@@ -233,15 +245,14 @@ function PersonalDetails({personalDetails}) {
             name="father_name"
             value={data.father_name}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
             label="Father Phone No"
             name="father_phone_no"
+            type="number"
             value={data.father_phone_no}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -249,7 +260,6 @@ function PersonalDetails({personalDetails}) {
             name="father_occupation"
             value={data.father_occupation}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -257,15 +267,14 @@ function PersonalDetails({personalDetails}) {
             name="mother_name"
             value={data.mother_name}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
             label="Mother Phone No"
             name='mother_phone_no'
+            type="number"
             value={data.mother_phone_no}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -273,15 +282,14 @@ function PersonalDetails({personalDetails}) {
             name="mother_occupation"
             value={data.mother_occupation}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
             label="Annual Income"
             name="annual_income"
+            type="number"
             value={data.annual_income}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -289,7 +297,6 @@ function PersonalDetails({personalDetails}) {
             name="nationality"
             value={data.nationality}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -297,7 +304,6 @@ function PersonalDetails({personalDetails}) {
             name="religion"
             value={data.religion}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -320,7 +326,6 @@ function PersonalDetails({personalDetails}) {
             name="door_no"
             value={data.door_no}
             onChange={handleChange}
-        
             size="small"
             />
              <STextField
@@ -328,7 +333,6 @@ function PersonalDetails({personalDetails}) {
             name="street"
             value={data.street}
             onChange={handleChange}
-        
             size="small"
             />
              <STextField
@@ -336,7 +340,6 @@ function PersonalDetails({personalDetails}) {
             name="district"
             value={data.district}
             onChange={handleChange}
-        
             size="small"
             />
              <STextField
@@ -344,7 +347,6 @@ function PersonalDetails({personalDetails}) {
             name="state"
             value={data.state}
             onChange={handleChange}
-        
             size="small"
             />
              <STextField
@@ -352,7 +354,6 @@ function PersonalDetails({personalDetails}) {
             name="country"
             value={data.country}
             onChange={handleChange}
-        
             size="small"
             />
              <STextField
@@ -360,7 +361,7 @@ function PersonalDetails({personalDetails}) {
             name="pincode"
             value={data.pincode}
             onChange={handleChange}
-        
+            type="number"
             size="small"
             />
              <STextField
@@ -381,7 +382,7 @@ function PersonalDetails({personalDetails}) {
             name="bus_route_no"
             value={data.bus_route_no}
             onChange={handleChange}
-        
+            type="number"
             size="small"
             />
              <STextField
@@ -389,7 +390,6 @@ function PersonalDetails({personalDetails}) {
             name="regular_boarding_point"
             value={data.regular_boarding_point}
             onChange={handleChange}
-        
             size="small"
             />
              <STextField
@@ -397,7 +397,6 @@ function PersonalDetails({personalDetails}) {
             name="regular_dropping_point"
             value={data.regular_dropping_point}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -405,7 +404,6 @@ function PersonalDetails({personalDetails}) {
             name="gaurdian_name"
             value={data.gaurdian_name}
             onChange={handleChange}
-        
             size="small"
             />
             <STextField
@@ -419,6 +417,7 @@ function PersonalDetails({personalDetails}) {
             size="small"
             label="Gaurdian Mobile"
             name="gaurdian_mobile"
+            type="number"
             value={data.gaurdian_mobile}
             onChange={handleChange}
             />
@@ -439,6 +438,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             label="Gaurdian 2 Mobile"
+            type="number"
             name="gaurdian_2_mobile"
             value={data.gaurdian_2_mobile}
             onChange={handleChange}
@@ -453,6 +453,7 @@ function PersonalDetails({personalDetails}) {
             <STextField
             size="small"
             label="Emergency Contact"
+            type="number"
             name="emergency_contact"
             value={data.emergency_contact}
             onChange={handleChange}

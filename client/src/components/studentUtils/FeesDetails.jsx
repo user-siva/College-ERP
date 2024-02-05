@@ -61,6 +61,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="Admission Fees"
             name="admission_fees"
+            type="number"
             size="small"
             value={data.admission_fees}
             onChange={handleChange}
@@ -69,6 +70,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="Tution Fees"
             name="tution_fees"
+            type="number"
             size="small"
             value={data.tution_fees}
             onChange={handleChange}
@@ -77,6 +79,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="Bus Fees"
             name="bus_fees"
+            type="number"
             size="small"
             value={data.bus_fees}
             onChange={handleChange}
@@ -85,6 +88,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="Hostel Fees"
             name="hostel_fees"
+            type="number"
             size="small"
             value={data.hostel_fees}
             onChange={handleChange}
@@ -93,6 +97,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="Previos Year Fees"
             name="previous_year_balance"
+            type="number"
             size="small"
             value={data.previous_year_balance}
             onChange={handleChange}
@@ -101,6 +106,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="Total Fees"
             name="total_fees"
+            type="number"
             size="small"
             value={data.total_fees}
             onChange={handleChange}
@@ -109,6 +115,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="FGG Scholarhip"
             name="fgg"
+            type="number"
             size="small"
             value={data.fgg}
             onChange={handleChange}
@@ -117,6 +124,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="PMSS Scholarhip"
             name="pmss"
+            type="number"
             size="small"
             value={data.pmss}
             onChange={handleChange}
@@ -125,6 +133,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="7.5% Govt Quota"
             name="seven_point_five"
+            type="number"
             size="small"
             value={data.seven_point_five}
             onChange={handleChange}
@@ -133,6 +142,7 @@ function FeesDetails({feesDetails}) {
             <STextField
             label="KET Scholarship"
             name="ket"
+            type="number"
             size="small"
             value={data.ket}
             onChange={handleChange}

@@ -84,6 +84,7 @@ const [data,setData] = useState({
             <STextField
             size="small"
             name="emp_id"
+            type="number"
             value={data.emp_id}
             onChange={handleChange}
             label="Employee ID"             
@@ -145,12 +146,14 @@ const [data,setData] = useState({
             size="small"
             label="Phone" 
             name="phone"
+            type="number"
             value={data.phone}
             onChange={handleChange}            
             />
             <STextField
             size="small"
             label="Email"
+            type="email"
             name="email"
             value={data.email}
             onChange={handleChange}
@@ -158,6 +161,7 @@ const [data,setData] = useState({
             <STextField
             size="small"
             label="Age"
+            type="number"
             name="age"
             value={data.age}
             onChange={handleChange}
@@ -193,6 +197,7 @@ const [data,setData] = useState({
             <STextField
             label="Home Contact No"
             name="home_contact_id"
+            type="number"
             value={data.home_contact_id}
             onChange={handleChange}
             size="small"
@@ -200,6 +205,7 @@ const [data,setData] = useState({
             <STextField
             label="Aadhaar No"
             name="aadhaar_no"
+            type="number"
             value={data.aadhaar_no}
             onChange={handleChange}
             size="small"
@@ -207,6 +213,7 @@ const [data,setData] = useState({
             <STextField
             label="Father Phone No"
             name="father_phone_no"
+            type="number"
             value={data.father_phone_no}
             onChange={handleChange}
             size="small"
@@ -214,6 +221,7 @@ const [data,setData] = useState({
             <STextField
             label="Mother Phone No"
             name="mother_phone_no"
+            type="number"
             value={data.mother_phone_no}
             onChange={handleChange}
             size="small"
@@ -235,6 +243,7 @@ const [data,setData] = useState({
             <STextField
             label="Door No"
             name="door_no"
+            type="number"
             value={data.door_no}
             onChange={handleChange}
             size="small"
@@ -270,6 +279,7 @@ const [data,setData] = useState({
              <STextField
             label="Pincode"
             name="pin_code"
+            type="number"
             value={data.pin_code}
             onChange={handleChange}
             size="small"
@@ -290,6 +300,7 @@ const [data,setData] = useState({
             <STextField
             label="Bus Route No"
             name="bus_route_no"
+            type="number"
             value={data.bus_route_no}
             onChange={handleChange}
             size="small"
@@ -330,6 +341,7 @@ const [data,setData] = useState({
             <STextField
             size="small"
             name="children_count"
+            type="number"
             value={data.children_count}
             onChange={handleChange}
             label="Children Count"
@@ -344,9 +356,10 @@ const [data,setData] = useState({
             <STextField
             size="small"
             name="experience"
+            type="number"
             value={data.experience}
             onChange={handleChange}
-            label="Experience"
+            label="Experience(in Years)"
             />
             <STextField
             size="small"
@@ -386,6 +399,7 @@ const [data,setData] = useState({
             <STextField
             size="small"
             name="office_pincode"
+            type="number"
             value={data.office_pincode}
             onChange={handleChange}
             label="Office Pincode"
@@ -393,6 +407,7 @@ const [data,setData] = useState({
             <STextField
             size="small"
             name="emergency_conatact"
+            type="number"
             value={data.emergency_contact}
             onChange={handleChange}
             label="Emergency Contact"

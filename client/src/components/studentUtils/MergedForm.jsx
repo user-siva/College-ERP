@@ -1,5 +1,5 @@
 import { Box,Button,Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
@@ -18,6 +18,8 @@ function MergedForm() {
     const [personalData,setPersonalData] = useState({});
     const [feesData,setFeesData] = useState({})
     const [markData,setMarkData] = useState({})
+    const [subjectData,setSubjectData] = useState({})
+    const isInitialRender = useRef(true);
 
     const totalSteps = () => {
     return steps.length;
@@ -65,6 +67,37 @@ function MergedForm() {
       handleComplete()
       setPersonalData(data)
     }
+
+    useEffect(() => {
+      console.log("personalData:",personalData)
+    },[personalData])
+
+    const getSubjects = async () => {
+      try {
+        const subjects = await axios.post('http://localhost:5000/api/subject/filter_subjects',
+      {
+        department:personalData.department,
+        year:personalData.year
+      })
+      setSubjectData(subjects)
+      }
+      catch(err)
+      {
+        console.log("Error:",err)
+      }
+    }
+
+    useEffect(() => {
+      if (isInitialRender.current) {
+        isInitialRender.current = false;
+        return;
+      }
+      getSubjects()
+    },[isInitialRender,personalData])
+
+    useEffect(() => {
+      console.log("subjects:",subjectData)
+    },[subjectData])
 
     const feesDetails = (data) => {
       setFeesData(data)

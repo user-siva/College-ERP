@@ -74,6 +74,7 @@ function SubjectForm() {
                 <STextField
                 size="small"
                 name="regulation"
+                type="number"
                 sx={{width:"125px"}}
                 value={data.regulation}
                 onChange={handleChange}
@@ -101,6 +102,7 @@ function SubjectForm() {
                 <STextField
                 size="small"
                 name="year"
+                type="number"
                 value={data.year}
                 sx={{width:"75px"}}
                 onChange={handleChange}
@@ -119,12 +121,10 @@ function SubjectForm() {
                 sx={{width:"110px"}}
                 value={data.semester}
                 onChange={handleChange}
-                select
                 label="Semester"
-                >
-                    <MenuItem value='Odd'>Odd</MenuItem>
-                    <MenuItem value='Even'>Even</MenuItem>
-                </STextField>
+                type="number"
+                />
+                    
                 <STextField
                 size="small"
                 name="staff"

@@ -21,10 +21,13 @@ function SubjectForm() {
     })
 
     const handleChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]:e.target.value
-        })
+        const { name, value } = e.target;
+    
+        // Convert to numbers for specific fields
+        const newValue = (name === 'year' || name === 'semester' || name === 'regulation') 
+        ? Number(value) : value;
+    
+        setData((prev) => ({ ...prev, [name]: newValue }));
     }
 
     const onSave = () => {

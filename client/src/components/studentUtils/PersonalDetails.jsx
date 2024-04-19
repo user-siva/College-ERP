@@ -23,6 +23,7 @@ function PersonalDetails({personalDetails}) {
         gender:"",
         department:"",
         year:"",
+        semester:"",
         blood_group:"",
         phone:"",
         email:"",
@@ -63,7 +64,9 @@ function PersonalDetails({personalDetails}) {
         const { name, value } = e.target;
     
         // Convert to numbers for specific fields
-        const newValue = (name === 'age' || name === 'register_no' || name === 'admission_no' || name === 'year') 
+        const newValue = (
+            name === 'age' || name === 'register_no' || name === 'admission_no' || name === 'year' || name === 'semester'
+            ) 
         ? Number(value) : value;
     
         setData((prev) => ({ ...prev, [name]: newValue }));
@@ -201,6 +204,18 @@ function PersonalDetails({personalDetails}) {
             type="number"
             name="year"
             value={data.year}
+            onChange={handleChange}
+            >
+                
+            </STextField>
+
+            <STextField
+            size="small"
+            sx={{width:'95px'}}
+            label="Semester"
+            type="number"
+            name="semester"
+            value={data.semester}
             onChange={handleChange}
             >
                 

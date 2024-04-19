@@ -55,10 +55,16 @@ const [data,setData] = useState({
     })
 
     const handleChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]:e.target.value
-        })
+        const { name, value } = e.target;
+    
+        // Convert to numbers for specific fields
+        const newValue = (
+            name === 'age' || name === 'phone' || name === 'home_contact_id' || name === 'father_phone_no'
+            || name === 'aadhaar_no' || name === 'emergency_contact' || name === 'mother_phone_no'
+        ) 
+        ? Number(value) : value;
+    
+        setData((prev) => ({ ...prev, [name]: newValue }));
     }
 
     const onSave = () => {

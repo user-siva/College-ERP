@@ -40,10 +40,13 @@ function StudentList({deptYear}) {
     return 'An error has occurred: ' + error.message
   }
   
-
+  var roman = {4:'IV',3:'III'}
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
+
+    
+    
 
     if (currentIndex === -1) {
       newChecked.push(value);
@@ -87,7 +90,7 @@ function StudentList({deptYear}) {
         {deptYear.map((details,index) => (
             <li key={index}>
             <ul>
-                <ListSubheader>{` ${details} Year`}</ListSubheader>
+                <ListSubheader>{` ${details[0]} ${roman[details[1]]} Year`}</ListSubheader>
                 {filter_data(details[0],details[1],data)?.map((value) => (
                 <ListItem
                 key={value.register_no+value.department+value.name}

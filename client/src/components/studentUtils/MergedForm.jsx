@@ -76,8 +76,7 @@ function MergedForm() {
       try {
         const subjects = await axios.post('http://localhost:5000/api/subject/filter_subjects',
       {
-        department:personalData.department,
-        year:personalData.year
+        department:personalData.department
       })
       setSubjectData(subjects)
       }
@@ -155,7 +154,7 @@ function MergedForm() {
             {activeStep===0 ? 
             <PersonalDetails personalDetails={personalDetails}/> : 
             activeStep===1 ? <FeesDetails feesDetails={feesDetails}/> : 
-            activeStep===2 ? <ExamDetails markDetails={markDetails}/> : null}
+            activeStep===2 ? <ExamDetails markDetails={markDetails} subjectDetails={subjectData} /> : null}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"

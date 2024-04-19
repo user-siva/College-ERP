@@ -7,7 +7,7 @@ const Subject = require("../models/Subject");
 
 router.post("/filter_subjects/", async (req, res) => {
   try {
-    const subjects = await Subject.find({ department:req.body.department,year:req.body.year });
+    const subjects = await Subject.find({ department:req.body.department });
     console.log("Body:",req.body)
     res.status(200).json(subjects);
   } catch (err) {

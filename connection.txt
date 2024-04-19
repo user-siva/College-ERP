@@ -1,0 +1,2 @@
+mongodb+srv://sivag0503:OjQM2zAU8Mhc3cvx@erp.sb8v7b9.mongodb.net/
+mongodb+srv://sivag0503:OjQM2zAU8Mhc3cvx@erp.sb8v7b9.mongodb.net/?retryWrites=true&w=majority&appName=ERP

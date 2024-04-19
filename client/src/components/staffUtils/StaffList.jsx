@@ -104,7 +104,7 @@ function StaffList() {
                         >
                         Role:&nbsp;
                         </Typography>
-                        {value?.register_no}
+                        {value?.emp_category}
                     </>
                     }
                     sx={{margin:'10px'}}

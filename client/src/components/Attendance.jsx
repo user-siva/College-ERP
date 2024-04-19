@@ -65,7 +65,7 @@ function Attendance() {
 
       {/* First Tab */}
       <CustomTabPanel value={value} index={0}>
-      <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Siva</Typography><br/>
+      <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Siva Ganesh</Typography><br/>
         <FormControl>
           <RadioGroup
             row
@@ -78,12 +78,82 @@ function Attendance() {
             <FormControlLabel value="od" control={<Radio size='small'/>} label="OD" />
             
           </RadioGroup>
-        </FormControl><br/>    
+        </FormControl><br/>  
+        <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Akash</Typography><br/>
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            defaultValue='present'
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="present" control={<Radio />} label="Present" />
+            <FormControlLabel value="absent" control={<Radio />} label="Absent"/>
+            <FormControlLabel value="od" control={<Radio size='small'/>} label="OD" />
+            
+          </RadioGroup>
+        </FormControl><br/> 
+        <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Pravin</Typography><br/>
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            defaultValue='present'
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="present" control={<Radio />} label="Present" />
+            <FormControlLabel value="absent" control={<Radio />} label="Absent"/>
+            <FormControlLabel value="od" control={<Radio size='small'/>} label="OD" />
+            
+          </RadioGroup>
+        </FormControl><br/> 
+        <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Bala</Typography><br/>
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            defaultValue='present'
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="present" control={<Radio />} label="Present" />
+            <FormControlLabel value="absent" control={<Radio />} label="Absent"/>
+            <FormControlLabel value="od" control={<Radio size='small'/>} label="OD" />
+            
+          </RadioGroup>
+        </FormControl><br/>  
+        <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Laxmanan</Typography><br/>
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            defaultValue='present'
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="present" control={<Radio />} label="Present" />
+            <FormControlLabel value="absent" control={<Radio />} label="Absent"/>
+            <FormControlLabel value="od" control={<Radio size='small'/>} label="OD" />
+            
+          </RadioGroup>
+        </FormControl><br/> 
+        <Typography variant='p' component="span" id="stuName1" sx={{color:'gray'}}>Saravana</Typography><br/>
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            defaultValue='present'
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="present" control={<Radio />} label="Present" />
+            <FormControlLabel value="absent" control={<Radio />} label="Absent"/>
+            <FormControlLabel value="od" control={<Radio size='small'/>} label="OD" />
+            
+          </RadioGroup>
+        </FormControl><br/>   
       </CustomTabPanel>
 
       {/* Second Tab */}
       <CustomTabPanel value={value} index={1}>
-        <Typography variant='p' component="span" id="stuName2" sx={{color:'gray'}}>Siva</Typography><br/>
+        <Typography variant='p' component="span" id="stuName2" sx={{color:'gray'}}>Ramji</Typography><br/>
         <FormControl>
           <RadioGroup
             row

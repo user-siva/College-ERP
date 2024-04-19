@@ -20,6 +20,7 @@ function ExamDetails({markDetails,subjectDetails}) {
     console.log("subjectDetails:",subjectDetails)
 
       const [years,setYears] = useState([1,2,3,4])
+      const [dept,setDept] = useState(['CSE','ECE','MECH','Civil','EEE'])
       const [sems,setSems] = useState([[1,2],[3,4],[5,6],[7,8]])
 
       const handleChange = (e) => {
@@ -48,8 +49,8 @@ function ExamDetails({markDetails,subjectDetails}) {
                   <div key={`${year}-${sem}`}>
                     <Typography>Year {year}, Semester {sem}</Typography>
                     {subjectDetails['data'] && subjectDetails['data'].map((subject) => (
-                      subject['year'] === year && subject['semester'] === sem ? 
-                      subject['subject_name'] 
+                      subject['year'] === year && subject['semester'] === sem  ? 
+                      <Typography>{subject['subject_name']}</Typography>
                       : ''
                     ))}
                   </div>

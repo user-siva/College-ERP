@@ -137,8 +137,8 @@ function SubjectForm() {
                 select
                 label="Staff"
                 >
-                    <MenuItem value='Staff1'>Staff1</MenuItem>
-                    <MenuItem value='Staff2'>Staff2</MenuItem>
+                    <MenuItem value='David'>David</MenuItem>
+                    <MenuItem value='Niyas'>Niyas</MenuItem>
                 </STextField>
                 </CardContent>
             <Button variant="contained" type="submit" onClick={onSave}>Save</Button>

@@ -46,6 +46,6 @@ app.use("/api/mark_details", markRouter);
 
 app.listen(5000, () => {
   console.log("server running....");
-  console.log(process.env.DB_URI);
+  //console.log(process.env.DB_URI);
 });
 

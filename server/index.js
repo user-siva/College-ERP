@@ -19,9 +19,9 @@ const timeTableRouter = require("./routes/timetable");
 
 dotenv.config();
 
-mongoose.connect(process.env.DB_URI).then(()=>{
-console.log("connected to mongodb");
-//console.log(path.join(__dirname, "public/images"));
+mongoose.connect(process.env.DB_URI).then(() => {
+  console.log("connected to mongodb");
+  //console.log(path.join(__dirname, "public/images"));
 }).catch((err) => { console.error(err); });;
 
 //middlewares

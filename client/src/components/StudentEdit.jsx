@@ -9,19 +9,72 @@ import {
 import ShadowLoading from './utils/ShadowLoading';
 import EditPersonalDetailsCard from "./studentUtils/EditPersonalDetailsCard";
 import EditFeesDetailsCard from "./studentUtils/EditFeesDetailsCard";
-
+import EditExamDetailsCard from "./studentUtils/EditExamDetailsCard";
 function StudentEdit() {
     const { Id } = useParams();
     const [feesId, setFeesId] = useState(null)
     const [examId, setExamId] = useState(null)
-    const { isLoading, error, data: studentData, isFetching, refetch: refetchStudentData } = useQuery({
+    const [subjectData, setSubjectData] = useState({})
+    const [isSubjectFetched, setIsSubjectFerched] = useState(false)
+    const [newPersonalData, setNewPersonalData] = useState({})
+    const [isPersonalDataChanged, setIsPersonalDataChanged] = useState(false)
+    const [newFeesData, setNewFeesData] = useState({})
+    const [newExamData, setNewExamData] = useState({})
+
+    useEffect(() => {
+        const update = async () => {
+            if (isPersonalDataChanged) {
+                console.log("newPersonalData:", newPersonalData)
+                try {
+                    await axios.put(`http://localhost:5000/api/student/update/${newPersonalData._id}`, newPersonalData)
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }
+        }
+        update()
+    }, [newPersonalData])
+
+    useEffect(() => {
+        const update = async () => {
+            if (isPersonalDataChanged) {
+                console.log("newPersonalData:", newPersonalData)
+                try {
+                    await axios.put(`http://localhost:5000/api/student/update/${newPersonalData._id}`, newPersonalData)
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }
+        }
+        update()
+    }, [newFeesData])
+
+    const { isLoading, error, data: studentData, isFetching, refetch: refetchStudentData, isFetched: isPersonalFetched } = useQuery({
         queryKey: ['studentData', Id],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5000/api/student/${Id}`);
             setFeesId(res.data.feesDetails)
+            setExamId(res.data.markDetails)
             return res.data;
         },
     });
+
+    const getSubjects = async () => {
+        try {
+            if (studentData && studentData.department) {
+                const subjects = await axios.post('http://localhost:5000/api/subject/filter_subjects', {
+                    department: studentData.department
+                });
+                setSubjectData(subjects.data);
+                setIsSubjectFerched(true)
+            }
+        } catch (err) {
+            console.log("Error:", err);
+        }
+    };
+
 
     const { isLoading: feesLoading, error: feesError, data: feesData, refetch: refetchFeesData } = useQuery({
         queryKey: ['feesData', Id],
@@ -35,11 +88,13 @@ function StudentEdit() {
         enabled: feesId != null
     });
 
-    const { isLoading: examLoading, error: examError, data: examData, refetch: refetchExamData } = useQuery({
+    const { isLoading: examLoading, error: examError, data: examData, refetch: refetchExamData, isFetched: isExamFetched } = useQuery({
         queryKey: ['ExamData', Id],
         queryFn: async () => {
             if (examId != null) {
                 const res = await axios.get(`http://localhost:5000/api/mark_details/${examId}`);
+                //console.log("examId:", examId)
+
                 return res.data;
             }
             return null;
@@ -50,15 +105,21 @@ function StudentEdit() {
     useEffect(() => {
         refetchStudentData();
         refetchFeesData();
+        refetchExamData()
     }, []);
 
-    if (isLoading || isFetching || feesLoading) {
+    useEffect(() => {
+        getSubjects()
+    }, [isPersonalFetched, studentData, Id])
+
+    if (isLoading || isFetching || feesLoading || examLoading) {
         return (
             <ShadowLoading />
         )
     }
 
-    if (error || feesError) {
+
+    if (error || feesError || examError) {
         console.log(error?.message || feesError?.message)
         return 'An error has occurred: ' + (error?.message || feesError?.message)
     }
@@ -69,13 +130,34 @@ function StudentEdit() {
         return 'An error has occurred: ' + error.message
     }
 
+    const handleNewPersonalData = (data) => {
+        setNewPersonalData(data)
+        setIsPersonalDataChanged(true)
+    }
+
+
+
+    const handleNewFeesData = (data) => {
+        setNewFeesData(data)
+    }
+    const handleNewExamData = (data) => {
+        setNewExamData(data)
+    }
+
+    //console.log("examData:", examData)
+
     return (
         <>
             <>
                 <Card sx={{ display: 'flex', flexDirection: 'column', p: 3, width: '95%', marginTop: '10px', height: 'auto' }}>
-                    <EditPersonalDetailsCard studentData={studentData} />
-                    <EditFeesDetailsCard feesData={feesData} />
-                    <Button variant="contained" >Save</Button>
+                    {isSubjectFetched ? (
+                        <>
+                            <EditPersonalDetailsCard studentData={studentData} setPersonalData={handleNewPersonalData} />
+                            <EditFeesDetailsCard feesData={feesData} setFeesData={handleNewFeesData} />
+                            <EditExamDetailsCard examData={examData} subjectDetails={subjectData} setExamData={handleNewExamData} />
+                            <Button variant="contained" >Save</Button>
+                        </>
+                    ) : null}
                 </Card>
 
 

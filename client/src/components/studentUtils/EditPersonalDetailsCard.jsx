@@ -1,10 +1,33 @@
-import { TextField, styled, MenuItem, Typography, CardContent } from "@mui/material";
+import { TextField, styled, MenuItem, Typography, CardContent, Button } from "@mui/material";
+import dayjs from 'dayjs';
+import { useState } from "react";
 
 const STextField = styled(TextField)({
     margin: '14px'
 })
 
-function EditPersonalDetailsCard({ studentData }) {
+function EditPersonalDetailsCard({ studentData, setPersonalData }) {
+    const [newData, setNewData] = useState(studentData)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        const newValue = (
+            name === 'age' || name === 'register_no' || name === 'admission_no' || name === 'year' || name === 'semester'
+        )
+            ? Number(value) : value;
+        setNewData((prev) => ({ ...prev, [name]: newValue }));
+    };
+
+    const onSave = () => {
+        console.log("Saved:", newData)
+        setPersonalData(newData)
+    }
+
+    const formatDate = (date) => {
+        return date ? dayjs(date).format('YYYY-MM-DD') : '';
+    }
+
     return (
         <>
             <Typography variant="h4">Personal Details</Typography>
@@ -13,14 +36,16 @@ function EditPersonalDetailsCard({ studentData }) {
                     label="Name"
                     name="name"
                     size="small"
-                    value={studentData.name}
+                    defaultValue={studentData?.name}
+                    onChange={handleChange}
                 />
                 <STextField
                     size="small"
                     label="Register No"
                     type="number"
                     name="register_no"
-                    value={studentData.register_no}
+                    defaultValue={studentData?.register_no}
+                    onChange={handleChange}
 
                 />
                 <STextField
@@ -28,24 +53,26 @@ function EditPersonalDetailsCard({ studentData }) {
                     label="Admission Number"
                     type="number"
                     name="admission_no"
-                    value={studentData.admission_no}
+                    defaultValue={studentData?.admission_no}
+                    onChange={handleChange}
+
                 />
-                <STextField
+                {/* <STextField
                     size='small'
-                    type='date'
                     label='Admission Date'
-                    value={studentData.admission_date}
+                    defaultValue={newData.admission_date ? formatDate(newData.admission_date) : ''}
                     helperText=" "
                     InputLabelProps={{ shrink: true }}
+                    onChange={handleChange}
                     name='admission_date'
-                    sx={{ margin: '14px' }} />
+                    sx={{ margin: '14px' }} /> */}
 
                 <STextField
                     size="small"
                     label="Batch"
                     name="batch"
-                    value={studentData.batch}
-
+                    defaultValue={studentData?.batch}
+                    onChange={handleChange}
                 />
 
                 <STextField
@@ -53,7 +80,8 @@ function EditPersonalDetailsCard({ studentData }) {
                     label="Roll No"
                     type="number"
                     name="roll_no"
-                    value={studentData.roll_no}
+                    defaultValue={studentData?.roll_no}
+                    onChange={handleChange}
 
                 />
                 <STextField
@@ -61,27 +89,29 @@ function EditPersonalDetailsCard({ studentData }) {
                     label="Age"
                     type="number"
                     name="age"
-                    value={studentData.age}
-
+                    defaultValue={studentData?.age}
+                    onChange={handleChange}
                 />
-                <STextField
+                {/* <STextField
                     size='small'
-                    type='date'
                     label='Date of Birth'
-                    value={studentData.dob}
+                    defaultValue={studentData?.dob ? formatDate(studentData?.dob) : ''}
                     name='dob'
-                    sx={{ margin: '14px' }} />
+                    onChange={handleChange}
+
+                    sx={{ margin: '14px' }} /> */}
 
                 <STextField
                     size="small"
                     sx={{ width: '95px' }}
                     select
                     label="Gender"
-                    value={studentData.gender}
+                    defaultValue={studentData?.gender}
+                    onChange={handleChange}
                     name="gender"
                 >
-                    <MenuItem value='Male' >Male</MenuItem>
-                    <MenuItem value='Female'>Female</MenuItem>
+                    <MenuItem defaultValue='Male' >Male</MenuItem>
+                    <MenuItem defaultValue='Female'>Female</MenuItem>
                 </STextField>
                 <STextField
                     size="small"
@@ -89,13 +119,14 @@ function EditPersonalDetailsCard({ studentData }) {
                     select
                     label="Department"
                     name="department"
-                    value={studentData.department}
+                    onChange={handleChange}
+                    defaultValue={studentData?.department}
                 >
-                    <MenuItem value='CSE'>CSE</MenuItem>
-                    <MenuItem value='ECE'>ECE</MenuItem>
-                    <MenuItem value='ECE'>ECE</MenuItem>
-                    <MenuItem value='Mech'>Mech</MenuItem>
-                    <MenuItem value='Civil'>Civil</MenuItem>
+                    <MenuItem defaultValue='CSE'>CSE</MenuItem>
+                    <MenuItem defaultValue='ECE'>ECE</MenuItem>
+                    <MenuItem defaultValue='ECE'>ECE</MenuItem>
+                    <MenuItem defaultValue='Mech'>Mech</MenuItem>
+                    <MenuItem defaultValue='Civil'>Civil</MenuItem>
                 </STextField>
                 <STextField
                     size="small"
@@ -103,7 +134,8 @@ function EditPersonalDetailsCard({ studentData }) {
                     label="Year"
                     type="number"
                     name="year"
-                    value={studentData.year}
+                    onChange={handleChange}
+                    defaultValue={studentData?.year}
                 >
 
                 </STextField>
@@ -114,7 +146,8 @@ function EditPersonalDetailsCard({ studentData }) {
                     label="Semester"
                     type="number"
                     name="semester"
-                    value={studentData.semester}
+                    onChange={handleChange}
+                    defaultValue={studentData?.semester}
                 >
 
                 </STextField>
@@ -122,225 +155,256 @@ function EditPersonalDetailsCard({ studentData }) {
                 <STextField
                     label="Blood Group"
                     name="blood_group"
-                    value={studentData.blood_group}
-
+                    defaultValue={studentData?.blood_group}
+                    onChange={handleChange}
                     size="small"
                 />
                 <STextField
                     label="Phone"
                     name="phone"
                     type="number"
-                    value={studentData.phone}
-
+                    defaultValue={studentData?.phone}
+                    onChange={handleChange}
                     size="small"
                 />
                 <STextField
                     label="Email"
                     name="email"
                     type="email"
-                    value={studentData.email}
-
+                    defaultValue={studentData?.email}
+                    onChange={handleChange}
                     size="small"
                 />
                 <STextField
                     label="Aadhaar No"
                     name="aadhaar_no"
                     type="number"
-                    value={studentData.aadhaar_no}
+                    defaultValue={studentData?.aadhaar_no}
+                    onChange={handleChange}
 
                     size="small"
                 />
                 <STextField
                     label="Father Name"
                     name="father_name"
-                    value={studentData.father_name}
+                    defaultValue={studentData?.father_name}
                     size="small"
+                    onChange={handleChange}
+
                 />
                 <STextField
                     label="Father Phone No"
                     name="father_phone_no"
                     type="number"
-                    value={studentData.father_phone_no}
+                    defaultValue={studentData?.father_phone_no}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     label="Father Occupation"
                     name="father_occupation"
-                    value={studentData.father_occupation}
+                    defaultValue={studentData?.father_occupation}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     label="Mother Name"
                     name="mother_name"
-                    value={studentData.mother_name}
+                    defaultValue={studentData?.mother_name}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     label="Mother Phone No"
                     name='mother_phone_no'
                     type="number"
-                    value={studentData.mother_phone_no}
+                    defaultValue={studentData?.mother_phone_no}
                     size="small"
+                    onChange={handleChange}
+
                 />
                 <STextField
                     label="Mother Occupation"
                     name="mother_occupation"
-                    value={studentData.mother_occupation}
+                    defaultValue={studentData?.mother_occupation}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     label="Annual Income"
                     name="annual_income"
                     type="number"
-                    value={studentData.annual_income}
+                    defaultValue={studentData?.annual_income}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     label="Nationality"
                     name="nationality"
-                    value={studentData.nationality}
+                    defaultValue={studentData?.nationality}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     label="Religion"
                     name="religion"
-                    value={studentData.religion}
+                    defaultValue={studentData?.religion}
                     size="small"
+                    onChange={handleChange}
                 />
                 <STextField
                     size="small"
                     sx={{ width: '175px' }}
                     select
                     label="Student Category"
+                    onChange={handleChange}
                     name="student_category"
-                    value={studentData.student_category}
+                    defaultValue={studentData?.student_category}
                 >
-                    <MenuItem value='BC'>BC</MenuItem>
-                    <MenuItem value='MBC'>MBC</MenuItem>
-                    <MenuItem value='OC'>OC</MenuItem>
-                    <MenuItem value='SC/ST'>SC/ST</MenuItem>
-                    <MenuItem value='Other'>Other</MenuItem>
+                    <MenuItem defaultValue='BC'>BC</MenuItem>
+                    <MenuItem defaultValue='MBC'>MBC</MenuItem>
+                    <MenuItem defaultValue='OC'>OC</MenuItem>
+                    <MenuItem defaultValue='SC/ST'>SC/ST</MenuItem>
+                    <MenuItem defaultValue='Other'>Other</MenuItem>
                 </STextField>
                 <STextField
+                    onChange={handleChange}
                     label="Door No"
                     name="door_no"
-                    value={studentData.door_no}
+                    defaultValue={studentData?.door_no}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="Street"
                     name="street"
-                    value={studentData.street}
+                    defaultValue={studentData?.street}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="District"
                     name="district"
-                    value={studentData.district}
+                    defaultValue={studentData?.district}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="State"
                     name="state"
-                    value={studentData.state}
+                    defaultValue={studentData?.state}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="Country"
                     name="country"
-                    value={studentData.country}
+                    defaultValue={studentData?.country}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="Pincode"
                     name="pincode"
-                    value={studentData.pincode}
+                    defaultValue={studentData?.pincode}
                     type="number"
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     sx={{ width: '215px' }}
                     select
                     label="Mode Of Transportation"
                     name="transportation"
-                    value={studentData.transportation}
+                    defaultValue={studentData?.transportation}
                 >
-                    <MenuItem value='College Bus'>College Bus</MenuItem>
-                    <MenuItem value='Own Vehicle'>Own Vehicle</MenuItem>
-                    <MenuItem value='By Walk'>By Walk</MenuItem>
+                    <MenuItem defaultValue='College Bus'>College Bus</MenuItem>
+                    <MenuItem defaultValue='Own Vehicle'>Own Vehicle</MenuItem>
+                    <MenuItem defaultValue='By Walk'>By Walk</MenuItem>
                 </STextField>
                 <STextField
+                    onChange={handleChange}
                     label="Bus Route No"
                     name="bus_route_no"
-                    value={studentData.bus_route_no}
+                    defaultValue={studentData?.bus_route_no}
                     type="number"
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="Regular Boarding Point"
                     name="regular_boarding_point"
-                    value={studentData.regular_boarding_point}
+                    defaultValue={studentData?.regular_boarding_point}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="Regular Dropping Point"
                     name="regular_dropping_point"
-                    value={studentData.regular_dropping_point}
+                    defaultValue={studentData?.regular_dropping_point}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     label="Gaurdian Name"
                     name="gaurdian_name"
-                    value={studentData.gaurdian_name}
+                    defaultValue={studentData?.gaurdian_name}
                     size="small"
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Gaurdian Is"
                     name="gaurdian_is"
-                    value={studentData.gaurdian_is}
+                    defaultValue={studentData?.gaurdian_is}
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Gaurdian Mobile"
                     name="gaurdian_mobile"
                     type="number"
-                    value={studentData.gaurdian_mobile}
+                    defaultValue={studentData?.gaurdian_mobile}
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Gaurdian Address"
                     name="gaurdian_address"
-                    value={studentData.gaurdian_address}
+                    defaultValue={studentData?.gaurdian_address}
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Gaurdian 2 Name"
                     name="gaurdian_2_name"
-                    value={studentData.gaurdian_2_name}
+                    defaultValue={studentData?.gaurdian_2_name}
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Gaurdian 2 Mobile"
                     type="number"
                     name="gaurdian_2_mobile"
-                    value={studentData.gaurdian_2_mobile}
+                    defaultValue={studentData?.gaurdian_2_mobile}
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Gaurdian 2 Address"
                     name="gaurdian_2_address"
-                    value={studentData.gaurdian_2_address}
+                    defaultValue={studentData?.gaurdian_2_address}
                 />
                 <STextField
+                    onChange={handleChange}
                     size="small"
                     label="Emergency Contact"
                     type="number"
                     name="emergency_contact"
-                    value={studentData.emergency_contact}
+                    defaultValue={studentData?.emergency_contact}
                 />
-
+                <Button variant="contained" onClick={onSave}>Save</Button>
             </CardContent>
         </>
     );

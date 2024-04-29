@@ -5,14 +5,14 @@ const Mark = require("../models/MarkDetails");
 //get user
 
 router.get("/:id", async (req, res) => {
-    try {
-      //console.log(req.params.id)
-      const mark = await Mark.findById(req.params.id);
-      res.status(200).json(mark);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    //console.log(req.params.id)
+    const mark = await Mark.findById(req.params.id);
+    res.status(200).json(mark);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //post
 

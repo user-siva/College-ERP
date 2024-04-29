@@ -5,14 +5,14 @@ const Fees = require("../models/FeesDetails");
 //get user
 
 router.get("/:id", async (req, res) => {
-    try {
-      //console.log(req.params.id)
-      const fees = await Fees.findById(req.params.id);
-      res.status(200).json(fees);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    //console.log(req.params.id)
+    const fees = await Fees.findById(req.params.id);
+    res.status(200).json(fees);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //post
 
@@ -28,7 +28,7 @@ router.post("/add", async (req, res) => {
 
 //update
 
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const fees = await Fees.findById(req.params.id);
     if (fees._id.toString() === req.body._id) {

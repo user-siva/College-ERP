@@ -57,7 +57,7 @@ function EditPersonalDetailsCard({ studentData, setPersonalData }) {
                     onChange={handleChange}
 
                 />
-                {/* <STextField
+                <STextField
                     size='small'
                     label='Admission Date'
                     defaultValue={newData.admission_date ? formatDate(newData.admission_date) : ''}
@@ -65,7 +65,7 @@ function EditPersonalDetailsCard({ studentData, setPersonalData }) {
                     InputLabelProps={{ shrink: true }}
                     onChange={handleChange}
                     name='admission_date'
-                    sx={{ margin: '14px' }} /> */}
+                    sx={{ margin: '14px' }} />
 
                 <STextField
                     size="small"
@@ -92,14 +92,14 @@ function EditPersonalDetailsCard({ studentData, setPersonalData }) {
                     defaultValue={studentData?.age}
                     onChange={handleChange}
                 />
-                {/* <STextField
+                <STextField
                     size='small'
                     label='Date of Birth'
                     defaultValue={studentData?.dob ? formatDate(studentData?.dob) : ''}
                     name='dob'
                     onChange={handleChange}
 
-                    sx={{ margin: '14px' }} /> */}
+                    sx={{ margin: '14px' }} />
 
                 <STextField
                     size="small"

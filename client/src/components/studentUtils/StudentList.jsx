@@ -95,7 +95,7 @@ function StudentList({ deptYear }) {
                 key={value.register_no + value.department + value.name}
                 secondaryAction={
                   <>
-                    <IconButton component={Link} to={`/SubjectEdit/${value?._id}`} edge="end" aria-label="comments">
+                    <IconButton component={Link} to={`/StudentEdit/${value?._id}`} edge="end" aria-label="comments">
                       <EditIcon sx={{ color: 'blue' }} />
                     </IconButton>
                     <IconButton edge="end" aria-label="comments">

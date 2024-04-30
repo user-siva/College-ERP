@@ -14,6 +14,7 @@ import StudentProfile from '../components/StudentProfile';
 import StaffProfile from '../components/StaffProfile';
 import SubjectProfile from "../components/SubjectProfile"
 import StudentEdit from '../components/StudentEdit';
+import StaffEdit from '../components/StaffEdit';
 function Home() {
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -42,7 +43,9 @@ function Home() {
             <Route path='/StudentProfile/:Id' element={<StudentProfile />} />
             <Route path='/staffDetails/StaffProfile/:Id' element={<StaffProfile />} />
             <Route path='/SubjectDet/SubjectProfile/:Id' element={<SubjectProfile />} />
-            <Route path='/SubjectEdit/:Id' element={<StudentEdit />} />
+            <Route path='/StudentEdit/:Id' element={<StudentEdit />} />
+            <Route path='/StaffEdit/:Id' element={<StaffEdit />} />
+
           </Routes>
         </Box>
       </Box>

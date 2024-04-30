@@ -7,7 +7,7 @@ const Staff = require("../models/Staff");
 
 router.get("/filter_staffs/", async (req, res) => {
   try {
-    const staffs = await Staff.find({ department:req.body.department,year:req.body.year });
+    const staffs = await Staff.find({ department: req.body.department, year: req.body.year });
     res.status(200).json(staffs);
   } catch (err) {
     res.status(500).json(err);
@@ -28,14 +28,14 @@ router.get("/all", async (req, res) => {
 //get user
 
 router.get("/:id", async (req, res) => {
-    try {
-      //console.log(req.params.id)
-      const staff = await Staff.findById(req.params.id);
-      res.status(200).json(staff);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    //console.log(req.params.id)
+    const staff = await Staff.findById(req.params.id);
+    res.status(200).json(staff);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 
@@ -53,7 +53,7 @@ router.post("/add", async (req, res) => {
 
 //update
 
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const staff = await Staff.findById(req.params.id);
     if (staff._id.toString() === req.body._id) {
@@ -69,10 +69,10 @@ router.put("/:id", async (req, res) => {
 
 //delete
 
-router.delete("/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const staff = await Staff.findById(req.params.id);
-    if (staff._id.toString() === req.body._id) {
+    if (staff._id.toString() === req.params.id) {
       await staff.deleteOne();
       res.status(200).json("Post deleted Successfully");
     } else {

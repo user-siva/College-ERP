@@ -8,7 +8,7 @@ const STextField = styled(TextField)({
 })
 
 
-function EditExamDetailsCard({ examData, subjectDetails }) {
+function EditExamDetailsCard({ examData, subjectDetails, setExamData }) {
     //console.log("examData:", examData)
     // console.log("subjectDetails:", subjectDetails)
 
@@ -17,6 +17,30 @@ function EditExamDetailsCard({ examData, subjectDetails }) {
     const years = [1, 2, 3, 4]
     const sems = [[1, 2], [3, 4], [5, 6], [7, 8]]
 
+    const [newData, setNewData] = useState(examData)
+
+    const handleInputChange = (year, semester, subject, exam, value) => {
+        setNewData(prevData => (
+            {
+                ...prevData,
+                [`year ${year}`]: {
+                    ...prevData[`year ${year}`],
+                    [`semester ${semester}`]: {
+                        ...prevData[`year ${year}`]?.[`semester ${semester}`],
+                        [exam]: {
+                            ...prevData[`year ${year}`]?.[`semester ${semester}`]?.[exam],
+                            [subject]: value
+                        }
+                    }
+                }
+            }
+        ))
+    }
+
+    const onSave = () => {
+        console.log("Saved", newData)
+        setExamData(newData)
+    }
 
     return (
         <div>
@@ -38,28 +62,32 @@ function EditExamDetailsCard({ examData, subjectDetails }) {
                                                     name="IAT 1"
                                                     sx={{ width: "110px" }}
                                                     label="IAT 1"
-                                                    value={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['IAT 1']?.[`${subject['subject_name']}`]}
+                                                    defaultValue={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['IAT 1']?.[`${subject['subject_name']}`]}
+                                                    onChange={(e) => handleInputChange(year, sem, subject['subject_name'], 'IAT 1', e.target.value)}
                                                 />
                                                 <STextField
                                                     size="small"
                                                     name="IAT 2"
                                                     sx={{ width: "110px" }}
                                                     label="IAT 2"
-                                                    value={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['IAT 2']?.[`${subject['subject_name']}`]}
+                                                    defaultValue={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['IAT 2']?.[`${subject['subject_name']}`]}
+                                                    onChange={(e) => handleInputChange(year, sem, subject['subject_name'], 'IAT 2', e.target.value)}
                                                 />
                                                 <STextField
                                                     size="small"
                                                     name="IAT 3"
                                                     sx={{ width: "110px" }}
                                                     label="IAT 3"
-                                                    value={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['IAT 3']?.[`${subject['subject_name']}`]}
+                                                    defaultValue={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['IAT 3']?.[`${subject['subject_name']}`]}
+                                                    onChange={(e) => handleInputChange(year, sem, subject['subject_name'], 'IAT 3', e.target.value)}
                                                 />
                                                 <STextField
                                                     size="small"
                                                     name="Semester"
                                                     sx={{ width: "110px" }}
                                                     label="semester"
-                                                    value={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['Semester']?.[`${subject['subject_name']}`]}
+                                                    defaultValue={examData?.[`year ${year}`]?.[`semester ${sem}`]?.['Semester']?.[`${subject['subject_name']}`]}
+                                                    onChange={(e) => handleInputChange(year, sem, subject['subject_name'], 'Semester', e.target.value)}
                                                 />
                                             </div>
                                         ) : null
@@ -69,7 +97,7 @@ function EditExamDetailsCard({ examData, subjectDetails }) {
                         </div>
                     ))}
                 </>
-
+                <Button variant="contained" onClick={onSave}>Save</Button>
             </CardContent>
         </div>
     );

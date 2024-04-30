@@ -1,4 +1,5 @@
-import { Button } from "@mui/material";
+import { Button, Box, Tab, Tabs } from "@mui/material";
+import CustomTabPanel from './utils/CustomTabPanel';
 import { useState, useEffect } from "react";
 import Card from '@mui/material/Card';
 import axios from "axios"
@@ -10,7 +11,16 @@ import ShadowLoading from './utils/ShadowLoading';
 import EditPersonalDetailsCard from "./studentUtils/EditPersonalDetailsCard";
 import EditFeesDetailsCard from "./studentUtils/EditFeesDetailsCard";
 import EditExamDetailsCard from "./studentUtils/EditExamDetailsCard";
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
 function StudentEdit() {
+    const [value, setValue] = useState(0);
     const { Id } = useParams();
     const [feesId, setFeesId] = useState(null)
     const [examId, setExamId] = useState(null)
@@ -19,12 +29,14 @@ function StudentEdit() {
     const [newPersonalData, setNewPersonalData] = useState({})
     const [isPersonalDataChanged, setIsPersonalDataChanged] = useState(false)
     const [newFeesData, setNewFeesData] = useState({})
+    const [isFeesDataChanged, setIsFeesDataChanged] = useState(false)
     const [newExamData, setNewExamData] = useState({})
+    const [isExamDataChanged, setIsExamDataChanged] = useState(false)
 
     useEffect(() => {
         const update = async () => {
             if (isPersonalDataChanged) {
-                console.log("newPersonalData:", newPersonalData)
+                //console.log("newPersonalData:", newPersonalData)
                 try {
                     await axios.put(`http://localhost:5000/api/student/update/${newPersonalData._id}`, newPersonalData)
                 }
@@ -34,14 +46,14 @@ function StudentEdit() {
             }
         }
         update()
-    }, [newPersonalData])
+    }, [newPersonalData, isPersonalDataChanged])
 
     useEffect(() => {
         const update = async () => {
-            if (isPersonalDataChanged) {
-                console.log("newPersonalData:", newPersonalData)
+            if (isFeesDataChanged) {
+                //console.log("newFeesData:", newFeesData)
                 try {
-                    await axios.put(`http://localhost:5000/api/student/update/${newPersonalData._id}`, newPersonalData)
+                    await axios.put(`http://localhost:5000/api/fees_details/update/${feesId}`, newFeesData)
                 }
                 catch (err) {
                     console.log(err)
@@ -49,7 +61,22 @@ function StudentEdit() {
             }
         }
         update()
-    }, [newFeesData])
+    }, [newFeesData, isFeesDataChanged, feesId])
+
+    useEffect(() => {
+        const update = async () => {
+            if (isExamDataChanged) {
+                console.log("newExamData:", newExamData)
+                try {
+                    await axios.put(`http://localhost:5000/api/mark_details/update/${examId}`, newExamData)
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }
+        }
+        update()
+    }, [newExamData, isExamDataChanged, examId])
 
     const { isLoading, error, data: studentData, isFetching, refetch: refetchStudentData, isFetched: isPersonalFetched } = useQuery({
         queryKey: ['studentData', Id],
@@ -139,10 +166,16 @@ function StudentEdit() {
 
     const handleNewFeesData = (data) => {
         setNewFeesData(data)
+        setIsFeesDataChanged(true)
     }
     const handleNewExamData = (data) => {
         setNewExamData(data)
+        setIsExamDataChanged(true)
     }
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     //console.log("examData:", examData)
 
@@ -150,12 +183,28 @@ function StudentEdit() {
         <>
             <>
                 <Card sx={{ display: 'flex', flexDirection: 'column', p: 3, width: '95%', marginTop: '10px', height: 'auto' }}>
-                    {isSubjectFetched ? (
+                    {isSubjectFetched && isExamFetched ? (
                         <>
-                            <EditPersonalDetailsCard studentData={studentData} setPersonalData={handleNewPersonalData} />
-                            <EditFeesDetailsCard feesData={feesData} setFeesData={handleNewFeesData} />
-                            <EditExamDetailsCard examData={examData} subjectDetails={subjectData} setExamData={handleNewExamData} />
-                            <Button variant="contained" >Save</Button>
+
+                            <Box sx={{ width: '100%' }}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                        <Tab label="Personal Details" {...a11yProps(0)} />
+                                        <Tab label="Fees & Scholarship Details" {...a11yProps(1)} />
+                                        <Tab label="Mark Details" {...a11yProps(2)} />
+                                    </Tabs>
+                                </Box>
+                                <CustomTabPanel value={value} index={0}>
+                                    <EditPersonalDetailsCard studentData={studentData} setPersonalData={handleNewPersonalData} />
+                                </CustomTabPanel>
+                                <CustomTabPanel value={value} index={1}>
+                                    <EditFeesDetailsCard feesData={feesData} setFeesData={handleNewFeesData} />
+                                </CustomTabPanel>
+                                <CustomTabPanel value={value} index={2}>
+                                    <EditExamDetailsCard examData={examData} subjectDetails={subjectData} setExamData={handleNewExamData} />
+                                </CustomTabPanel>
+                            </Box>
+
                         </>
                     ) : null}
                 </Card>

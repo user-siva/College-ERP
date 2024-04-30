@@ -28,10 +28,10 @@ router.post("/add", async (req, res) => {
 
 //update
 
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const mark = await Mark.findById(req.params.id);
-    if (mark._id.toString() === req.body._id) {
+    if (mark._id.toString() === req.params.id) {
       await mark.updateOne({ $set: req.body });
       res.status(200).json("Post updated Successfully");
     } else {

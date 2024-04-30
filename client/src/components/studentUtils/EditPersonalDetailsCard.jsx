@@ -404,8 +404,9 @@ function EditPersonalDetailsCard({ studentData, setPersonalData }) {
                     name="emergency_contact"
                     defaultValue={studentData?.emergency_contact}
                 />
-                <Button variant="contained" onClick={onSave}>Save</Button>
             </CardContent>
+            <Button variant="contained" onClick={onSave}>Save</Button>
+
         </>
     );
 }

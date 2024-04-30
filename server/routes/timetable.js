@@ -8,7 +8,7 @@ const TimeTable = require("../models/TimeTable");
 router.get("/filter_timetable/", async (req, res) => {
   try {
     console.log(req.body)
-    const timetable = await TimeTable.find({ department:req.body.department,year:req.body.year });
+    const timetable = await TimeTable.find({ department: req.body.department, year: req.body.year });
     res.status(200).json(timetable);
   } catch (err) {
     res.status(500).json(err);
@@ -18,18 +18,18 @@ router.get("/filter_timetable/", async (req, res) => {
 //get user
 
 router.get("/:id", async (req, res) => {
-    try {
-      //console.log(req.params.id)
-      const timeTable = await TimeTable.findById(req.params.id);
-      res.status(200).json(timeTable);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    //console.log(req.params.id)
+    const timeTable = await TimeTable.findById(req.params.id);
+    res.status(200).json(timeTable);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //post
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   const newtimeTable = new TimeTable(req.body);
   try {
     await newtimeTable.save();

@@ -56,7 +56,7 @@ router.post("/add", async (req, res) => {
 
 //update
 
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const timeTable = await TimeTable.findById(req.params.id);
     if (timeTable._id.toString() === req.body._id) {

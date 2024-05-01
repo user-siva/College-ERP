@@ -170,6 +170,9 @@ function AddTimeTable() {
 
     const onSave = async () => {
         try {
+            rows.map((row, index) => {
+                row['id'] = `${department}_${year}_${semester}_${index + 1}`
+            })
             await axios.post('http://localhost:5000/api/timetable/add',
                 { department: department, year: year, semester: semester, timetable: rows })
             console.log("SAVED")
@@ -184,7 +187,9 @@ function AddTimeTable() {
 
         const updatedRows = [...rows];
         updatedRows[rowIndex] = updatedRow;
-
+        updatedRows.map((d) => {
+            console.log('d:', d)
+        })
         setRows(updatedRows);
         return updatedRow;
 

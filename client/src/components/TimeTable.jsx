@@ -60,16 +60,18 @@ const columns = [
 
 function TimeTable() {
   const [data, setData] = useState({})
-
+  const [timetables, setTimetables] = useState([])
   const [rows, setRows] = useState([]);
 
   const handleFilter = async () => {
     const res = await axios.post('http://localhost:5000/api/timetable/filter_timetable/', data)
-    console.log(res.data)
     const rowData = res.data.map((d, index) => ({ ...d, id: index + 1 }));
+    setTimetables(rowData.map((d) => d));
     setRows(rowData.map((d) => d.timetable));
     return res.data
   }
+
+
 
   useEffect(() => {
     console.log("data:", data)
@@ -79,25 +81,38 @@ function TimeTable() {
   useEffect(() => {
     console.log('rows', rows)
   }, [rows])
+  useEffect(() => {
+    console.log('timetables', timetables)
+  }, [timetables])
 
   const handleData = (data) => {
     setData(data)
   }
 
-  const onSave = () => {
-    console.log("Rows:", rows)
+  const onSave = async (index) => {
+    const updatedTimeTable = { ...timetables[index] }
+    updatedTimeTable.timetable = rows[index]
+    console.log("data:", updatedTimeTable)
+    const res = await axios.put(`http://localhost:5000/api/timetable/update/${updatedTimeTable._id}`,
+      updatedTimeTable)
+    return res.data
   }
 
   const processRowUpdate = (updatedRow) => {
-    const rowIndex = rows.findIndex((row) => row.id === updatedRow.id);
-
-    const updatedRows = [...rows];
-    updatedRows[rowIndex] = updatedRow;
-
+    const updatedRows = rows.map((row) => {
+      const rowIndex = row.findIndex((r) => r.id === updatedRow.id);
+      if (rowIndex !== -1) {
+        const updatedRowArray = [...row];
+        updatedRowArray[rowIndex] = updatedRow;
+        return updatedRowArray;
+      }
+      return row;
+    });
     setRows(updatedRows);
     return updatedRow;
-
   };
+
+
 
 
 
@@ -110,21 +125,22 @@ function TimeTable() {
       {
         rows && (
           rows.map((timetable, index) => (
-            <DataGrid
-              key={index}
-              sx={{ width: 1200, height: 372, marginTop: 5, marginBottom: 10 }}
-              rows={timetable}
-              columns={columns}
-              processRowUpdate={processRowUpdate}
+            <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginBottom: '10px' }}>
+              <DataGrid
+                sx={{ width: 1200, height: 372, marginTop: 5, marginBottom: 2 }}
+                rows={timetable}
+                columns={columns}
+                processRowUpdate={processRowUpdate}
+                hideFooter={true}
+                disableRowSelectionOnClick
+              />
+              <Button variant="contained" color="success" onClick={() => onSave(index)} sx={{ height: '45px', width: '80px', marginTop: '5px' }}>Update</Button>
+            </div>
+          ))
 
-              hideFooter={true}
-              disableRowSelectionOnClick
-            />
-          )
-          )
         )
       }
-      {/* <Button variant="contained" color="success" onClick={onSave} sx={{ height: '45px', width: '80px' }}>Save</Button> */}
+
     </Box>
   );
 }

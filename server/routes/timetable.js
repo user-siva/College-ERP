@@ -5,15 +5,30 @@ const TimeTable = require("../models/TimeTable");
 
 //filter
 
-router.get("/filter_timetable/", async (req, res) => {
+router.post("/filter_timetable/", async (req, res) => {
   try {
-    console.log(req.body)
-    const timetable = await TimeTable.find({ department: req.body.department, year: req.body.year });
+    console.log(req.body);
+
+    const filter = {
+      department: req.body.department,
+    };
+
+    if (req.body.year) {
+      filter.year = req.body.year;
+    }
+
+    if (req.body.semester) {
+      filter.semester = req.body.semester;
+    }
+
+    const timetable = await TimeTable.find(filter);
+
     res.status(200).json(timetable);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 //get user
 

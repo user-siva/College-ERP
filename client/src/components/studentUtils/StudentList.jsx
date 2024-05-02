@@ -9,6 +9,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import { Link } from 'react-router-dom';
 import { Typography } from "@mui/material";
 import axios from "axios"
+import { motion } from "framer-motion"
 import {
   useQuery,
 } from '@tanstack/react-query'
@@ -19,7 +20,6 @@ import ShadowLoading from '../utils/ShadowLoading';
 function StudentList({ deptYear, filterData }) {
   const [checked, setChecked] = useState([]);
   const [filtered, setFiltered] = useState(false)
-  const [forceRender, setForceRender] = useState(0)
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -27,12 +27,6 @@ function StudentList({ deptYear, filterData }) {
       setFiltered(true);
     }
   }, [filterData]);
-
-
-
-  useEffect(() => {
-    setForceRender((prev) => (prev + 1))
-  }, [data])
 
   const { isLoading, error, isFetching, refetch, isFetched, isRefetching } = useQuery({
     queryKey: ['repoData'],
@@ -118,10 +112,9 @@ function StudentList({ deptYear, filterData }) {
     >
       {data && deptYear.map((details, index) => {
         const filteredDataForDeptYear = filter_data(details[0], details[1], data);
-        // Check if there are students available for the current department and year
         if (filteredDataForDeptYear.length > 0) {
           return (
-            <li key={index}>
+            <li key={index} style={{ marginBottom: 3 }}>
               <ul>
                 <ListSubheader>{` ${details[0]} ${roman[details[1]]} Year`}</ListSubheader>
                 {filteredDataForDeptYear.map((value) => (
@@ -137,6 +130,15 @@ function StudentList({ deptYear, filterData }) {
                         </IconButton>
                       </>
                     }
+                    sx={{ width: '95%', marginLeft: 3 }}
+                    component={motion.div}
+                    whileHover={{
+                      scale: 1.01,
+                      boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                      backgroundColor: 'white',
+                      transition: { duration: 0.3 }
+                    }}
+                    whileTap={{ scale: 0.97 }}
                     disablePadding
                   >
                     <ListItemButton role={undefined} component={Link} to={`StudentProfile/${value?._id}`} onClick={handleToggle(value)} dense>

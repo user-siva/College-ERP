@@ -10,23 +10,46 @@ import ListSubheader from '@mui/material/ListSubheader';
 import ShadowLoading from '../utils/ShadowLoading';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useQuery,
 } from '@tanstack/react-query'
 
-function SubjectList() {
+function SubjectList({ filterData }) {
   const [checked, setChecked] = useState([]);
+  const [filtered, setFiltered] = useState(false)
+  const [data, setData] = useState({})
 
-  const { isLoading, error, data } = useQuery({
+  useEffect(() => {
+    if (filterData['department'] || filterData['year'] || filterData['semester']) {
+      setFiltered(true);
+    }
+  }, [filterData]);
+
+  const { isLoading, error, isFetching, refetch, isRefetching } = useQuery({
     queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('http://localhost:5000/api/subject/all').then(
-        (res) => res.json(),
-      ),
+    queryFn: async () => {
+      let res;
+      if (filtered) {
+        res = await axios.post('http://localhost:5000/api/subject/filter_subjects', filterData)
+        setData(res.data)
+        return res.data
+      }
+      else {
+        res = await axios.get('http://localhost:5000/api/subject/all')
+        setData(res.data)
+        return res.data
+      }
+    },
   })
 
-  if (isLoading) {
+  useEffect(() => {
+    if (filtered) {
+      refetch();
+    }
+  }, [filtered, refetch]);
+
+  if (isLoading || isFetching || isRefetching) {
     return (
       <ShadowLoading />
     )
@@ -84,50 +107,56 @@ function SubjectList() {
       }}
       subheader={<li />}
     >
-      {dept_year.map((details) => (
-        <li key={`section-${details[1]}`}>
-          <ul>
-            <ListSubheader>{` ${details} Year`}</ListSubheader>
-            {filter_data(details[0], details[1], data)?.map((value) => (
-              <ListItem
-                key={value.register_no + value.department + value.name}
-                secondaryAction={
-                  <>
-                    <IconButton component={Link} to={`/SubjectEdit/${value?._id}`} edge="end" aria-label="comments">
-                      <EditIcon sx={{ color: 'blue' }} />
-                    </IconButton>
-                    <IconButton edge="end" aria-label="comments">
-                      <DeleteIcon onClick={(e) => (handleDelete(e, value._id))} sx={{ color: 'red' }} />
-                    </IconButton>
-                  </>
-                }
-                disablePadding
-              >
-                <ListItemButton role={undefined} component={Link} to={`SubjectProfile/${value?._id}`} onClick={handleToggle(value)} dense>
-
-                  <ListItemText
-                    primary={value?.subject_name}
-                    secondary={
+      {dept_year.map((details) => {
+        const filteredData = filter_data(details[0], details[1], data)
+        if (filteredData.length > 0) {
+          return (
+            <li key={`section-${details[1]}`}>
+              <ul>
+                <ListSubheader>{` ${details} Year`}</ListSubheader>
+                {filter_data(details[0], details[1], data)?.map((value) => (
+                  <ListItem
+                    key={value.register_no + value.department + value.name}
+                    secondaryAction={
                       <>
-                        <Typography
-                          sx={{ display: 'inline' }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          Staff:&nbsp;
-                        </Typography>
-                        {value?.staff}
+                        <IconButton component={Link} to={`/SubjectEdit/${value?._id}`} edge="end" aria-label="comments">
+                          <EditIcon sx={{ color: 'blue' }} />
+                        </IconButton>
+                        <IconButton edge="end" aria-label="comments">
+                          <DeleteIcon onClick={(e) => (handleDelete(e, value._id))} sx={{ color: 'red' }} />
+                        </IconButton>
                       </>
                     }
-                    sx={{ margin: '10px' }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </ul>
-        </li>
-      ))}
+                    disablePadding
+                  >
+                    <ListItemButton role={undefined} component={Link} to={`SubjectProfile/${value?._id}`} onClick={handleToggle(value)} dense>
+
+                      <ListItemText
+                        primary={value?.subject_name}
+                        secondary={
+                          <>
+                            <Typography
+                              sx={{ display: 'inline' }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              Staff:&nbsp;
+                            </Typography>
+                            {value?.staff}
+                          </>
+                        }
+                        sx={{ margin: '10px' }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </ul>
+            </li>
+          )
+        }
+
+      })}
     </List>
   );
 }

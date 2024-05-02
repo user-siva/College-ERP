@@ -9,25 +9,48 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ListSubheader from '@mui/material/ListSubheader';
 import ShadowLoading from '../utils/ShadowLoading';
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios"
 import {
   useQuery,
 } from '@tanstack/react-query'
 
-function StaffList() {
+function StaffList({ filterData }) {
 
   const [checked, setChecked] = useState([]);
+  const [filtered, setFiltered] = useState(false)
+  const [data, setData] = useState({})
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('http://localhost:5000/api/staff/all').then(
-        (res) => res.json(),
-      ),
+  useEffect(() => {
+    if (filterData['department'] || filterData['year'] || filterData['semester']) {
+      setFiltered(true);
+    }
+  }, [filterData]);
+
+  const { isLoading, error, isFetching, refetch } = useQuery({
+    queryKey: ['staffList'],
+    queryFn: async () => {
+      let res;
+      if (filtered) {
+        res = await axios.post('http://localhost:5000/api/staff/filter_staffs', filterData)
+        setData(res.data)
+        return res.data
+      }
+      else {
+        res = await axios.get('http://localhost:5000/api/staff/all')
+        setData(res.data)
+        return res.data
+      }
+    },
   })
 
-  if (isLoading) {
+  useEffect(() => {
+    if (filtered) {
+      refetch();
+    }
+  }, [filtered, refetch]);
+
+  if (isLoading || isFetching) {
     return (
       <ShadowLoading />
     )
@@ -59,15 +82,13 @@ function StaffList() {
   const filter_data = (department, documents) => {
     const filtered_data = documents.filter(doc => {
       return (
-        (doc.department === department)
+        (doc?.department === department)
       );
     });
     return filtered_data
   }
 
-  //const dept_year = [['CSE',1],['CSE',2],['CSE',3],['CSE',4],["ECE",1],["ECE",2],["ECE",3],["ECE",4],
-  //                  ["EEE",1],["EEE",2],["EEE",3],["EEE",4],["MECH",1],["MECH",2],["MECH",3],["MECH",4],
-  //                  ["Civil",1],["Civil",2],["Civil",3],["Civil",4],]
+
   const dept_year = ['CSE', 'ECE', 'EEE', 'Civil', 'Mech']
 
   return (
@@ -83,50 +104,56 @@ function StaffList() {
       }}
       subheader={<li />}
     >
-      {dept_year.map((details, index_) => (
-        <li key={index_}>
-          <ul>
-            <ListSubheader>{` ${details}`}</ListSubheader>
-            {filter_data(details, data)?.map((value, index) => (
-              <ListItem
-                secondaryAction={
-                  <>
-                    <IconButton component={Link} to={`/StaffEdit/${value?._id}`} edge="end" aria-label="comments">
-                      <EditIcon sx={{ color: 'blue' }} />
-                    </IconButton>
-                    <IconButton edge="end" aria-label="comments">
-                      <DeleteIcon onClick={(e) => (handleDelete(e, value._id))} sx={{ color: 'red' }} />
-                    </IconButton>
-                  </>
-                }
-
-                disablePadding
-              >
-                <ListItemButton role={undefined} component={Link} to={`StaffProfile/${value?._id}`} onClick={handleToggle(value)} dense>
-
-                  <ListItemText
-                    primary={value?.name}
-                    secondary={
+      {dept_year.map((details, index_) => {
+        const filteredData = filter_data(details, data);
+        if (filteredData.length > 0) {
+          return (
+            <li key={index_}>
+              <ul>
+                <ListSubheader>{` ${details}`}</ListSubheader>
+                {filter_data(details, data)?.map((value, index) => (
+                  <ListItem
+                    secondaryAction={
                       <>
-                        <Typography
-                          sx={{ display: 'inline' }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          Role:&nbsp;
-                        </Typography>
-                        {value?.emp_category}
+                        <IconButton component={Link} to={`/StaffEdit/${value?._id}`} edge="end" aria-label="comments">
+                          <EditIcon sx={{ color: 'blue' }} />
+                        </IconButton>
+                        <IconButton edge="end" aria-label="comments">
+                          <DeleteIcon onClick={(e) => (handleDelete(e, value._id))} sx={{ color: 'red' }} />
+                        </IconButton>
                       </>
                     }
-                    sx={{ margin: '10px' }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </ul>
-        </li>
-      ))}
+
+                    disablePadding
+                  >
+                    <ListItemButton role={undefined} component={Link} to={`StaffProfile/${value?._id}`} onClick={handleToggle(value)} dense>
+
+                      <ListItemText
+                        primary={value?.name}
+                        secondary={
+                          <>
+                            <Typography
+                              sx={{ display: 'inline' }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              Role:&nbsp;
+                            </Typography>
+                            {value?.emp_category}
+                          </>
+                        }
+                        sx={{ margin: '10px' }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </ul>
+            </li>
+          )
+        }
+
+      })}
     </List>
   );
 }

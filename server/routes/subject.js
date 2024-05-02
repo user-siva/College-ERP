@@ -5,10 +5,21 @@ const Subject = require("../models/Subject");
 
 //filter
 
-router.post("/filter_subjects/", async (req, res) => {
+router.post("/filter_subjects", async (req, res) => {
   try {
-    const subjects = await Subject.find({ department: req.body.department });
-    console.log("Body:", req.body)
+    const filter = {
+      department: req.body.department,
+    };
+
+    if (req.body.year) {
+      filter.year = req.body.year;
+    }
+
+    if (req.body.semester) {
+      filter.semester = req.body.semester;
+    }
+
+    const subjects = await Subject.find(filter);
     res.status(200).json(subjects);
   } catch (err) {
     res.status(500).json(err);

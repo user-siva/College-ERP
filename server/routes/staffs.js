@@ -5,9 +5,21 @@ const Staff = require("../models/Staff");
 
 //filter
 
-router.get("/filter_staffs/", async (req, res) => {
+router.post("/filter_staffs", async (req, res) => {
   try {
-    const staffs = await Staff.find({ department: req.body.department, year: req.body.year });
+    const filter = {
+      department: req.body.department,
+    };
+
+    if (req.body.year) {
+      filter.year = req.body.year;
+    }
+
+    if (req.body.semester) {
+      filter.semester = req.body.semester;
+    }
+
+    const staffs = await Staff.find(filter);
     res.status(200).json(staffs);
   } catch (err) {
     res.status(500).json(err);

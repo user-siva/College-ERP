@@ -58,10 +58,63 @@ function PersonalDetails({ personalDetails }) {
         emergency_contact: ""
     })
 
+    const [errors, setErrors] = useState({
+        name: false,
+        admission_no: false,
+        admission_date: dayjs(),
+        batch: false,
+        register_no: false,
+        roll_no: false,
+        age: false,
+        dob: dayjs(),
+        gender: false,
+        department: false,
+        year: false,
+        semester: false,
+        blood_group: false,
+        phone: false,
+        email: false,
+        aadhaar_no: false,
+        father_name: false,
+        father_phone_no: false,
+        father_occupation: false,
+        mother_name: false,
+        mother_phone_no: false,
+        mother_occupation: false,
+        annual_income: false,
+        nationality: false,
+        religion: false,
+        student_category: false,
+        door_no: false,
+        street: false,
+        district: false,
+        state: false,
+        country: false,
+        pincode: false,
+        transportation: false,
+        bus_route_no: false,
+        regular_boarding_point: false,
+        regular_dropping_point: false,
+        gaurdian_name: false,
+        gaurdian_is: false,
+        gaurdian_mobile: false,
+        gaurdian_address: false,
+        gaurdian_2_name: false,
+        gaurdian_2_mobile: false,
+        gaurdian_2_address: false,
+        emergency_contact: false
+    })
+
     const [customFields, setCustomFields] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (e.target.validity.valid) {
+            errors[name] = false;
+        } else {
+            errors[name] = true;
+        }
+
 
 
         const newValue = (
@@ -103,6 +156,13 @@ function PersonalDetails({ personalDetails }) {
                         label="Name"
                         name="name"
                         size="small"
+                        inputProps={{
+                            pattern: "[A-Za-z ]+",
+                        }}
+                        error={errors['name']}
+                        helperText={
+                            errors['name'] ? "Please enter your name (letters and spaces only)" : ""
+                        }
                         value={data.name}
                         onChange={handleChange}
                     />
@@ -110,11 +170,18 @@ function PersonalDetails({ personalDetails }) {
                         size="small"
                         label="Register No"
                         type="number"
+                        inputProps={{
+                            pattern: "^\\d{12}$",
+                        }}
+                        error={errors['register_no']}
+                        helperText={
+                            errors['register_no'] ? "Please enter a 12 digit register number" : ""
+                        }
                         name="register_no"
                         onChange={handleChange}
                         value={data.register_no}
-
                     />
+
                     <STextField
                         size="small"
                         label="Admission Number"

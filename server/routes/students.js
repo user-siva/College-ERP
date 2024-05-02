@@ -5,9 +5,21 @@ const Student = require("../models/Student");
 
 //filter
 
-router.get("/filter_students", async (req, res) => {
+router.post("/filter_students", async (req, res) => {
   try {
-    const students = await Student.find({ department:req.body.department,year:req.body.year });
+    const filter = {
+      department: req.body.department,
+    };
+
+    if (req.body.year) {
+      filter.year = req.body.year;
+    }
+
+    if (req.body.semester) {
+      filter.semester = req.body.semester;
+    }
+
+    const students = await Student.find(filter);
     res.status(200).json(students);
   } catch (err) {
     res.status(500).json(err);
@@ -28,14 +40,14 @@ router.get("/all", async (req, res) => {
 //get student
 
 router.get("/:id", async (req, res) => {
-    try {
-      //console.log(req.params.id)
-      const student = await Student.findById(req.params.id);
-      res.status(200).json(student);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    //console.log(req.params.id)
+    const student = await Student.findById(req.params.id);
+    res.status(200).json(student);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //post
 

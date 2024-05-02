@@ -13,22 +13,53 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ShadowLoading from '../utils/ShadowLoading';
 
-function StudentList({ deptYear }) {
+function StudentList({ deptYear, filterData }) {
   const [checked, setChecked] = useState([]);
+  const [filtered, setFiltered] = useState(false)
+  const [forceRender, setForceRender] = useState(0)
+  const [data, setData] = useState({})
 
-  const { isLoading, error, data, isFetching } = useQuery({
+  useEffect(() => {
+    if (filterData['department'] || filterData['year'] || filterData['semester']) {
+      setFiltered(true);
+    }
+  }, [filterData]);
+
+
+
+  useEffect(() => {
+    setForceRender((prev) => (prev + 1))
+  }, [data])
+
+  const { isLoading, error, isFetching, refetch, isFetched, isRefetching } = useQuery({
     queryKey: ['repoData'],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:5000/api/student/all')
-      return res.data
+      let res;
+      if (filtered) {
+        res = await axios.post('http://localhost:5000/api/student/filter_students', filterData)
+        setData(res.data)
+        return res.data
+      }
+      else {
+        res = await axios.get('http://localhost:5000/api/student/all')
+        setData(res.data)
+        return res.data
+      }
     },
   })
 
-  if (isLoading || isFetching) {
+  useEffect(() => {
+    if (filtered) {
+      refetch();
+    }
+  }, [filtered, refetch]);
+
+  if (isLoading || isFetching || isRefetching) {
     return (
+
       <ShadowLoading />
     )
   }
@@ -39,7 +70,7 @@ function StudentList({ deptYear }) {
     return 'An error has occurred: ' + error.message
   }
 
-  var roman = { 4: 'IV', 3: 'III' }
+  var roman = { 4: 'IV', 3: 'III', 2: 'II', 1: 'I' }
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -77,7 +108,6 @@ function StudentList({ deptYear }) {
     <List
       sx={{
         width: '100%',
-
         bgcolor: 'background.paper',
         position: 'relative',
         overflow: 'auto',
@@ -86,52 +116,59 @@ function StudentList({ deptYear }) {
       }}
       subheader={<li />}
     >
-      {deptYear.map((details, index) => (
-        <li key={index}>
-          <ul>
-            <ListSubheader>{` ${details[0]} ${roman[details[1]]} Year`}</ListSubheader>
-            {filter_data(details[0], details[1], data)?.map((value) => (
-              <ListItem
-                key={value.register_no + value.department + value.name}
-                secondaryAction={
-                  <>
-                    <IconButton component={Link} to={`/StudentEdit/${value?._id}`} edge="end" aria-label="comments">
-                      <EditIcon sx={{ color: 'blue' }} />
-                    </IconButton>
-                    <IconButton edge="end" aria-label="comments">
-                      <DeleteIcon onClick={(e) => (handleDelete(e, value._id))} sx={{ color: 'red' }} />
-                    </IconButton>
-                  </>
-                }
-
-                disablePadding
-              >
-                <ListItemButton role={undefined} component={Link} to={`StudentProfile/${value?._id}`} onClick={handleToggle(value)} dense>
-
-                  <ListItemText
-                    primary={value?.name}
-                    secondary={
+      {data && deptYear.map((details, index) => {
+        const filteredDataForDeptYear = filter_data(details[0], details[1], data);
+        // Check if there are students available for the current department and year
+        if (filteredDataForDeptYear.length > 0) {
+          return (
+            <li key={index}>
+              <ul>
+                <ListSubheader>{` ${details[0]} ${roman[details[1]]} Year`}</ListSubheader>
+                {filteredDataForDeptYear.map((value) => (
+                  <ListItem
+                    key={value.register_no + value.department + value.name}
+                    secondaryAction={
                       <>
-                        <Typography
-                          sx={{ display: 'inline' }}
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          Register No:&nbsp;
-                        </Typography>
-                        {value?.register_no}
+                        <IconButton component={Link} to={`/StudentEdit/${value?._id}`} edge="end" aria-label="comments">
+                          <EditIcon sx={{ color: 'blue' }} />
+                        </IconButton>
+                        <IconButton edge="end" aria-label="comments">
+                          <DeleteIcon onClick={(e) => (handleDelete(e, value._id))} sx={{ color: 'red' }} />
+                        </IconButton>
                       </>
                     }
-                    sx={{ margin: '10px' }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </ul>
-        </li>
-      ))}
+                    disablePadding
+                  >
+                    <ListItemButton role={undefined} component={Link} to={`StudentProfile/${value?._id}`} onClick={handleToggle(value)} dense>
+                      <ListItemText
+                        primary={value?.name}
+                        secondary={
+                          <>
+                            <Typography
+                              sx={{ display: 'inline' }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              Register No:&nbsp;
+                            </Typography>
+                            {value?.register_no}
+                          </>
+                        }
+                        sx={{ margin: '10px' }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </ul>
+            </li>
+          );
+        } else {
+          return null; // Don't render ListSubheader if no students found
+        }
+      })}
     </List>
+
   );
 }
 

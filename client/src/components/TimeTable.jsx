@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import Filter from "./utils/Filter";
@@ -123,22 +123,25 @@ function TimeTable() {
         <Button variant="contained" sx={{ height: '50px' }} color="success" href='/AddTimeTable'>Add TimeTable</Button>
       </Box>
       {
-        rows && (
+        rows ? (
           rows.map((timetable, index) => (
-            <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginBottom: '10px' }}>
-              <DataGrid
-                sx={{ width: 1200, height: 372, marginTop: 5, marginBottom: 2 }}
-                rows={timetable}
-                columns={columns}
-                processRowUpdate={processRowUpdate}
-                hideFooter={true}
-                disableRowSelectionOnClick
-              />
-              <Button variant="contained" color="success" onClick={() => onSave(index)} sx={{ height: '45px', width: '80px', marginTop: '5px' }}>Update</Button>
-            </div>
+            <>
+              <Typography sx={{ marginLeft: 2, marginTop: 2, fontWeight: 'bold' }}>{`Year ${timetables[index].year},Semester ${timetables[index].semester}`}</Typography>
+              <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginBottom: '10px' }}>
+                <DataGrid
+                  sx={{ width: 1200, height: 372, marginTop: 5, marginBottom: 2 }}
+                  rows={timetable}
+                  columns={columns}
+                  processRowUpdate={processRowUpdate}
+                  hideFooter={true}
+                  disableRowSelectionOnClick
+                />
+                <Button variant="contained" color="success" onClick={() => onSave(index)} sx={{ height: '45px', width: '80px', marginTop: '5px' }}>Update</Button>
+              </div>
+            </>
           ))
 
-        )
+        ) : 'please,select department,year and semester to view timetable'
       }
 
     </Box>

@@ -1,5 +1,6 @@
 import List from '@mui/material/List';
 import { Typography } from "@mui/material";
+import { motion } from "framer-motion"
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -127,6 +128,15 @@ function SubjectList({ filterData }) {
                         </IconButton>
                       </>
                     }
+                    sx={{ width: '95%', marginLeft: 3 }}
+                    component={motion.div}
+                    whileHover={{
+                      scale: 1.01,
+                      boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                      backgroundColor: 'white',
+                      transition: { duration: 0.3 }
+                    }}
+                    whileTap={{ scale: 0.97 }}
                     disablePadding
                   >
                     <ListItemButton role={undefined} component={Link} to={`SubjectProfile/${value?._id}`} onClick={handleToggle(value)} dense>

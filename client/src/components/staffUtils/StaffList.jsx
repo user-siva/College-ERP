@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListSubheader from '@mui/material/ListSubheader';
+import { motion } from "framer-motion"
 import ShadowLoading from '../utils/ShadowLoading';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -123,7 +124,15 @@ function StaffList({ filterData }) {
                         </IconButton>
                       </>
                     }
-
+                    sx={{ width: '95%', marginLeft: 3 }}
+                    component={motion.div}
+                    whileHover={{
+                      scale: 1.01,
+                      boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                      backgroundColor: 'white',
+                      transition: { duration: 0.3 }
+                    }}
+                    whileTap={{ scale: 0.97 }}
                     disablePadding
                   >
                     <ListItemButton role={undefined} component={Link} to={`StaffProfile/${value?._id}`} onClick={handleToggle(value)} dense>

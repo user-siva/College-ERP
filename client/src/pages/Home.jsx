@@ -17,6 +17,7 @@ import StudentEdit from '../components/StudentEdit';
 import StaffEdit from '../components/StaffEdit';
 import SubjectEdit from '../components/SubjectEdit';
 import AddTimeTable from '../components/AddTimeTable';
+import AttendanceView from '../components/AttendanceView';
 function Home() {
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -49,6 +50,7 @@ function Home() {
             <Route path='/StaffEdit/:Id' element={<StaffEdit />} />
             <Route path='/SubjectEdit/:Id' element={<SubjectEdit />} />
             <Route path='/AddTimeTable' element={<AddTimeTable />} />
+            <Route path='/AttendanceView' element={<AttendanceView />} />
           </Routes>
         </Box>
       </Box>

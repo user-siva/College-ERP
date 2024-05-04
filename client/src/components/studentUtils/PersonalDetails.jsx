@@ -109,11 +109,6 @@ function PersonalDetails({ personalDetails }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (e.target.validity.valid) {
-            errors[name] = false;
-        } else {
-            errors[name] = true;
-        }
 
 
 
@@ -156,13 +151,6 @@ function PersonalDetails({ personalDetails }) {
                         label="Name"
                         name="name"
                         size="small"
-                        inputProps={{
-                            pattern: "[A-Za-z ]+",
-                        }}
-                        error={errors['name']}
-                        helperText={
-                            errors['name'] ? "Please enter your name (letters and spaces only)" : ""
-                        }
                         value={data.name}
                         onChange={handleChange}
                     />
@@ -170,13 +158,6 @@ function PersonalDetails({ personalDetails }) {
                         size="small"
                         label="Register No"
                         type="number"
-                        inputProps={{
-                            pattern: "^\\d{12}$",
-                        }}
-                        error={errors['register_no']}
-                        helperText={
-                            errors['register_no'] ? "Please enter a 12 digit register number" : ""
-                        }
                         name="register_no"
                         onChange={handleChange}
                         value={data.register_no}

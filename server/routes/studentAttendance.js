@@ -7,28 +7,39 @@ const StudentAttendance = require("../models/StudentAttendance");
 
 router.get("/filter_students/", async (req, res) => {
   try {
-    const student_attendance = await StudentAttendance.find({ department:req.body.department,year:req.body.year });
+    const student_attendance = await StudentAttendance.find({ department: req.body.department, year: req.body.year });
     res.status(200).json(student_attendance);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//get user
+// get all
+
+router.get("/all", async (req, res) => {
+  try {
+    const attendance = await StudentAttendance.find(req.body);
+    res.status(200).json(attendance);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//get 
 
 router.get("/:id", async (req, res) => {
-    try {
-      //console.log(req.params.id)
-      const studentAttendance = await StudentAttendance.findById(req.params.id);
-      res.status(200).json(studentAttendance);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    //console.log(req.params.id)
+    const studentAttendance = await StudentAttendance.findById(req.params.id);
+    res.status(200).json(studentAttendance);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //post
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   const newstudentAttendance = new StudentAttendance(req.body);
   try {
     await newstudentAttendance.save();

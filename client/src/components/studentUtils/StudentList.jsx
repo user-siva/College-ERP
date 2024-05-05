@@ -21,7 +21,6 @@ function StudentList({ deptYear, filterData }) {
   const [checked, setChecked] = useState([]);
   const [filtered, setFiltered] = useState(false)
   const [data, setData] = useState({})
-
   useEffect(() => {
     if (filterData['department'] || filterData['year'] || filterData['semester']) {
       setFiltered(true);
@@ -33,12 +32,12 @@ function StudentList({ deptYear, filterData }) {
     queryFn: async () => {
       let res;
       if (filtered) {
-        res = await axios.post('http://localhost:5000/api/student/filter_students', filterData)
+        res = await axios.post(`${process.env.REACT_APP_API_URL}/api/student/filter_students`, filterData)
         setData(res.data)
         return res.data
       }
       else {
-        res = await axios.get('http://localhost:5000/api/student/all')
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/api/student/all`)
         setData(res.data)
         return res.data
       }
@@ -92,7 +91,7 @@ function StudentList({ deptYear, filterData }) {
   }
 
   const handleDelete = async (e, id) => {
-    await axios.delete(`http://localhost:5000/api/student/delete/${id}`)
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/student/delete/${id}`)
     console.log("Deleted")
   }
 
@@ -131,14 +130,7 @@ function StudentList({ deptYear, filterData }) {
                       </>
                     }
                     sx={{ width: '95%', marginLeft: 3 }}
-                    component={motion.div}
-                    whileHover={{
-                      scale: 1.01,
-                      boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-                      backgroundColor: 'white',
-                      transition: { duration: 0.3 }
-                    }}
-                    whileTap={{ scale: 0.97 }}
+
                     disablePadding
                   >
                     <ListItemButton role={undefined} component={Link} to={`StudentProfile/${value?._id}`} onClick={handleToggle(value)} dense>

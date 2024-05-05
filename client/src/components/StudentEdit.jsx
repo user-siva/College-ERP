@@ -19,30 +19,7 @@ function a11yProps(index) {
     };
 }
 
-const handlePeriodWise = (index, choice, period, event) => {
-    event.preventDefault();
-    setPeriodWise(prevPeriodWise => {
-        const newPeriodWise = [...prevPeriodWise];
-        if (!newPeriodWise[index]) {
-            newPeriodWise[index] = Array.from({ length: 8 }, () => 'present');
-        }
-        newPeriodWise[index] = newPeriodWise[index].map((value, idx) =>
-            idx === period - 1 ? choice : value
-        );
-        return newPeriodWise;
-    });
-}
 
-const handleDoubleClick = (index) => {
-    setPeriodWise(prevPeriodWise => {
-        const newPeriodWise = [...prevPeriodWise];
-        console.log("newPeriodWise[index]:", newPeriodWise)
-        newPeriodWise[index] = newPeriodWise[index].map((value, idx) =>
-            value === 'absent' ? 'od' : value
-        );
-        return newPeriodWise;
-    });
-};
 
 function StudentEdit() {
     const [value, setValue] = useState(0);

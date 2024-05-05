@@ -33,12 +33,12 @@ function StaffList({ filterData }) {
     queryFn: async () => {
       let res;
       if (filtered) {
-        res = await axios.post('http://localhost:5000/api/staff/filter_staffs', filterData)
+        res = await axios.post(`${process.env.REACT_APP_API_URL}/api/staff/filter_staffs`, filterData)
         setData(res.data)
         return res.data
       }
       else {
-        res = await axios.get('http://localhost:5000/api/staff/all')
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/api/staff/all`)
         setData(res.data)
         return res.data
       }
@@ -76,7 +76,7 @@ function StaffList({ filterData }) {
   };
 
   const handleDelete = async (e, id) => {
-    await axios.delete(`http://localhost:5000/api/staff/delete/${id}`)
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/staff/delete/${id}`)
     console.log("Deleted")
   }
 

@@ -18,7 +18,7 @@ function SubjectEdit() {
     const { isLoading, error, newData: subjectData, isFetching, refetch: refetchSubjectData, isFetched: isSubjectFetched } = useQuery({
         queryKey: ['SubjectData', Id],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/api/subject/${Id}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/subject/${Id}`);
             setNewData(res.data)
             return res.data;
         },
@@ -46,7 +46,7 @@ function SubjectEdit() {
     }
 
     const onSave = () => {
-        axios.put(`http://localhost:5000/api/subject/update/${Id}`, newData)
+        axios.put(`${process.env.REACT_APP_API_URL}/api/subject/update/${Id}`, newData)
         console.log(newData)
     }
 

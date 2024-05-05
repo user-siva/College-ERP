@@ -41,7 +41,7 @@ function Attendance() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.post(`http://localhost:5000/api/student/filter_students`, filterData);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/student/filter_students`, filterData);
         setStudentData(res.data)
         setDayWise(new Array(res.data.length).fill('present'));
       } catch (error) {
@@ -68,7 +68,7 @@ function Attendance() {
     })
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/studentAttendance/add`, attendanceData)
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/studentAttendance/add`, attendanceData)
     }
     catch (err) {
       console.log(err)

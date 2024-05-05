@@ -15,7 +15,7 @@ function AttendanceView() {
     const { isLoading, error, isFetching, data, refetch, isFetched, isRefetching } = useQuery({
         queryKey: ['attendance'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/api/studentAttendance/all')
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/studentAttendance/all`)
             return res.data
         },
     })

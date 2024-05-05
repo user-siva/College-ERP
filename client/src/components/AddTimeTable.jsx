@@ -173,7 +173,7 @@ function AddTimeTable() {
             rows.map((row, index) => {
                 row['id'] = `${department}_${year}_${semester}_${index + 1}`
             })
-            await axios.post('http://localhost:5000/api/timetable/add',
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/timetable/add`,
                 { department: department, year: year, semester: semester, timetable: rows })
             console.log("SAVED")
         }

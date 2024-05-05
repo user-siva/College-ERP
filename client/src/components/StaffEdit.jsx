@@ -19,7 +19,7 @@ function StaffEdit() {
     const { isLoading, error, newData: staffData, isFetching, refetch: refetchStaffData, isFetched: isStaffFetched } = useQuery({
         queryKey: ['staffData', Id],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/api/staff/${Id}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/staff/${Id}`);
             setNewData(res.data)
             return res.data;
         },
@@ -49,7 +49,7 @@ function StaffEdit() {
     }
 
     const onSave = () => {
-        axios.put(`http://localhost:5000/api/staff/update/${Id}`, newData)
+        axios.put(`${process.env.REACT_APP_API_URL}/api/staff/update/${Id}`, newData)
         console.log("Saved")
     }
 

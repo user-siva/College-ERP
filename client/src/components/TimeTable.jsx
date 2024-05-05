@@ -64,7 +64,7 @@ function TimeTable() {
   const [rows, setRows] = useState([]);
 
   const handleFilter = async () => {
-    const res = await axios.post('http://localhost:5000/api/timetable/filter_timetable/', data)
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/timetable/filter_timetable/`, data)
     const rowData = res.data.map((d, index) => ({ ...d, id: index + 1 }));
     setTimetables(rowData.map((d) => d));
     setRows(rowData.map((d) => d.timetable));
@@ -93,7 +93,7 @@ function TimeTable() {
     const updatedTimeTable = { ...timetables[index] }
     updatedTimeTable.timetable = rows[index]
     console.log("data:", updatedTimeTable)
-    const res = await axios.put(`http://localhost:5000/api/timetable/update/${updatedTimeTable._id}`,
+    const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/timetable/update/${updatedTimeTable._id}`,
       updatedTimeTable)
     return res.data
   }

@@ -32,12 +32,12 @@ function SubjectList({ filterData }) {
     queryFn: async () => {
       let res;
       if (filtered) {
-        res = await axios.post('http://localhost:5000/api/subject/filter_subjects', filterData)
+        res = await axios.post(`${process.env.REACT_APP_API_URL}/api/subject/filter_subjects`, filterData)
         setData(res.data)
         return res.data
       }
       else {
-        res = await axios.get('http://localhost:5000/api/subject/all')
+        res = await axios.get(`${process.env.REACT_APP_API_URL}/api/subject/all`)
         setData(res.data)
         return res.data
       }
@@ -86,7 +86,7 @@ function SubjectList({ filterData }) {
   }
 
   const handleDelete = async (e, id) => {
-    await axios.delete(`http://localhost:5000/api/subject/delete/${id}`)
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/subject/delete/${id}`)
     console.log("Deleted")
   }
 
